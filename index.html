@@ -4,9 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="description" content="Ricettario di Mamma Anna">
-  <link rel="icon" type="image/png" href="./logo.png">
-  <link rel="shortcut icon" type="image/png" href="./logo.png">
-  <link rel="apple-touch-icon" href="./logo.png">
+  <meta name="theme-color" content="#a90818">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Mamma Anna">
+  <link rel="manifest" href="./manifest.webmanifest">
   <title>RICETTARIO DI MAMMA ANNA</title>
 
   <style>
@@ -482,6 +485,15 @@
   <div id="toast" class="toast" role="status"></div>
   <footer>RICETTARIO DI MAMMA ANNA · Archivio personale</footer>
 
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(error => {
+          console.warn("Service worker non registrato:", error);
+        });
+      });
+    }
+  </script>
   <script>
     "use strict";
 
