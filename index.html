@@ -7,6 +7,13 @@
   <title>RICETTARIO DI MAMMA ANNA</title>
 
   <style>
+    @font-face {
+      font-family: "MammaAnna";
+      src: url("./font.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
     :root {
       --red: #df1024;
       --red-dark: #a90818;
@@ -25,7 +32,7 @@
       margin: 0;
       color: var(--text);
       background: var(--paper);
-      font: 16px/1.55 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font: 16px/1.55 "MammaAnna", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     }
     
     button, input { font: inherit; }
@@ -87,7 +94,7 @@
     h1 {
       max-width: 880px;
       margin: 0 auto;
-      font: 800 clamp(2.4rem, 6vw, 4.9rem)/.98 Georgia, serif;
+      font: 800 clamp(2.4rem, 6vw, 4.9rem)/.98 "MammaAnna", Georgia, serif;
       text-shadow: 0 3px 18px rgba(0,0,0,.62);
     }
     .hero-description {
@@ -228,7 +235,7 @@
     }
     .recipe-card h2 {
       margin: 8px 0 10px;
-      font: 700 1.45rem/1.18 Georgia, serif;
+      font: 700 1.45rem/1.18 "MammaAnna", Georgia, serif;
       text-shadow: 0 1px 2px white;
     }
     .recipe-description { flex: 1; margin: 0; color: #554c46; text-shadow: 0 1px 2px white; }
@@ -299,7 +306,7 @@
       backdrop-filter: blur(9px);
       -webkit-backdrop-filter: blur(9px);
     }
-    .dialog-header h2 { margin: 4px 0 0; font: 700 clamp(1.7rem, 5vw, 2.7rem)/1.08 Georgia, serif; }
+    .dialog-header h2 { margin: 4px 0 0; font: 700 clamp(1.7rem, 5vw, 2.7rem)/1.08 "MammaAnna", Georgia, serif; }
     .close-button {
       width: 44px;
       min-width: 44px;
@@ -349,7 +356,7 @@
     .dialog-body::-webkit-scrollbar-thumb:hover { background: var(--red-dark); }
     .lead { padding-bottom: 18px; color: #554c46; font-size: 1.05rem; border-bottom: 1px solid var(--border); }
     .recipe-section { margin-top: 24px; }
-    .recipe-section h3 { margin: 0 0 10px; color: var(--red-dark); font: 700 1.35rem Georgia, serif; }
+    .recipe-section h3 { margin: 0 0 10px; color: var(--red-dark); font: 700 1.35rem "MammaAnna", Georgia, serif; }
     .recipe-group { margin: 17px 0 6px; font-weight: 900; }
     .recipe-section li { margin: 7px 0; }
     .oven-step { font-weight: 900; color: #231d19; }
@@ -744,8 +751,14 @@
       elements.dialogBody.scrollTop = 0;
       elements.recipeDialog.showModal();
 
-      // Il focus automatico del dialog non deve spostare la home.
-      elements.closeDialog.focus({ preventScroll: true });
+      // Ogni scheda ricetta si apre sempre dall'inizio.
+      requestAnimationFrame(() => {
+        elements.dialogBody.scrollTop = 0;
+        elements.closeDialog.focus({ preventScroll: true });
+        requestAnimationFrame(() => {
+          elements.dialogBody.scrollTop = 0;
+        });
+      });
       requestAnimationFrame(() => window.scrollTo({
         top: state.pageScrollY,
         left: 0,
