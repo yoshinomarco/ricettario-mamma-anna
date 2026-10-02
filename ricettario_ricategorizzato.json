@@ -33299,6 +33299,913 @@
         "method": "title_ingredients_procedure_plus_web_verified_taxonomy",
         "confidence": "high"
       }
+    },
+    {
+      "id": 240,
+      "title": "Montanare",
+      "slug": "montanare",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "500 g di farina 0"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "10 g di sale"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "12 g di lievito fresco oppure 3 g di lievito secco"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "1 cucchiaino di zucchero"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "300 ml di acqua"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "1 cucchiaio di olio extravergine d’oliva"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Procedimento",
+          "text": "Mettere in una ciotola la farina, lo zucchero e il lievito e mescolare."
+        },
+        {
+          "order": 2,
+          "section": "Procedimento",
+          "text": "Aggiungere gradualmente l’acqua, quindi l’olio e il sale."
+        },
+        {
+          "order": 3,
+          "section": "Procedimento",
+          "text": "Impastare fino a ottenere un impasto liscio."
+        },
+        {
+          "order": 4,
+          "section": "Procedimento",
+          "text": "Coprire e lasciare lievitare nel forno spento con la luce accesa per 2-3 ore."
+        },
+        {
+          "order": 5,
+          "section": "Procedimento",
+          "text": "Sgonfiare l’impasto e formare palline da 60 g ciascuna."
+        },
+        {
+          "order": 6,
+          "section": "Procedimento",
+          "text": "Stendere ogni pallina fino a un diametro di circa 10 cm."
+        },
+        {
+          "order": 7,
+          "section": "Procedimento",
+          "text": "Premere bene il centro delle pizzette per evitare che si gonfino eccessivamente."
+        },
+        {
+          "order": 8,
+          "section": "Procedimento",
+          "text": "Friggere fino a doratura."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Note",
+          "text": "Tempo di lievitazione: 3 ore"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "MONTANARE\nDose per 14 pizzette/4 persone. Tempo lievitazione: 3 ore.",
+      "category_id": 1,
+      "category": "Antipasti e contorni",
+      "description": "Pizzette fritte lievitate, dorate e soffici.",
+      "yield_text": "14 pizzette / 4 persone",
+      "rise_time": "3 ore",
+      "classification": {
+        "previous_category": "Lievitati",
+        "new_category": "Antipasti e contorni",
+        "method": "title_ingredients_procedure_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 241,
+      "title": "Detroit Pizza",
+      "slug": "detroit-pizza",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "650 g di farina 00"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "390 g di acqua"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "7 g di lievito fresco oppure 2 g di lievito secco"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "10 g di sale"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "10 g di olio"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "200 g di spianata"
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "2 scamorzine"
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "Polpa di pomodoro q.b."
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Procedimento",
+          "text": "Sciogliere il lievito nell’acqua con le mani."
+        },
+        {
+          "order": 2,
+          "section": "Procedimento",
+          "text": "Mettere in una ciotola la farina e il sale, mescolare e aggiungere gradualmente l’acqua con il lievito."
+        },
+        {
+          "order": 3,
+          "section": "Procedimento",
+          "text": "Aggiungere lentamente l’olio e lavorare bene l’impasto."
+        },
+        {
+          "order": 4,
+          "section": "Procedimento",
+          "text": "Lasciare lievitare nel forno spento con la luce accesa per 30 minuti."
+        },
+        {
+          "order": 5,
+          "section": "Procedimento",
+          "text": "Lavorare nuovamente l’impasto eseguendo delle pieghe."
+        },
+        {
+          "order": 6,
+          "section": "Procedimento",
+          "text": "Ungere leggermente la superficie dell’impasto per evitare che si secchi e lasciare lievitare per 2 ore."
+        },
+        {
+          "order": 7,
+          "section": "Procedimento",
+          "text": "Ungere le teglie, distribuire l’impasto senza rialzare i bordi e lasciare lievitare per 1 ora e 30 minuti."
+        },
+        {
+          "order": 8,
+          "section": "Procedimento",
+          "text": "Aggiungere un filo d’olio, abbondante scamorza grattugiata, tre strisce di polpa di pomodoro e la spianata tagliata a metà."
+        },
+        {
+          "order": 9,
+          "section": "Procedimento",
+          "text": "Cuocere nella parte medio-bassa del forno ventilato a 220 °C per 20 minuti."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Note",
+          "text": "Tempo di lievitazione: 5 ore"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "DETROIT PIZZA\nDose per 2 teglie da 28 cm/4 persone. Tempo lievitazione: 5 ore.",
+      "category_id": 1,
+      "category": "Antipasti e contorni",
+      "description": "Pizza in teglia in stile Detroit, con scamorza, pomodoro e spianata.",
+      "yield_text": "2 teglie da 28 cm / 4 persone",
+      "rise_time": "5 ore",
+      "classification": {
+        "previous_category": "Lievitati",
+        "new_category": "Antipasti e contorni",
+        "method": "title_ingredients_procedure_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 242,
+      "title": "Focaccia Barese",
+      "slug": "focaccia-barese",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "350 g di acqua"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "250 g di farina di semola"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "250 g di farina Manitoba"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "150 g di patate bollite e schiacciate"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "1 cucchiaino di sale"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "10 g di lievito fresco oppure 3 g di lievito secco"
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "5 g di miele"
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "Olio extravergine d’oliva q.b."
+        },
+        {
+          "order": 9,
+          "group": "Ingredienti",
+          "text": "Olive q.b."
+        },
+        {
+          "order": 10,
+          "group": "Ingredienti",
+          "text": "Origano q.b."
+        },
+        {
+          "order": 11,
+          "group": "Ingredienti",
+          "text": "Pomodorini q.b."
+        },
+        {
+          "order": 12,
+          "group": "Ingredienti",
+          "text": "Mozzarella q.b."
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Procedimento",
+          "text": "Mettere in una ciotola l’acqua, il miele e il lievito e mescolare."
+        },
+        {
+          "order": 2,
+          "section": "Procedimento",
+          "text": "Aggiungere le farine, le patate bollite e schiacciate e il sale, quindi lavorare l’impasto."
+        },
+        {
+          "order": 3,
+          "section": "Procedimento",
+          "text": "Lasciare lievitare nel forno spento con la luce accesa per 2 ore."
+        },
+        {
+          "order": 4,
+          "section": "Procedimento",
+          "text": "Trasferire l’impasto in una teglia grande, schiacciarlo con le dita e lasciarlo riposare per 30 minuti."
+        },
+        {
+          "order": 5,
+          "section": "Procedimento",
+          "text": "Aggiungere un po’ di mozzarella e spingerla nell’impasto con le dita."
+        },
+        {
+          "order": 6,
+          "section": "Procedimento",
+          "text": "Distribuire i pomodorini, un filo d’olio, le olive e l’origano."
+        },
+        {
+          "order": 7,
+          "section": "Procedimento",
+          "text": "Cuocere in forno a 200 °C per 20 minuti."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Note",
+          "text": "Tempo di lievitazione: 2 ore e 30 minuti"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "FOCACCIA BARESE\nDose per 1 teglia. Tempo lievitazione: 2 ore e mezza.",
+      "category_id": 1,
+      "category": "Antipasti e contorni",
+      "description": "Focaccia barese soffice con patate nell’impasto, pomodorini, olive e origano.",
+      "yield_text": "1 teglia grande",
+      "rise_time": "2 ore e 30 minuti",
+      "classification": {
+        "previous_category": "Lievitati",
+        "new_category": "Antipasti e contorni",
+        "method": "title_ingredients_procedure_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 243,
+      "title": "Schiacciata Antico Fornaio",
+      "slug": "schiacciata-antico-fornaio",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "800 g di farina"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "650 ml di acqua"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "10 g di lievito fresco"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "3 cucchiai di olio"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "15 g di sale"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "8 g di zucchero"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Poolish",
+          "text": "Prelevare dal totale 320 g di acqua e 320 g di farina."
+        },
+        {
+          "order": 2,
+          "section": "Poolish",
+          "text": "Sciogliere il lievito nell’acqua, unire la farina e mescolare bene."
+        },
+        {
+          "order": 3,
+          "section": "Poolish",
+          "text": "Lasciare lievitare nel forno spento con la luce accesa per 2 ore."
+        },
+        {
+          "order": 4,
+          "section": "Impasto",
+          "text": "Versare il poolish in un’altra ciotola e aggiungere l’acqua restante, la farina restante, lo zucchero e un filo d’olio."
+        },
+        {
+          "order": 5,
+          "section": "Impasto",
+          "text": "Eseguire alcune pieghe e lasciare riposare per 30 minuti."
+        },
+        {
+          "order": 6,
+          "section": "Impasto",
+          "text": "Ripetere le pieghe e lasciare lievitare per 1 ora e 30 minuti."
+        },
+        {
+          "order": 7,
+          "section": "Formatura e cottura",
+          "text": "Stendere l’impasto in teglia, spennellarlo con poco olio per evitare che si secchi e lasciare lievitare per 1 ora."
+        },
+        {
+          "order": 8,
+          "section": "Formatura e cottura",
+          "text": "Cuocere a 240 °C per 10 minuti nella parte bassa del forno e poi per 20 minuti nella parte centrale."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Note",
+          "text": "Tempo di lievitazione: 5 ore"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "SCHIACCIATA ANTICO FORNAIO\nDose per 6 persone. Tempo lievitazione: 5 ore.",
+      "category_id": 1,
+      "category": "Antipasti e contorni",
+      "description": "Schiacciata ad alta idratazione preparata con preimpasto poolish.",
+      "yield_text": "6 persone",
+      "rise_time": "5 ore",
+      "classification": {
+        "previous_category": "Lievitati",
+        "new_category": "Antipasti e contorni",
+        "method": "title_ingredients_procedure_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 244,
+      "title": "Pizza Salvatore Lioniello",
+      "slug": "pizza-salvatore-lioniello",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Biga",
+          "text": "200 g di farina forte"
+        },
+        {
+          "order": 2,
+          "group": "Biga",
+          "text": "100 ml di acqua"
+        },
+        {
+          "order": 3,
+          "group": "Biga",
+          "text": "1,5 g di lievito fresco"
+        },
+        {
+          "order": 4,
+          "group": "Poolish",
+          "text": "100 g di farina forte"
+        },
+        {
+          "order": 5,
+          "group": "Poolish",
+          "text": "100 ml di acqua"
+        },
+        {
+          "order": 6,
+          "group": "Poolish",
+          "text": "5 g di lievito fresco"
+        },
+        {
+          "order": 7,
+          "group": "Chiusura",
+          "text": "Biga"
+        },
+        {
+          "order": 8,
+          "group": "Chiusura",
+          "text": "Poolish"
+        },
+        {
+          "order": 9,
+          "group": "Chiusura",
+          "text": "700 g di farina media o forte"
+        },
+        {
+          "order": 10,
+          "group": "Chiusura",
+          "text": "500 ml di acqua"
+        },
+        {
+          "order": 11,
+          "group": "Chiusura",
+          "text": "22 g di sale"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Biga",
+          "text": "Sciogliere il lievito nell’acqua, mescolarlo con la farina, preparare la biga e metterla in frigorifero."
+        },
+        {
+          "order": 2,
+          "section": "Poolish",
+          "text": "Dopo 6 ore sciogliere il lievito nell’acqua, mescolarlo con la farina, preparare il poolish e metterlo in frigorifero."
+        },
+        {
+          "order": 3,
+          "section": "Chiusura",
+          "text": "Dopo circa 16 ore mettere la farina nella planetaria, unire il lievito e aggiungere la biga a pezzetti."
+        },
+        {
+          "order": 4,
+          "section": "Chiusura",
+          "text": "Aggiungere l’acqua poco alla volta e il sale alla fine."
+        },
+        {
+          "order": 5,
+          "section": "Lievitazione",
+          "text": "Eseguire le pieghe e lasciare lievitare per 1 ora a temperatura ambiente, poi per 6 ore in frigorifero."
+        },
+        {
+          "order": 6,
+          "section": "Staglio",
+          "text": "Eseguire lo staglio, formare le palline e lasciarle lievitare in frigorifero fino all’utilizzo."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Note",
+          "text": "Tempo di lievitazione: 16 ore + 6 ore + 4 ore"
+        },
+        {
+          "order": 2,
+          "section": "Note",
+          "text": "Orari consigliati: ore 16:00 biga; ore 22:00 poolish; il giorno seguente ore 9:00 chiusura; ore 16:00 palline."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "PIZZA SALVATORE LIONIELLO\nDose per 6/7 pizze. Biga, poolish e chiusura.",
+      "category_id": 1,
+      "category": "Antipasti e contorni",
+      "description": "Pizza a lunga lievitazione preparata con biga e poolish.",
+      "yield_text": "6-7 pizze",
+      "rise_time": "16 ore + 6 ore + 4 ore",
+      "classification": {
+        "previous_category": "Lievitati",
+        "new_category": "Antipasti e contorni",
+        "method": "title_ingredients_procedure_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 245,
+      "title": "Pizza da Forno in Teglia",
+      "slug": "pizza-da-forno-in-teglia",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "1 kg di farina medio-forte"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "800 ml di acqua"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "13 g di lievito fresco"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "20 g di sale"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "Semola q.b. per la stesura"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "Salsa di pomodoro q.b."
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "Mozzarella scolata q.b."
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "Olio q.b."
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Procedimento",
+          "text": "Mettere la farina e il lievito nell’impastatrice e mescolare."
+        },
+        {
+          "order": 2,
+          "section": "Procedimento",
+          "text": "Aggiungere gradualmente l’acqua."
+        },
+        {
+          "order": 3,
+          "section": "Procedimento",
+          "text": "Aggiungere il sale quando l’impasto è sodo."
+        },
+        {
+          "order": 4,
+          "section": "Procedimento",
+          "text": "Eseguire tre cicli start and stop, intervallati da pause di 10 minuti."
+        },
+        {
+          "order": 5,
+          "section": "Procedimento",
+          "text": "Eseguire le pieghe e lasciare riposare per 3 ore a temperatura ambiente, oppure per 2 ore a temperatura ambiente e 2 ore in frigorifero."
+        },
+        {
+          "order": 6,
+          "section": "Procedimento",
+          "text": "Stendere l’impasto con la semola nelle teglie quadrate e lasciarlo riposare per circa 30 minuti."
+        },
+        {
+          "order": 7,
+          "section": "Procedimento",
+          "text": "Condire con la salsa e cuocere nella parte bassa del forno alla massima temperatura fino a doratura."
+        },
+        {
+          "order": 8,
+          "section": "Procedimento",
+          "text": "Aggiungere altra salsa, la mozzarella ben scolata e un po’ d’olio."
+        },
+        {
+          "order": 9,
+          "section": "Procedimento",
+          "text": "Completare la cottura nella parte alta del forno in modalità grill."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Note",
+          "text": "Tempo di lievitazione: 3 ore"
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "PIZZA DA FORNO IN TEGLIA\nDose per 2 teglie quadrate. Tempo lievitazione: 3 ore.",
+      "category_id": 1,
+      "category": "Antipasti e contorni",
+      "description": "Pizza in teglia ad alta idratazione, cotta prima con pomodoro e poi completata con mozzarella.",
+      "yield_text": "2 teglie quadrate",
+      "rise_time": "3 ore",
+      "classification": {
+        "previous_category": "Lievitati",
+        "new_category": "Antipasti e contorni",
+        "method": "title_ingredients_procedure_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 246,
+      "title": "Pizza Vincenzo Capuano",
+      "slug": "pizza-vincenzo-capuano",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Biga",
+          "text": "500 g di farina forte"
+        },
+        {
+          "order": 2,
+          "group": "Biga",
+          "text": "250 ml di acqua"
+        },
+        {
+          "order": 3,
+          "group": "Biga",
+          "text": "5 g di lievito fresco"
+        },
+        {
+          "order": 4,
+          "group": "Autolisi",
+          "text": "500 g di farina media"
+        },
+        {
+          "order": 5,
+          "group": "Autolisi",
+          "text": "250 ml di acqua"
+        },
+        {
+          "order": 6,
+          "group": "Chiusura",
+          "text": "Biga"
+        },
+        {
+          "order": 7,
+          "group": "Chiusura",
+          "text": "Autolisi"
+        },
+        {
+          "order": 8,
+          "group": "Chiusura",
+          "text": "1 g di lievito fresco"
+        },
+        {
+          "order": 9,
+          "group": "Chiusura",
+          "text": "300 ml di acqua"
+        },
+        {
+          "order": 10,
+          "group": "Chiusura",
+          "text": "25 g di sale"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Biga",
+          "text": "Sciogliere il lievito nell’acqua, mescolarlo con la farina e preparare una biga abbastanza impastata."
+        },
+        {
+          "order": 2,
+          "section": "Biga",
+          "text": "Spezzettare la biga, lasciarla riposare per 4 ore e poi trasferirla in frigorifero per un massimo di 20 ore."
+        },
+        {
+          "order": 3,
+          "section": "Autolisi",
+          "text": "Preparare l’autolisi con farina e acqua e lasciarla in frigorifero per 30 minuti."
+        },
+        {
+          "order": 4,
+          "section": "Chiusura",
+          "text": "Mettere nella planetaria la biga e l’autolisi spezzettate, aggiungere il lievito e incorporare gradualmente l’acqua."
+        },
+        {
+          "order": 5,
+          "section": "Chiusura",
+          "text": "Aggiungere il sale alla fine con un goccio d’acqua."
+        },
+        {
+          "order": 6,
+          "section": "Staglio",
+          "text": "Formare panetti da 280 g aiutandosi con l’olio."
+        },
+        {
+          "order": 7,
+          "section": "Lievitazione",
+          "text": "Lasciare lievitare i panetti per 6 ore e poi stendere."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Note",
+          "text": "Tempo di lievitazione: 4 ore + 20 ore + 30 minuti + 6 ore"
+        },
+        {
+          "order": 2,
+          "section": "Note",
+          "text": "Orari consigliati: ore 13:00 biga; ore 17:00 frigorifero; il giorno seguente ore 13:30 autolisi; ore 14:00 impasto e staglio; ore 20:00 stesura."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "PIZZA VINCENZO CAPUANO\nDose per 6 pizze. Biga, autolisi e chiusura.",
+      "category_id": 1,
+      "category": "Antipasti e contorni",
+      "description": "Pizza a lunga lievitazione preparata con biga e autolisi.",
+      "yield_text": "6 pizze",
+      "rise_time": "4 ore + 20 ore + 30 minuti + 6 ore",
+      "classification": {
+        "previous_category": "Lievitati",
+        "new_category": "Antipasti e contorni",
+        "method": "title_ingredients_procedure_taxonomy",
+        "confidence": "high"
+      }
     }
   ],
   "validation": {
@@ -33306,7 +34213,7 @@
     "category_counts": {
       "Altro": 40,
       "Primi": 26,
-      "Antipasti e contorni": 49,
+      "Antipasti e contorni": 56,
       "Dolci": 105,
       "Secondi": 19
     },
@@ -33380,5 +34287,5 @@
       }
     ]
   },
-  "recipe_count": 239
+  "recipe_count": 246
 }
