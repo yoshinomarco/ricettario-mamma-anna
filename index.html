@@ -498,9 +498,11 @@
   <script>
     if ("serviceWorker" in navigator) {
       window.addEventListener("load", () => {
-        navigator.serviceWorker.register("./service-worker.js").catch(error => {
-          console.warn("Service worker non registrato:", error);
-        });
+        navigator.serviceWorker.register("./service-worker.js", { updateViaCache: "none" })
+          .then(registration => registration.update())
+          .catch(error => {
+            console.warn("Service worker non registrato:", error);
+          });
       });
     }
   </script>
@@ -736,7 +738,7 @@
      * Incolla il token tra le virgolette e non modificare le altre righe.
      * Esempio: const GITHUB_TOKEN = "github_pat_...";
      */
-    const GITHUB_TOKEN = ""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";
+    const GITHUB_TOKEN = "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";
 
     const GITHUB_CONFIG = Object.freeze({
       owner: "yoshinomarco",
@@ -747,7 +749,7 @@
 
     function getGithubConfig() {
       const token = GITHUB_TOKEN.trim();
-      if (!token || token === ""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") {
+      if (!token || token === "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") {
         throw new Error("Token GitHub non configurato nell'HTML.");
       }
       return { ...GITHUB_CONFIG, token };
@@ -969,20 +971,33 @@
     }
 
     async function autoLoadJson() {
-      try {
-        const jsonUrl = new URL(`./${JSON_FILE}`, window.location.href);
-        const response = await fetch(jsonUrl, { cache: "no-store" });
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}`);
+      const cacheBuster = Date.now();
+      const repositoryUrl = new URL(`./${JSON_FILE}?v=${cacheBuster}`, window.location.href);
+      const rawGithubUrl = `https://raw.githubusercontent.com/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repository}/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.jsonPath}?v=${cacheBuster}`;
+      const sources = [repositoryUrl.href, rawGithubUrl];
+      let lastError = null;
+
+      for (const source of sources) {
+        try {
+          const response = await fetch(source, {
+            cache: "no-store",
+            headers: { "Accept": "application/json" }
+          });
+          if (!response.ok) throw new Error(`HTTP ${response.status}`);
+          const data = await response.json();
+          loadData(data, JSON_FILE);
+          return;
+        } catch (error) {
+          lastError = error;
+          console.warn("Caricamento JSON non riuscito da:", source, error);
         }
-        loadData(await response.json(), JSON_FILE);
-      } catch (error) {
-        if (location.protocol === "file:") {
-          elements.sourceStatus.textContent = "";
-          showToast("Per il caricamento automatico apri la cartella tramite un server locale.");
-        } else {
-          showToast(`Impossibile caricare automaticamente ${JSON_FILE}.`);
-        }
+      }
+
+      if (location.protocol === "file:") {
+        elements.sourceStatus.textContent = "";
+        showToast("Apri il ricettario da GitHub Pages per caricare automaticamente il JSON.");
+      } else {
+        showToast(`Impossibile caricare ${JSON_FILE}: ${lastError?.message || "errore sconosciuto"}.`);
       }
     }
 
