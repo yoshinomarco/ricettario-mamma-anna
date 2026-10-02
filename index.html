@@ -749,7 +749,7 @@
 
     function getGithubConfig() {
       const token = GITHUB_TOKEN.trim();
-      if (!token || token === "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") {
+      if (!token || token === "INCOLLA_QUI_IL_TOKEN_GITHUB") {
         throw new Error("Token GitHub non configurato nell'HTML.");
       }
       return { ...GITHUB_CONFIG, token };
