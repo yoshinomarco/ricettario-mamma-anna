@@ -371,6 +371,16 @@
     .toast.show { opacity: 1; transform: none; }
     footer { padding: 26px; color: var(--muted); text-align: center; border-top: 1px solid var(--border); }
 
+
+    /* Editor ricetta */
+    .recipe-actions{display:flex;gap:10px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}
+    .editor-panel{display:grid;gap:18px}.editor-field{display:grid;gap:7px}.editor-field label,.editor-title{font-weight:900}
+    .editor-input,.editor-textarea,.editor-select{width:100%;padding:12px 14px;color:var(--text);background:#fff;border:1px solid #cebbaa;border-radius:12px;outline:none;font:inherit}
+    .editor-textarea{min-height:110px;resize:vertical}.editor-input:focus,.editor-textarea:focus,.editor-select:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(223,16,36,.12)}
+    .editor-section{display:grid;gap:11px;padding:16px;background:#fbf6ef;border:1px solid var(--border);border-radius:16px}.editor-section-header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+    .editor-list{display:grid;gap:10px}.editor-row{display:grid;grid-template-columns:minmax(120px,.38fr) 1fr auto;gap:8px;align-items:start}.editor-remove{width:42px;min-width:42px;padding:0;border:1px solid #e2b9b9;border-radius:10px;color:var(--red-dark);background:#fff;font-size:1.25rem}
+    .editor-footer{position:sticky;bottom:-34px;z-index:5;display:flex;flex-wrap:wrap;gap:10px;padding:16px 0 4px;background:linear-gradient(transparent,var(--card) 18%)}.editor-footer .button{flex:1 1 180px}
+    @media(max-width:620px){.editor-row{grid-template-columns:1fr auto}.editor-row .editor-group{grid-column:1/-1}.editor-section{padding:13px}}
     @media (max-width: 1024px) {
       .recipes-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .hero { min-height: 410px; }
@@ -507,7 +517,9 @@
       categories: new Map(),
       activeCategory: "all",
       query: "",
-      pageScrollY: 0
+      pageScrollY: 0,
+      currentRecipeId: null,
+      isEditing: false
     };
 
     const elements = {
@@ -709,7 +721,163 @@
       return isOvenInstruction(text) ? `<strong class="oven-step">${safeText}</strong>` : safeText;
     }
 
-    function openRecipe(recipeId) {
+    function refreshRecipeSearch(recipe) {
+      recipe._searchText = normalize([recipe.title, recipe.description, recipe.source_text,
+        ...(recipe.ingredients || []).map(item => item.text),
+        ...(recipe.instructions || []).map(item => item.text),
+        ...(recipe.notes || []).map(item => item.text)].filter(Boolean).join(" "));
+    }
+    function syncRecipeToData(recipe) {
+      const index = state.data.recipes.findIndex(item => Number(item.id) === Number(recipe.id));
+      if (index >= 0) { const clean = {...recipe}; delete clean._searchText; state.data.recipes[index] = clean; }
+    }
+    /*
+     * CONFIGURAZIONE GITHUB
+     * Incolla il token tra le virgolette e non modificare le altre righe.
+     * Esempio: const GITHUB_TOKEN = "github_pat_...";
+     */
+    const GITHUB_TOKEN = "INCOLLA_QUI_IL_TOKEN_GITHUB";
+
+    const GITHUB_CONFIG = Object.freeze({
+      owner: "yoshinomarco",
+      repository: "ricettario-mamma-anna",
+      branch: "main",
+      jsonPath: "ricettario_ricategorizzato.json"
+    });
+
+    function getGithubConfig() {
+      const token = GITHUB_TOKEN.trim();
+      if (!token || token === "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") {
+        throw new Error("Token GitHub non configurato nell'HTML.");
+      }
+      return { ...GITHUB_CONFIG, token };
+    }
+
+    function buildUpdatedJson() {
+      const output = structuredClone(state.data);
+      output.recipes = state.recipes.map(recipe => {
+        const cleanRecipe = { ...recipe };
+        delete cleanRecipe._searchText;
+        return cleanRecipe;
+      });
+      output.recipe_count = output.recipes.length;
+      return output;
+    }
+
+    function encodeUtf8ToBase64(value) {
+      const bytes = new TextEncoder().encode(value);
+      let binary = "";
+      const chunkSize = 32768;
+      for (let index = 0; index < bytes.length; index += chunkSize) {
+        binary += String.fromCharCode(...bytes.subarray(index, index + chunkSize));
+      }
+      return btoa(binary);
+    }
+
+    function githubApiHeaders(token) {
+      return {
+        "Accept": "application/vnd.github+json",
+        "Authorization": `Bearer ${token}`,
+        "X-GitHub-Api-Version": "2022-11-28"
+      };
+    }
+
+    function githubContentsUrl(config) {
+      const encodedPath = config.jsonPath.split("/").map(encodeURIComponent).join("/");
+      return `https://api.github.com/repos/${encodeURIComponent(config.owner)}/${encodeURIComponent(config.repository)}/contents/${encodedPath}`;
+    }
+
+    async function overwriteJsonOnGitHub() {
+      const config = getGithubConfig();
+
+      const fileUrl = githubContentsUrl(config);
+      const getResponse = await fetch(`${fileUrl}?ref=${encodeURIComponent(config.branch)}`, {
+        headers: githubApiHeaders(config.token),
+        cache: "no-store"
+      });
+      const currentFile = await getResponse.json();
+      if (!getResponse.ok) {
+        throw new Error(currentFile.message || `Lettura GitHub non riuscita: HTTP ${getResponse.status}`);
+      }
+      if (!currentFile.sha) throw new Error("SHA del JSON non ricevuto da GitHub.");
+
+      const output = buildUpdatedJson();
+      const content = encodeUtf8ToBase64(`${JSON.stringify(output, null, 2)}\n`);
+      const putResponse = await fetch(fileUrl, {
+        method: "PUT",
+        headers: { ...githubApiHeaders(config.token), "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: `Aggiorna ricetta ${state.currentRecipeId}`,
+          content,
+          sha: currentFile.sha,
+          branch: config.branch
+        })
+      });
+      const result = await putResponse.json();
+      if (!putResponse.ok) {
+        if (putResponse.status === 409) throw new Error("Il JSON è cambiato. Ricarica la pagina e riprova.");
+        throw new Error(result.message || `Scrittura GitHub non riuscita: HTTP ${putResponse.status}`);
+      }
+      return result;
+    }
+
+    function editorRowHtml(item,type) {
+      const value=type==="ingredient"?(item.group||""):(item.section||"");
+      return `<div class="editor-row" data-editor-row><input class="editor-input editor-group" placeholder="${type==="ingredient"?"Gruppo":"Sezione"} (facoltativo)" value="${escapeHtml(value)}"><textarea class="editor-input editor-item-text" rows="2" required>${escapeHtml(item.text||"")}</textarea><button class="editor-remove" type="button" data-remove-row>×</button></div>`;
+    }
+    function startRecipeEdit() {
+      const recipe=state.recipes.find(r=>Number(r.id)===Number(state.currentRecipeId)); if(!recipe)return; state.isEditing=true;
+      const options=state.data.categories.map(c=>`<option value="${escapeHtml(c.id)}" ${String(c.id)===String(recipe.category_id)?"selected":""}>${escapeHtml(c.name)}</option>`).join("");
+      elements.dialogContent.innerHTML=`<form id="recipeEditor" class="editor-panel"><h3>Modifica ricetta</h3>          <p class="editor-help">Aggiorna i campi e salva. Il JSON nella repository GitHub verrà sovrascritto con un nuovo commit.</p>
+          <div class="github-config-note">Salvataggio diretto su <strong>yoshinomarco/ricettario-mamma-anna</strong>, branch <strong>main</strong>.</div>
+          <div id="recipeSaveStatus" class="save-status" role="status"></div>
+      <div class="editor-field"><label for="editTitle">Titolo</label><input id="editTitle" class="editor-input" value="${escapeHtml(recipe.title||"")}" required></div>
+      <div class="editor-field"><label for="editDescription">Descrizione</label><textarea id="editDescription" class="editor-textarea">${escapeHtml(recipe.description||"")}</textarea></div>
+      <div class="editor-field"><label for="editCategory">Categoria</label><select id="editCategory" class="editor-select">${options}</select></div>
+      <section class="editor-section"><div class="editor-section-header"><b>Ingredienti</b><button class="button button-neutral" type="button" data-add-row="ingredient">+ Ingrediente</button></div><div id="editIngredients" class="editor-list">${(recipe.ingredients||[]).map(i=>editorRowHtml(i,"ingredient")).join("")}</div></section>
+      <section class="editor-section"><div class="editor-section-header"><b>Procedimento</b><button class="button button-neutral" type="button" data-add-row="instruction">+ Passaggio</button></div><div id="editInstructions" class="editor-list">${(recipe.instructions||[]).map(i=>editorRowHtml(i,"instruction")).join("")}</div></section>
+      <div class="editor-footer"><button class="button button-primary" type="submit">Salva modifiche</button><button id="cancelRecipeEdit" class="button button-neutral" type="button">Annulla modifiche</button></div></form>`;
+      elements.dialogBody.scrollTop=0;
+    }
+    async function saveRecipeEdit(event) {
+      event.preventDefault(); const recipe=state.recipes.find(r=>Number(r.id)===Number(state.currentRecipeId)); if(!recipe)return;
+      const catId=document.getElementById("editCategory").value,cat=state.categories.get(String(catId));
+      const rows=(sel,type)=>[...document.querySelectorAll(sel)].map((row,index)=>{const text=row.querySelector(".editor-item-text").value.trim(),g=row.querySelector(".editor-group").value.trim();return type==="ingredient"?{order:index+1,group:g,text}:{order:index+1,section:g,text}}).filter(x=>x.text);
+      recipe.title=document.getElementById("editTitle").value.trim(); recipe.description=document.getElementById("editDescription").value.trim(); recipe.category_id=catId; recipe.category=cat?.name||"Altro"; recipe.ingredients=rows("#editIngredients [data-editor-row]","ingredient"); recipe.instructions=rows("#editInstructions [data-editor-row]","instruction");
+      const originalRecipe = structuredClone(recipe);
+      refreshRecipeSearch(recipe);
+      syncRecipeToData(recipe);
+
+      const saveButton = event.submitter;
+      const status = document.getElementById("recipeSaveStatus");
+      saveButton.disabled = true;
+      saveButton.textContent = "Salvataggio su GitHub…";
+      status.textContent = "Connessione a GitHub e sovrascrittura del JSON in corso…";
+      status.className = "save-status show";
+
+      try {
+        await overwriteJsonOnGitHub();
+      } catch (error) {
+        Object.assign(recipe, originalRecipe);
+        refreshRecipeSearch(recipe);
+        syncRecipeToData(recipe);
+        saveButton.disabled = false;
+        saveButton.textContent = "Salva modifiche";
+        status.textContent = `Errore: ${error.message}`;
+        status.className = "save-status error show";
+        showToast(`Errore: ${error.message}`);
+        return;
+      }
+
+      state.isEditing = false;
+      renderCategoryButtons();
+      renderRecipes();
+      openRecipe(recipe.id, true);
+      showToast("Modifiche salvate nella repository GitHub.");
+    }
+    function cancelRecipeEdit(){state.isEditing=false;openRecipe(state.currentRecipeId,true);showToast("Modifiche annullate.");}
+
+    function openRecipe(recipeId, keepDialogOpen = false) {
       state.pageScrollY = window.scrollY || document.documentElement.scrollTop || 0;
       const recipe = state.recipes.find(item => Number(item.id) === recipeId);
       if (!recipe) return;
@@ -761,10 +929,11 @@
         html += `<div class="warning"><strong>Controllo documento:</strong> ${recipe.warnings.length} segnalazione/i presenti nel JSON.</div>`;
       }
 
-      html += `<p><button class="button button-neutral" type="button" onclick="window.print()">Stampa ricetta</button></p>`;
+      html += `<div class="recipe-actions"><button id="editRecipeButton" class="button button-primary" type="button">Modifica ricetta</button></div>`;
       elements.dialogContent.innerHTML = html;
+      document.getElementById("editRecipeButton").addEventListener("click", startRecipeEdit);
       elements.dialogBody.scrollTop = 0;
-      elements.recipeDialog.showModal();
+      if (!keepDialogOpen && !elements.recipeDialog.open) elements.recipeDialog.showModal();
 
       // Ogni scheda ricetta si apre sempre dall'inizio.
       requestAnimationFrame(() => {
@@ -807,6 +976,8 @@
       }
     }
 
+    elements.dialogContent.addEventListener("click", event => {const add=event.target.closest("[data-add-row]");if(add){const type=add.dataset.addRow,list=document.getElementById(type==="ingredient"?"editIngredients":"editInstructions");list.insertAdjacentHTML("beforeend",editorRowHtml({},type));return;}const remove=event.target.closest("[data-remove-row]");if(remove)remove.closest("[data-editor-row]").remove();if(event.target.id==="cancelRecipeEdit")cancelRecipeEdit();});
+    elements.dialogContent.addEventListener("submit",event=>{if(event.target.id==="recipeEditor")saveRecipeEdit(event);});
     elements.importButton.addEventListener("click", () => elements.fileInput.click());
     elements.fileInput.addEventListener("change", event => event.target.files[0] && readJsonFile(event.target.files[0]));
     elements.searchInput.addEventListener("input", event => { state.query = event.target.value; renderRecipes(); });
