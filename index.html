@@ -7,14 +7,17 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Mamma Anna">
   <link rel="manifest" href="./manifest.webmanifest">
-  <link rel="icon" type="image/png" href="./logo.png">
-  <link rel="apple-touch-icon" href="./logo.png">
+  <link rel="preload" as="image" href="./copertina-mamma-anna.jpg?v=4">
+  <link rel="icon" type="image/png" sizes="32x32" href="./logo.png?v=4">
+  <link rel="icon" type="image/png" sizes="192x192" href="./logo.png?v=4">
+  <link rel="shortcut icon" type="image/png" href="./logo.png?v=4">
+  <link rel="apple-touch-icon" sizes="180x180" href="./logo.png?v=4">
   <title>RICETTARIO DI MAMMA ANNA</title>
   <style>
     @font-face{font-family:MammaAnna;src:url("./font.ttf") format("truetype");font-display:swap}
     :root{--red:#df1024;--dark:#a90818;--paper:#f8f3eb;--card:#fffdf9;--text:#2e2824;--muted:#746a62;--border:#e3d6c7;--shadow:0 14px 36px rgba(64,32,16,.12);--radius:20px}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:var(--paper);font:16px/1.55 MammaAnna,system-ui,sans-serif}.container{width:min(1180px,calc(100% - 32px));margin:auto}
-    button,input,textarea,select{font:inherit}button{min-height:44px;cursor:pointer}.hero{min-height:430px;display:flex;align-items:center;color:#fff;text-align:center;background:#251916 linear-gradient(90deg,rgba(22,12,11,.82),rgba(49,16,16,.53)),url("copertina-mamma-anna.jpg") center 43%/cover no-repeat;box-shadow:var(--shadow)}
+    button,input,textarea,select{font:inherit}button{min-height:44px;cursor:pointer}.hero{min-height:430px;display:flex;align-items:center;color:#fff;text-align:center;background-color:#251916;background-image:linear-gradient(90deg,rgba(22,12,11,.82),rgba(49,16,16,.53)),url("./copertina-mamma-anna.jpg?v=4");background-position:center,center 43%;background-size:auto,cover;background-repeat:no-repeat,no-repeat;box-shadow:var(--shadow)}
     h1{margin:0;font:800 clamp(2.3rem,6vw,4.8rem)/1 MammaAnna,Georgia,serif;text-shadow:0 3px 18px #000}.hero p{max-width:720px;margin:18px auto 0;text-shadow:0 2px 8px #000}.controls{position:sticky;top:0;z-index:20;padding:16px 0 8px;background:rgba(248,243,235,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(14px)}
     .search-row{display:grid;grid-template-columns:1fr auto;gap:12px}.input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:13px;background:#fff;outline:none}.input:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(223,16,36,.12)}#searchInput{border-radius:999px}.button{border:0;border-radius:999px;padding:10px 17px;font-weight:850}.primary{color:#fff;background:var(--red)}.neutral{color:var(--text);background:#f1e7db}.categories{display:flex;gap:8px;overflow:auto;padding:12px 0 4px}.category{flex:0 0 auto;padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);font-weight:800}.category.active{color:#fff;background:var(--dark)}
     .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:24px 0 56px}.card{position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:270px;padding:22px;overflow:hidden;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 22px rgba(73,47,32,.07)}.card:before{content:"";position:absolute;inset:-3px;z-index:-2;background:var(--image,none) center/cover;opacity:.85}.card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(255,253,249,.8),rgba(255,253,249,.5),rgba(255,253,249,.72))}.card h2{margin:8px 0;font:700 1.45rem/1.18 MammaAnna,Georgia,serif}.cat{color:var(--dark);font-size:.77rem;font-weight:900;text-transform:uppercase}.desc{flex:1}.footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px}.empty{grid-column:1/-1;padding:50px;text-align:center;background:var(--card);border:1px dashed #cdb9a7;border-radius:var(--radius)}
