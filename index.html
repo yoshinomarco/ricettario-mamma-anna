@@ -736,7 +736,7 @@
      * Incolla il token tra le virgolette e non modificare le altre righe.
      * Esempio: const GITHUB_TOKEN = "github_pat_...";
      */
-    const GITHUB_TOKEN = "INCOLLA_QUI_IL_TOKEN_GITHUB";
+    const GITHUB_TOKEN = ""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";
 
     const GITHUB_CONFIG = Object.freeze({
       owner: "yoshinomarco",
@@ -747,7 +747,7 @@
 
     function getGithubConfig() {
       const token = GITHUB_TOKEN.trim();
-      if (!token || token === "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") {
+      if (!token || token === ""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") {
         throw new Error("Token GitHub non configurato nell'HTML.");
       }
       return { ...GITHUB_CONFIG, token };
@@ -882,6 +882,10 @@
       const recipe = state.recipes.find(item => Number(item.id) === recipeId);
       if (!recipe) return;
 
+      // Memorizza la ricetta corrente: serve al pulsante Modifica ricetta.
+      state.currentRecipeId = recipe.id;
+      state.isEditing = false;
+
       const category = state.categories.get(String(recipe.category_id));
       elements.dialogCategory.textContent = category?.name || "Altro";
       elements.dialogTitle.textContent = recipe.title;
@@ -931,7 +935,13 @@
 
       html += `<div class="recipe-actions"><button id="editRecipeButton" class="button button-primary" type="button">Modifica ricetta</button></div>`;
       elements.dialogContent.innerHTML = html;
-      document.getElementById("editRecipeButton").addEventListener("click", startRecipeEdit);
+      const editRecipeButton = document.getElementById("editRecipeButton");
+      if (editRecipeButton) {
+        editRecipeButton.addEventListener("click", event => {
+          event.preventDefault();
+          startRecipeEdit();
+        });
+      }
       elements.dialogBody.scrollTop = 0;
       if (!keepDialogOpen && !elements.recipeDialog.open) elements.recipeDialog.showModal();
 
