@@ -2,7 +2,7 @@
   "schema_version": "2.0",
   "source": {
     "file_name": "MAMMA_ricettario_con_lievitati.docx",
-    "recipe_count": 239
+    "recipe_count": 249
   },
   "taxonomy": {
     "categories": [
@@ -34206,16 +34206,421 @@
         "method": "title_ingredients_procedure_taxonomy",
         "confidence": "high"
       }
+    },
+    {
+      "id": 247,
+      "title": "Pasta, Patate e Provola",
+      "slug": "pasta-patate-e-provola",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "350 g di pasta mista"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "150 g di patate"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "50 ml di olio"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "1 cipolla bianca"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "Trito di sedano, carota e cipolla q.b."
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "1 crosta di Parmigiano"
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "150 g di provola affumicata fresca"
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "40 g di Pecorino"
+        },
+        {
+          "order": 9,
+          "group": "Ingredienti",
+          "text": "50 g di Parmigiano"
+        },
+        {
+          "order": 10,
+          "group": "Ingredienti",
+          "text": "Brodo vegetale q.b."
+        },
+        {
+          "order": 11,
+          "group": "Ingredienti",
+          "text": "Sale q.b."
+        },
+        {
+          "order": 12,
+          "group": "Ingredienti",
+          "text": "Pepe q.b."
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Procedimento",
+          "text": "In un tegame fare soffriggere il trito di sedano, carota e cipolla nell’olio."
+        },
+        {
+          "order": 2,
+          "section": "Procedimento",
+          "text": "Aggiungere la crosta di Parmigiano."
+        },
+        {
+          "order": 3,
+          "section": "Procedimento",
+          "text": "Unire le patate tagliate a dadini e lasciarle rosolare per circa 5 minuti."
+        },
+        {
+          "order": 4,
+          "section": "Procedimento",
+          "text": "Coprire con il brodo vegetale e cuocere per 20-30 minuti."
+        },
+        {
+          "order": 5,
+          "section": "Procedimento",
+          "text": "Aggiungere la pasta."
+        },
+        {
+          "order": 6,
+          "section": "Procedimento",
+          "text": "Unire altro brodo vegetale secondo necessità e regolare di sale e pepe."
+        },
+        {
+          "order": 7,
+          "section": "Procedimento",
+          "text": "Coprire con il coperchio e lasciare cuocere per circa 8 minuti."
+        },
+        {
+          "order": 8,
+          "section": "Procedimento",
+          "text": "Spegnere il fuoco e lasciare riposare per qualche minuto."
+        },
+        {
+          "order": 9,
+          "section": "Procedimento",
+          "text": "Aggiungere la provola, il Pecorino e il Parmigiano."
+        },
+        {
+          "order": 10,
+          "section": "Procedimento",
+          "text": "Mescolare accuratamente fino a ottenere una consistenza cremosa e ben amalgamata."
+        }
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        }
+      ],
+      "warnings": [],
+      "source_text": "PASTA, PATATE E PROVOLA\nIngredienti\n350 g di pasta mista\n150 g di patate\n50 ml di olio\n1 cipolla bianca\nTrito di sedano, carota e cipolla\n1 crosta di Parmigiano\n150 g di provola affumicata fresca\n40 g di Pecorino\n50 g di Parmigiano\nBrodo vegetale\nProcedimento\nFare soffriggere il trito nell’olio con la crosta di Parmigiano. Unire le patate a dadini, rosolare, coprire con brodo e cuocere. Aggiungere la pasta, completare la cottura e mantecare con provola e formaggi.",
+      "category_id": 2,
+      "category": "Primi",
+      "description": "Primo piatto cremoso con pasta mista, patate, provola affumicata, Pecorino e Parmigiano.",
+      "classification": {
+        "previous_category": "Primi",
+        "new_category": "Primi",
+        "method": "title_ingredients_procedure_plus_web_verified_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 248,
+      "title": "Pollo Tenerissimo con Verdure",
+      "slug": "pollo-tenerissimo-con-verdure",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "1 petto di pollo intero, oppure carne di maiale o vitello"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "1 cipolla sfogliata"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "Carote q.b."
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "Zucchine q.b."
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "Zenzero q.b."
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "Salsa di soia q.b."
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "1-2 cucchiai di amido di mais"
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "Olio q.b."
+        },
+        {
+          "order": 9,
+          "group": "Ingredienti",
+          "text": "Sale q.b."
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Procedimento",
+          "text": "Tagliare il pollo stracciandolo con il coltello, in modo da ottenere dei bocconcini."
+        },
+        {
+          "order": 2,
+          "section": "Procedimento",
+          "text": "Unire al pollo 1-2 cucchiai di amido di mais e poca salsa di soia."
+        },
+        {
+          "order": 3,
+          "section": "Procedimento",
+          "text": "In alternativa alla salsa di soia, utilizzare succo di limone mescolato con acqua."
+        },
+        {
+          "order": 4,
+          "section": "Procedimento",
+          "text": "Massaggiare il pollo con le mani per distribuire uniformemente la marinatura."
+        },
+        {
+          "order": 5,
+          "section": "Procedimento",
+          "text": "Lasciare riposare per 30-60 minuti."
+        },
+        {
+          "order": 6,
+          "section": "Procedimento",
+          "text": "Tagliare le verdure e cuocerle in una padella larga con un po’ d’olio."
+        },
+        {
+          "order": 7,
+          "section": "Procedimento",
+          "text": "Aggiungere lo zenzero, regolare di sale e mettere temporaneamente da parte le verdure."
+        },
+        {
+          "order": 8,
+          "section": "Procedimento",
+          "text": "Nella stessa padella cuocere il pollo a fiamma alta, aggiungendo altro olio se necessario."
+        },
+        {
+          "order": 9,
+          "section": "Procedimento",
+          "text": "Unire nuovamente le verdure al pollo."
+        },
+        {
+          "order": 10,
+          "section": "Procedimento",
+          "text": "Coprire e proseguire la cottura per qualche altro minuto."
+        }
+      ],
+      "notes": [
+        {
+          "order": 1,
+          "section": "Nota",
+          "text": "Negli appunti originali è riportata l’espressione “cipolla sfogliata”."
+        }
+      ],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        },
+        {
+          "title": "Note",
+          "type": "notes",
+          "order": 3
+        }
+      ],
+      "warnings": [],
+      "source_text": "POLLO TENERISSIMO CON LE VERDURE\nIngredienti\n1 petto di pollo intero, cipolla sfogliata, carote, zucchine, zenzero, salsa di soia, amido di mais.\nProcedimento\nTagliare il pollo, marinarlo con amido e salsa di soia, farlo riposare. Cuocere le verdure, metterle da parte, cuocere il pollo a fiamma alta e riunire il tutto.",
+      "category_id": 3,
+      "category": "Secondi",
+      "description": "Secondo piatto di pollo marinato con salsa di soia e amido di mais, cotto a fiamma alta con verdure e zenzero.",
+      "classification": {
+        "previous_category": "Secondi",
+        "new_category": "Secondi",
+        "method": "title_ingredients_procedure_plus_web_verified_taxonomy",
+        "confidence": "high"
+      }
+    },
+    {
+      "id": 249,
+      "title": "Frolla Napoli (Occhi di Bue)",
+      "slug": "frolla-napoli-occhi-di-bue",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "260 g di farina"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "40 g di farina di mandorle"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "1 uovo grande"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "110 g di zucchero a velo"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "120 g di burro morbido"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "2 g di sale"
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "Scorza grattugiata di limone"
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "1 cucchiaino di lievito per dolci"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Procedimento",
+          "text": "Lavorare il burro morbido con lo zucchero a velo fino a ottenere un composto cremoso; con la planetaria utilizzare la velocità 4 per circa 1 minuto."
+        },
+        {
+          "order": 2,
+          "section": "Procedimento",
+          "text": "Aggiungere il sale e la scorza grattugiata di limone."
+        },
+        {
+          "order": 3,
+          "section": "Procedimento",
+          "text": "Sbattere leggermente l’uovo."
+        },
+        {
+          "order": 4,
+          "section": "Procedimento",
+          "text": "Incorporare l’uovo poco alla volta, lasciando assorbire bene ogni aggiunta; continuare a velocità 4."
+        },
+        {
+          "order": 5,
+          "section": "Procedimento",
+          "text": "Unire la farina, la farina di mandorle e il lievito per dolci."
+        },
+        {
+          "order": 6,
+          "section": "Procedimento",
+          "text": "Lavorare brevemente l’impasto a velocità 4, fino a renderlo omogeneo."
+        },
+        {
+          "order": 7,
+          "section": "Procedimento",
+          "text": "Stendere la frolla a uno spessore di circa 4-5 mm."
+        },
+        {
+          "order": 8,
+          "section": "Procedimento",
+          "text": "Ritagliare i biscotti con uno stampino."
+        },
+        {
+          "order": 9,
+          "section": "Procedimento",
+          "text": "Lasciare riposare i biscotti in frigorifero per 30 minuti."
+        },
+        {
+          "order": 10,
+          "section": "Procedimento",
+          "text": "Cuocere in forno preriscaldato a 180 °C per circa 15 minuti."
+        }
+      ],
+      "notes": [],
+      "sections": [
+        {
+          "title": "Ingredienti",
+          "type": "ingredients",
+          "order": 1
+        },
+        {
+          "title": "Procedimento",
+          "type": "instructions",
+          "order": 2
+        }
+      ],
+      "warnings": [],
+      "source_text": "FROLLA NAPOLI (OCCHI DI BUE)\nIngredienti\n260 g di farina\n40 g di farina di mandorle\n1 uovo grande\n110 g di zucchero a velo\n120 g di burro morbido\n2 g di sale\nScorza grattugiata di limone\n1 cucchiaino di lievito\nProcedimento\nLavorare burro e zucchero, aggiungere sale, limone e uovo. Unire le farine e il lievito. Stendere a 4-5 mm, ritagliare, riposare in frigorifero e cuocere a 180 °C per 15 minuti.",
+      "category_id": 4,
+      "category": "Dolci",
+      "description": "Pasta frolla friabile alle mandorle e limone, adatta alla preparazione dei biscotti occhi di bue.",
+      "classification": {
+        "previous_category": "Dolci",
+        "new_category": "Dolci",
+        "method": "title_ingredients_procedure_plus_web_verified_taxonomy",
+        "confidence": "high"
+      }
     }
   ],
   "validation": {
     "status": "warning",
     "category_counts": {
       "Altro": 40,
-      "Primi": 26,
+      "Primi": 27,
       "Antipasti e contorni": 56,
-      "Dolci": 105,
-      "Secondi": 19
+      "Dolci": 106,
+      "Secondi": 20
     },
     "changed_category_counts": {
       "Antipasti e contorni -> Altro": 9,
@@ -34287,5 +34692,5 @@
       }
     ]
   },
-  "recipe_count": 246
+  "recipe_count": 249
 }
