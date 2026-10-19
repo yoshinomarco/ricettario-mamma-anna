@@ -183,7 +183,7 @@ Restituisci SOLO un oggetto JSON valido con questa struttura esatta:
 }`;
 
   const parts = [{text: promptText}, ...b64List.map(data => ({inline_data: {mime_type: "image/jpeg", data}}))];
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
   const res = await fetch(url, {
     method: "POST",
     headers: {"Content-Type": "application/json"},
