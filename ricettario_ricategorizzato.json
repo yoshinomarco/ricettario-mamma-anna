@@ -34778,6 +34778,87 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 252,
+      "title": "Triangoli al Brie, Noci e Miele",
+      "slug": "triangoli-al-brie-noci-e-miele",
+      "description": "Preparazione: 10 minuti\nCottura: 20 minuti\nIngredienti per 4 persone.",
+      "category_id": "1",
+      "category": "Antipasti e contorni",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "1 rotolo di Pasta Brisée Buitoni"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "200 g di formaggio brie"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "100 g di gherigli di noci"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "1 ciotola di insalatina mista"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "2 cucchiai di miele amaro"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "1 tuorlo d'uovo"
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "1 cucchiaio di latte"
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "1 limone"
+        },
+        {
+          "order": 9,
+          "group": "Ingredienti",
+          "text": "Olio extravergine di oliva"
+        },
+        {
+          "order": 10,
+          "group": "Ingredienti",
+          "text": "Sale e pepe"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Srotolate la Pasta Brisée e dividetela in 4 spicchi. Dividete in 4 il formaggio e disponetelo sulla Pasta Brisée lasciando liberi i bordi che andranno pennellati d'acqua. Coprite con le noci spezzettate e richiudete facendo combaciare un lato formando un triangolo, sigillando con le dita."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "Pennellate la superficie con il tuorlo e il latte sbattuti assieme con una forchetta. Incidete la superficie con dei tagli obliqui, salate, pepate e infornate a 200°C per 20 minuti."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "In una ciotola preparate un battuto con il succo del limone, 3 cucchiai di olio, sale e pepe. Unite il miele e mescolate bene. Servite i triangoli su di un letto di insalata condendo con una cucchiaiata del battuto di olio al miele."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -34859,5 +34940,5 @@
       }
     ]
   },
-  "recipe_count": 251
+  "recipe_count": 252
 }
