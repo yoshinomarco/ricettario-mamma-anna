@@ -17,7 +17,7 @@
 "use strict";
 const JSON_FILE="ricettario_ricategorizzato.json",IMAGE_FOLDER="img",TOKEN_KEY="mammaAnnaGithubToken",GEMINI_KEY="mammaAnnaGeminiKey";
 const GITHUB=Object.freeze({owner:"yoshinomarco",repository:"ricettario-mamma-anna",branch:"main",jsonPath:JSON_FILE});
-const state={data:null,recipes:[],categories:new Map(),active:"all",query:"",currentId:null,scrollY:0,mode:"view",pendingImage:null};
+const state={data:null,recipes:[],categories:new Map(),active:"all",query:"",currentId:null,scrollY:0,mode:"view",pendingImage:null,pendingAiRecipe:null,saveInProgress:false};
 const $=id=>document.getElementById(id),grid=$("grid"),dialog=$("dialog"),dialogBody=$("dialogBody"),dialogContent=$("dialogContent");
 
 function esc(v=""){return String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"})[c])}
@@ -129,6 +129,7 @@ function showAiSourceChooser(){
 }
 function showAiPreview(aiRecipe,dishFile){
   state.pendingImage=dishFile;
+  state.pendingAiRecipe=structuredClone(aiRecipe);
   const catId=state.categories.has(String(aiRecipe.category_id))?String(aiRecipe.category_id):String(state.data.categories[0]?.id||"");
   const catName=state.categories.get(catId)?.name||"Altro";
   const imageUrl=URL.createObjectURL(dishFile);
@@ -152,7 +153,7 @@ function showAiPreview(aiRecipe,dishFile){
       </div>
     </form>`;
   $("aiPreviewImage").onload=()=>URL.revokeObjectURL(imageUrl);
-  $("cancelAiPreview").onclick=()=>{state.pendingImage=null;dialog.close()};
+  $("cancelAiPreview").onclick=()=>{state.pendingImage=null;state.pendingAiRecipe=null;dialog.close()};
   const confirmButton=$("confirmAiRecipe");
   const saveFromPreview=async e=>{
     e?.preventDefault();e?.stopPropagation();
@@ -295,40 +296,137 @@ async function handleAiFiles(fileList){
     toast("Errore durante il caricamento AI");
   }
 }
-function formRecipe(id){const catId=$("editCat").value,cat=state.categories.get(String(catId)),read=(box,type)=>[...$(box).querySelectorAll("[data-row]")].map((el,i)=>{const text=el.querySelector(".text").value.trim(),g=el.querySelector(".group").value.trim();return type==="ingredient"?{order:i+1,group:g,text}:{order:i+1,section:g,text}}).filter(x=>x.text),title=$("editTitle").value.trim();return{id,title,slug:norm(title).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),description:$("editDesc").value.trim(),category_id:catId,category:cat?.name||"Altro",ingredients:read("ingredients","ingredient"),instructions:read("instructions","instruction"),notes:[],sections:[],warnings:[],source_text:""}}
+function buildSourceText(recipe){
+  const lines=[recipe.title,recipe.description,"",...recipe.ingredients.map(x=>x.text),"",...recipe.instructions.map(x=>x.text)];
+  return lines.filter((x,i)=>x||i===2).join("\n").trim();
+}
+function formRecipe(id){
+  const catIdRaw=$("editCat").value,cat=state.categories.get(String(catIdRaw));
+  const catId=Number.isFinite(Number(catIdRaw))?Number(catIdRaw):catIdRaw;
+  const read=(box,type)=>[...$(box).querySelectorAll("[data-row]")].map((el,i)=>{
+    const text=el.querySelector(".text").value.trim(),g=el.querySelector(".group").value.trim();
+    return type==="ingredient"?{order:i+1,group:g||"Ingredienti",text}:{order:i+1,section:g||"Procedimento",text};
+  }).filter(x=>x.text);
+  const title=$("editTitle").value.trim(),description=$("editDesc").value.trim();
+  const ingredients=read("ingredients","ingredient"),instructions=read("instructions","instruction");
+  const recipe={id,title,slug:norm(title).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),ingredients,instructions,notes:[],sections:[],warnings:[],source_text:"",category_id:catId,category:cat?.name||"Altro",description,classification:{previous_category:cat?.name||"Altro",new_category:cat?.name||"Altro",method:state.mode==="new"?"ai_photo_transcription":"manual_edit",confidence:state.mode==="new"?"medium":"high"}};
+  recipe.source_text=state.mode==="new"&&state.pendingAiRecipe?.source_text?.trim()?state.pendingAiRecipe.source_text.trim():buildSourceText(recipe);
+  return recipe;
+}
+function validateRepository(remote){
+  if(!remote||typeof remote!=="object"||!Array.isArray(remote.categories)||!Array.isArray(remote.recipes))throw Error("Il database remoto non rispetta lo schema previsto.");
+  const ids=new Set();
+  for(const recipe of remote.recipes){
+    const id=Number(recipe?.id);
+    if(!Number.isSafeInteger(id)||id<1)throw Error("Il database contiene un ID ricetta non valido.");
+    if(ids.has(id))throw Error(`Il database contiene l'ID duplicato ${id}. Salvataggio annullato per sicurezza.`);
+    ids.add(id);
+  }
+}
+function updateDerivedMetadata(remote){
+  remote.recipe_count=remote.recipes.length;
+  if(!remote.validation||typeof remote.validation!=="object")remote.validation={status:"warning"};
+  const counts={};
+  for(const c of remote.categories)counts[c.name]=0;
+  for(const r of remote.recipes)counts[r.category]=(counts[r.category]||0)+1;
+  remote.validation.category_counts=counts;
+  const titles=new Map();
+  for(const r of remote.recipes){const key=norm(r.title);if(!key)continue;const item=titles.get(key)||{title:r.title,recipe_ids:[]};item.recipe_ids.push(r.id);titles.set(key,item)}
+  remote.validation.duplicate_titles=[...titles.values()].filter(x=>x.recipe_ids.length>1);
+}
+function validateNewRecipe(recipe){
+  if(!recipe.title)throw Error("Il titolo della ricetta è vuoto.");
+  if(!recipe.ingredients.length)throw Error("La ricetta non contiene ingredienti.");
+  if(!recipe.instructions.length)throw Error("La ricetta non contiene il procedimento.");
+  if(!state.categories.has(String(recipe.category_id)))throw Error("La categoria scelta non è valida.");
+}
 function headers(token){return{Accept:"application/vnd.github+json",Authorization:`Bearer ${token}`,"X-GitHub-Api-Version":"2022-11-28"}}
 function b64bytes(bytes){let b="";for(let i=0;i<bytes.length;i+=32768)b+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(b)}
 function b64text(s){return b64bytes(new TextEncoder().encode(s))}
 function decode64(s){const b=atob(s.replace(/\n/g,"")),a=new Uint8Array(b.length);for(let i=0;i<b.length;i++)a[i]=b.charCodeAt(i);return new TextDecoder().decode(a)}
 
-async function githubFile(path,token){const u=`https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repository}/contents/${path}?ref=${GITHUB.branch}`,r=await fetch(u,{headers:headers(token),cache:"no-store"}),d=await r.json();if(!r.ok)throw Error(d.message||`HTTP ${r.status}`);return d}
-async function putFile(path,content,message,token,sha){const u=`https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repository}/contents/${path}`,body={message,content,branch:GITHUB.branch};if(sha)body.sha=sha;const r=await fetch(u,{method:"PUT",headers:{...headers(token),"Content-Type":"application/json"},body:JSON.stringify(body)}),d=await r.json();if(!r.ok)throw Error(d.message||`HTTP ${r.status}`);return d}
+async function readApiResponse(response,source="Servizio remoto"){
+  const text=await response.text();
+  let data={};
+  if(text.trim()){
+    try{data=JSON.parse(text)}
+    catch(error){
+      const preview=text.replace(/\s+/g," ").slice(0,240);
+      throw Error(`${source} ha restituito una risposta non JSON (HTTP ${response.status})${preview?`: ${preview}`:""}`);
+    }
+  }
+  if(!response.ok){const error=Error(data?.message||data?.error?.message||`${source}: HTTP ${response.status}`);error.status=response.status;error.data=data;throw error;}
+  if(!text.trim())throw Error(`${source} ha restituito una risposta vuota (HTTP ${response.status}).`);
+  return data;
+}
+function parseRepositoryJson(fileData,path){
+  if(!fileData?.content)throw Error(`GitHub non ha restituito il contenuto di ${path}.`);
+  const decoded=decode64(fileData.content).replace(/^\uFEFF/,"").trim();
+  if(!decoded)throw Error(`Il file ${path} su GitHub è vuoto.`);
+  try{return JSON.parse(decoded)}
+  catch(error){throw Error(`Il file ${path} su GitHub contiene JSON non valido: ${error.message}`)}
+}
+async function githubFile(path,token){
+  const u=`https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repository}/contents/${path}?ref=${GITHUB.branch}`;
+  const r=await fetch(u,{headers:headers(token),cache:"no-store"});
+  return readApiResponse(r,"GitHub");
+}
+async function putFile(path,content,message,token,sha){
+  const u=`https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repository}/contents/${path}`;
+  const body={message,content,branch:GITHUB.branch};
+  if(sha)body.sha=sha;
+  const r=await fetch(u,{method:"PUT",headers:{...headers(token),"Content-Type":"application/json"},body:JSON.stringify(body)});
+  return readApiResponse(r,"GitHub");
+}
 async function jpegBase64(file){const bitmap=await createImageBitmap(file),max=1600,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement("canvas");canvas.width=Math.round(bitmap.width*scale);canvas.height=Math.round(bitmap.height*scale);canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();const blob=await new Promise((res,rej)=>canvas.toBlob(b=>b?res(b):rej(Error("Conversione immagine non riuscita")),"image/jpeg",.88));return b64bytes(new Uint8Array(await blob.arrayBuffer()))}
 async function deleteFile(path,sha,token){const u=`https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repository}/contents/${path}`,r=await fetch(u,{method:"DELETE",headers:{...headers(token),"Content-Type":"application/json"},body:JSON.stringify({message:`Rollback ${path}`,sha,branch:GITHUB.branch})});if(!r.ok)console.warn("Rollback immagine non riuscito")}
 
 async function saveNewRecipe(){
+  if(state.saveInProgress)throw Error("Un salvataggio è già in corso.");
   if(!state.pendingImage)throw Error("La foto da salvare non è più disponibile.");
   if(!$("editTitle")||!$("editCat")||!$("ingredients")||!$("instructions"))throw Error("I dati della preview non sono più disponibili. Annulla e ripeti la scansione.");
-  if(!$("editTitle").value.trim())throw Error("Il titolo della ricetta è vuoto.");
-  const token=requestToken(),jsonFile=await githubFile(GITHUB.jsonPath,token),remote=JSON.parse(decode64(jsonFile.content));
-  if(!Array.isArray(remote.recipes))throw Error("JSON remoto non valido.");
-  const ids=new Set(remote.recipes.map(r=>Number(r.id)).filter(Number.isSafeInteger));
-  let id=ids.size?Math.max(...ids)+1:1;while(ids.has(id))id++;
-  const imgRepoPath=`img/${id}.jpg`;
-  let imageCommit=null;
-  try{await githubFile(imgRepoPath,token);throw Error(`Esiste già un'immagine per l'ID ${id}.`)}catch(e){if(!/Not Found|404/i.test(e.message)&&!/Esiste già/.test(e.message))throw e;if(/Esiste già/.test(e.message))throw e}
-  const recipe=formRecipe(id),imageContent=await jpegBase64(state.pendingImage);
-  imageCommit=await putFile(imgRepoPath,imageContent,`Aggiungi immagine ricetta ${id}`,token);
-  remote.recipes.push(recipe);remote.recipe_count=remote.recipes.length;
-  try{await putFile(GITHUB.jsonPath,b64text(JSON.stringify(remote,null,2)+"\n"),`Aggiungi ricetta ${id}: ${recipe.title}`,token,jsonFile.sha)}catch(e){const sha=imageCommit?.content?.sha;if(sha)await deleteFile(imgRepoPath,sha,token);throw e}
-  imageVersions.set(String(id),Date.now());loadData(remote);state.currentId=null;state.mode="view";dialog.close();
-  requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:"auto"}));toast(`Ricetta #${id} (${recipe.title}) salvata su GitHub!`);
+  state.saveInProgress=true;
+  const token=requestToken();
+  let lastError=null;
+  try{
+    for(let attempt=1;attempt<=3;attempt++){
+      let imageCommit=null,imgRepoPath="",recipe=null,remote=null,jsonFile=null;
+      try{
+        jsonFile=await githubFile(GITHUB.jsonPath,token);
+        remote=parseRepositoryJson(jsonFile,GITHUB.jsonPath);
+        validateRepository(remote);
+        const ids=new Set(remote.recipes.map(r=>Number(r.id)));
+        let id=ids.size?Math.max(...ids)+1:1;while(ids.has(id))id++;
+        recipe=formRecipe(id);validateNewRecipe(recipe);
+        imgRepoPath=`img/${id}.jpg`;
+        try{await githubFile(imgRepoPath,token);const conflict=Error(`L'ID ${id} è già occupato.`);conflict.status=409;throw conflict}
+        catch(error){if(error.status!==404&&!/Not Found|404/i.test(error.message))throw error}
+        const imageContent=await jpegBase64(state.pendingImage);
+        imageCommit=await putFile(imgRepoPath,imageContent,`Aggiungi immagine ricetta ${id}`,token);
+        remote.recipes.push(recipe);
+        updateDerivedMetadata(remote);
+        await putFile(GITHUB.jsonPath,b64text(JSON.stringify(remote,null,2)+"\n"),`Aggiungi ricetta ${id}: ${recipe.title}`,token,jsonFile.sha);
+        imageVersions.set(String(id),Date.now());
+        state.pendingImage=null;state.pendingAiRecipe=null;loadData(remote);state.currentId=null;state.mode="view";dialog.close();
+        requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:"auto"}));
+        toast(`Ricetta #${id} (${recipe.title}) salvata su GitHub!`);
+        return;
+      }catch(error){
+        lastError=error;
+        const sha=imageCommit?.content?.sha;
+        if(sha&&imgRepoPath)await deleteFile(imgRepoPath,sha,token);
+        const concurrent=error.status===409||error.status===422||/sha|conflict|already exists|già occupato/i.test(error.message);
+        if(concurrent&&attempt<3)continue;
+        throw error;
+      }
+    }
+    throw lastError||Error("Salvataggio non completato.");
+  }finally{state.saveInProgress=false}
 }
-
 async function saveExisting(){
   const token=requestToken(),r=current(),backup=structuredClone(r),updated=formRecipe(r.id);
   Object.assign(r,updated,{_search:searchText(updated)});
-  const file=await githubFile(GITHUB.jsonPath,token),remote=JSON.parse(decode64(file.content)),i=remote.recipes.findIndex(x=>Number(x.id)===Number(r.id));
+  const file=await githubFile(GITHUB.jsonPath,token),remote=parseRepositoryJson(file,GITHUB.jsonPath);validateRepository(remote);const i=remote.recipes.findIndex(x=>Number(x.id)===Number(r.id));
   if(i<0){Object.assign(r,backup);throw Error("Ricetta non trovata nel JSON remoto.")}
   let oldImage=null,newImageCommit=null;
   const imageRepoPath=`img/${r.id}.jpg`;
@@ -338,7 +436,7 @@ async function saveExisting(){
       const imageContent=await jpegBase64(state.pendingImage);
       newImageCommit=await putFile(imageRepoPath,imageContent,`Aggiorna immagine ricetta ${r.id}`,token,oldImage?.sha);
     }
-    remote.recipes[i]=updated;remote.recipe_count=remote.recipes.length;
+    remote.recipes[i]=updated;updateDerivedMetadata(remote);
     await putFile(GITHUB.jsonPath,b64text(JSON.stringify(remote,null,2)+"\n"),`Aggiorna ricetta ${r.id}: ${r.title}`,token,file.sha);
   }catch(error){
     Object.assign(r,backup);
