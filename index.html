@@ -2,12 +2,12 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#a90818">
-<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Mamma Anna">
+<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Mamma Anna">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="preload" as="image" href="./copertina-mamma-anna.jpg?v=6">
 <link rel="icon" type="image/png" sizes="192x192" href="./logo.png?v=6"><link rel="shortcut icon" href="./logo.png?v=6"><link rel="apple-touch-icon" href="./logo.png?v=6">
 <title>RICETTARIO DI MAMMA ANNA</title>
 <style>
-@font-face{font-family:MammaAnna;src:url("./font.ttf") format("truetype");font-display:swap}:root{--red:#df1024;--dark:#a90818;--paper:#f8f3eb;--card:#fffdf9;--text:#2e2824;--muted:#746a62;--border:#e3d6c7;--shadow:0 14px 36px rgba(64,32,16,.12);--radius:20px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:var(--paper);font:16px/1.55 MammaAnna,system-ui,sans-serif}.container{width:min(1180px,calc(100% - 32px));margin:auto}button,input,textarea,select{font:inherit}button{min-height:44px;cursor:pointer}.hero{min-height:430px;display:flex;align-items:center;color:#fff;text-align:center;background-color:#251916;background-image:linear-gradient(90deg,rgba(22,12,11,.82),rgba(49,16,16,.53)),url("./copertina-mamma-anna.jpg?v=6");background-position:center,center 43%;background-size:auto,cover;background-repeat:no-repeat;box-shadow:var(--shadow)}h1{margin:0;font:800 clamp(2.3rem,6vw,4.8rem)/1 MammaAnna,Georgia,serif;text-shadow:0 3px 18px #000}.hero p{max-width:720px;margin:18px auto 0;text-shadow:0 2px 8px #000}.controls{position:sticky;top:0;z-index:20;padding:16px 0 8px;background:rgba(248,243,235,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(14px)}.search-row{display:grid;grid-template-columns:1fr auto auto;gap:12px}.input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:13px;background:#fff;outline:none}.input:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(223,16,36,.12)}#searchInput{border-radius:999px}.button{border:0;border-radius:999px;padding:10px 17px;font-weight:850;transition:.15s}.button:disabled{opacity:.55;cursor:not-allowed}.primary{color:#fff;background:var(--red)}.primary:hover:not(:disabled){background:var(--dark)}.neutral{color:var(--text);background:#f1e7db}.categories{display:flex;gap:8px;overflow:auto;padding:12px 0 4px}.category{flex:0 0 auto;padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);font-weight:800}.category.active{color:#fff;background:var(--dark)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:24px 0 56px}.card{position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:270px;padding:22px;overflow:hidden;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 22px rgba(73,47,32,.07)}.card:before{content:"";position:absolute;inset:-3px;z-index:-2;background:var(--image,none) center/cover;opacity:.85}.card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(255,253,249,.8),rgba(255,253,249,.5),rgba(255,253,249,.72))}.card h2{margin:8px 0;font:700 1.45rem/1.18 MammaAnna,Georgia,serif}.cat{color:var(--dark);font-size:.77rem;font-weight:900;text-transform:uppercase}.desc{flex:1}.footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px}.empty{grid-column:1/-1;padding:50px;text-align:center;background:var(--card);border:1px dashed #cdb9a7;border-radius:var(--radius)}dialog{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(900px,calc(100% - 26px));max-height:calc(100dvh - 30px);padding:0;overflow:hidden;border:0;border-radius:24px;background:var(--card);box-shadow:0 30px 80px rgba(35,22,16,.38)}dialog::backdrop{background:rgba(33,23,18,.66);backdrop-filter:blur(4px)}.dialog-head{display:flex;justify-content:space-between;gap:15px;padding:20px 24px;border-bottom:1px solid var(--border)}.dialog-head h2{margin:3px 0 0;font:700 clamp(1.7rem,5vw,2.7rem)/1.08 MammaAnna,Georgia,serif}.dialog-head>div:first-child{min-width:0;flex:1 1 auto}.close{width:44px;min-width:44px;max-width:44px;height:44px;min-height:44px;max-height:44px;flex:0 0 44px;display:inline-grid;place-items:center;align-self:flex-start;padding:0;aspect-ratio:1/1;line-height:1;white-space:nowrap;overflow:hidden;border:1px solid var(--border);border-radius:50%;background:#f3eadf;font-size:1.35rem}.dialog-body{max-height:calc(100dvh - 125px);padding:24px;overflow:auto}.detail-img{width:calc(100% + 48px);margin:-24px -24px 22px}.detail-img img{display:block;width:100%;max-height:520px;object-fit:contain;background:#f5efe8}.section{margin-top:22px}.section h3{color:var(--dark)}.actions{display:flex;gap:10px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}.editor{display:grid;gap:18px}.field{display:grid;gap:7px}.field label{font-weight:900}.textarea{min-height:110px;resize:vertical}.edit-section{display:grid;gap:10px;padding:15px;background:#fbf6ef;border:1px solid var(--border);border-radius:16px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.edit-list{display:grid;gap:9px}.edit-row{display:grid;grid-template-columns:minmax(110px,.38fr) 1fr auto;gap:8px;align-items:start}.remove{width:42px;min-width:42px;padding:0;color:var(--dark);background:#fff;border:1px solid #e2b9b9;border-radius:10px;font-size:1.25rem}.editor-footer{position:sticky;bottom:-24px;display:flex;flex-wrap:wrap;gap:10px;padding:16px 0 4px;background:var(--card)}.editor-footer .button{flex:1 1 180px}.notice{padding:12px 14px;background:#fff7e7;border:1px solid #e7c98c;border-radius:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}.notice button{min-height:0;padding:0;border:0;background:none;color:var(--dark);font-weight:900;text-decoration:underline}.id-badge{display:inline-flex;padding:5px 10px;border-radius:999px;background:#f1e7db;font-weight:900}.image-preview{display:none;max-width:240px;max-height:180px;object-fit:cover;border:1px solid var(--border);border-radius:14px}.image-preview.show{display:block}.ai-box{padding:18px;background:linear-gradient(135deg,#fff5f5,#fffdf9);border:2px dashed var(--red);border-radius:18px;display:grid;gap:12px}.ai-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}.ai-btns{display:flex;flex-wrap:wrap;gap:10px}.ai-status{font-weight:800;color:var(--dark);display:none;align-items:center;gap:8px}.ai-status.show{display:flex}.ai-progress{display:grid;gap:12px;padding:18px;border:1px solid var(--border);border-radius:16px;background:#fff}.ai-spinner{width:36px;height:36px;margin:auto;border:4px solid #eadbd0;border-top-color:var(--red);border-radius:50%;animation:aiSpin .8s linear infinite}.ai-error{padding:14px;color:#7c0a16;background:#fff0f1;border:1px solid #f0a8af;border-radius:13px;white-space:pre-wrap;word-break:break-word}.ai-file-note{font-size:.9rem;color:var(--muted);text-align:center}@keyframes aiSpin{to{transform:rotate(360deg)}}.toast{position:fixed;right:18px;bottom:18px;z-index:200;padding:13px 17px;color:#fff;background:#332824;border-radius:13px;opacity:0;transform:translateY(15px);transition:.25s}.toast.show{opacity:1;transform:none}@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.container{width:calc(100% - 22px)}.hero{min-height:380px}.search-row,.grid{grid-template-columns:1fr}dialog{top:0;left:0;transform:none;width:100%;height:100dvh;max-height:100dvh;border-radius:0}.dialog-body{max-height:calc(100dvh - 90px)}.edit-row{grid-template-columns:1fr auto}.edit-row .group{grid-column:1/-1}}
+@font-face{font-family:MammaAnna;src:url("./font.ttf") format("truetype");font-display:swap}:root{--red:#df1024;--dark:#a90818;--paper:#f8f3eb;--card:#fffdf9;--text:#2e2824;--muted:#746a62;--border:#e3d6c7;--shadow:0 14px 36px rgba(64,32,16,.12);--radius:20px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--text);background:var(--paper);font:16px/1.55 MammaAnna,system-ui,sans-serif}.container{width:min(1180px,calc(100% - 32px));margin:auto}button,input,textarea,select{font:inherit}button{min-height:44px;cursor:pointer}.hero{min-height:430px;display:flex;align-items:center;color:#fff;text-align:center;background-color:#251916;background-image:linear-gradient(0deg,rgba(22,12,11,.88) 0%,rgba(49,16,16,.58) 48%,rgba(49,16,16,.18) 100%),url("./copertina-mamma-anna.jpg?v=6");background-position:center,center 43%;background-size:auto,cover;background-repeat:no-repeat;box-shadow:var(--shadow)}h1{margin:0;font:800 clamp(2.3rem,6vw,4.8rem)/1 MammaAnna,Georgia,serif;text-shadow:0 3px 18px #000}.hero p{max-width:720px;margin:18px auto 0;text-shadow:0 2px 8px #000}.controls{position:sticky;top:0;z-index:20;padding:16px 0 8px;background:rgba(248,243,235,.95);border-bottom:1px solid var(--border);backdrop-filter:blur(14px)}.search-row{display:grid;grid-template-columns:1fr auto auto;gap:12px}.input{width:100%;padding:12px 16px;border:1px solid var(--border);border-radius:13px;background:#fff;outline:none}.input:focus{border-color:var(--red);box-shadow:0 0 0 4px rgba(223,16,36,.12)}#searchInput{border-radius:999px}.button{border:0;border-radius:999px;padding:10px 17px;font-weight:850;transition:.15s}.button:disabled{opacity:.55;cursor:not-allowed}.primary{color:#fff;background:var(--red)}.primary:hover:not(:disabled){background:var(--dark)}.neutral{color:var(--text);background:#f1e7db}.categories{display:flex;gap:8px;overflow:auto;padding:12px 0 4px}.category{flex:0 0 auto;padding:8px 14px;border:1px solid var(--border);border-radius:999px;background:var(--card);font-weight:800}.category.active{color:#fff;background:var(--dark)}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;padding:24px 0 56px}.card{position:relative;isolation:isolate;display:flex;flex-direction:column;min-height:270px;padding:22px;overflow:hidden;border:1px solid var(--border);border-radius:var(--radius);box-shadow:0 8px 22px rgba(73,47,32,.07)}.card:before{content:"";position:absolute;inset:-3px;z-index:-2;background:var(--image,none) center/cover;opacity:.85}.card:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(135deg,rgba(255,253,249,.8),rgba(255,253,249,.5),rgba(255,253,249,.72))}.card h2{margin:8px 0;font:700 1.45rem/1.18 MammaAnna,Georgia,serif}.cat{color:var(--dark);font-size:.77rem;font-weight:900;text-transform:uppercase}.desc{flex:1}.footer{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:18px}.empty{grid-column:1/-1;padding:50px;text-align:center;background:var(--card);border:1px dashed #cdb9a7;border-radius:var(--radius)}dialog{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);width:min(900px,calc(100% - 26px));max-height:calc(100dvh - 30px);padding:0;overflow:hidden;border:0;border-radius:24px;background:var(--card);box-shadow:0 30px 80px rgba(35,22,16,.38)}dialog::backdrop{background:rgba(33,23,18,.66);backdrop-filter:blur(4px)}.dialog-head{display:flex;justify-content:space-between;gap:15px;padding:20px 24px;border-bottom:1px solid var(--border)}.dialog-head h2{margin:3px 0 0;font:700 clamp(1.7rem,5vw,2.7rem)/1.08 MammaAnna,Georgia,serif}.dialog-head>div:first-child{min-width:0;flex:1 1 auto}.close{width:44px;min-width:44px;max-width:44px;height:44px;min-height:44px;max-height:44px;flex:0 0 44px;display:inline-grid;place-items:center;align-self:flex-start;padding:0;aspect-ratio:1/1;line-height:1;white-space:nowrap;overflow:hidden;border:1px solid var(--border);border-radius:50%;background:#f3eadf;font-size:1.35rem}.dialog-body{max-height:calc(100dvh - 125px);padding:24px;overflow:auto}.detail-img{width:calc(100% + 48px);margin:-24px -24px 22px}.detail-img img{display:block;width:100%;max-height:520px;object-fit:contain;background:#f5efe8}.section{margin-top:22px}.section h3{color:var(--dark)}.actions{display:flex;gap:10px;margin-top:28px;padding-top:20px;border-top:1px solid var(--border)}.editor{display:grid;gap:18px}.field{display:grid;gap:7px}.field label{font-weight:900}.textarea{min-height:110px;resize:vertical}.edit-section{display:grid;gap:10px;padding:15px;background:#fbf6ef;border:1px solid var(--border);border-radius:16px}.section-head{display:flex;justify-content:space-between;align-items:center;gap:10px}.edit-list{display:grid;gap:9px}.edit-row{display:grid;grid-template-columns:minmax(110px,.38fr) 1fr auto;gap:8px;align-items:start}.remove{width:42px;min-width:42px;padding:0;color:var(--dark);background:#fff;border:1px solid #e2b9b9;border-radius:10px;font-size:1.25rem}.editor-footer{position:sticky;bottom:-24px;display:flex;flex-wrap:wrap;gap:10px;padding:16px 0 4px;background:var(--card)}.editor-footer .button{flex:1 1 180px}.notice{padding:12px 14px;background:#fff7e7;border:1px solid #e7c98c;border-radius:12px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}.notice button{min-height:0;padding:0;border:0;background:none;color:var(--dark);font-weight:900;text-decoration:underline}.id-badge{display:inline-flex;padding:5px 10px;border-radius:999px;background:#f1e7db;font-weight:900}.image-preview{display:none;max-width:240px;max-height:180px;object-fit:cover;border:1px solid var(--border);border-radius:14px}.image-preview.show{display:block}.ai-box{padding:18px;background:linear-gradient(135deg,#fff5f5,#fffdf9);border:2px dashed var(--red);border-radius:18px;display:grid;gap:12px}.ai-head{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}.ai-btns{display:flex;flex-wrap:wrap;gap:10px}.ai-status{font-weight:800;color:var(--dark);display:none;align-items:center;gap:8px}.ai-status.show{display:flex}.toast{position:fixed;right:18px;bottom:18px;z-index:200;padding:13px 17px;color:#fff;background:#332824;border-radius:13px;opacity:0;transform:translateY(15px);transition:.25s}.toast.show{opacity:1;transform:none}@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:700px){.container{width:calc(100% - 22px)}.hero{min-height:380px}.search-row,.grid{grid-template-columns:1fr}dialog{top:0;left:0;transform:none;width:100%;height:100dvh;max-height:100dvh;border-radius:0}.dialog-body{max-height:calc(100dvh - 90px)}.edit-row{grid-template-columns:1fr auto}.edit-row .group{grid-column:1/-1}}
 </style></head>
 <body><header class="hero"><div class="container"><p>Ricette di famiglia</p><h1>RICETTARIO DI MAMMA ANNA</h1><p>Cerca tra ingredienti, procedimenti, titoli e descrizioni.</p></div></header>
 <section class="controls"><div class="container"><div class="search-row"><input id="searchInput" class="input" type="search" placeholder="Cerca ricette…"><button id="clearButton" class="button neutral">Azzera filtri</button><button id="addRecipeButton" class="button primary">+ Nuova ricetta</button></div><div id="categories" class="categories"></div></div></section>
@@ -47,7 +47,7 @@ function render(){const list=visible();grid.innerHTML=list.length?list.map(r=>`<
 function current(){return state.recipes.find(r=>Number(r.id)===Number(state.currentId))}
 function grouped(a,k){const g=[];(a||[]).forEach(x=>{let y=g.find(z=>z.label===(x[k]||""));if(!y){y={label:x[k]||"",items:[]};g.push(y)}y.items.push(x)});return g}
 
-function openRecipe(id,keep=false){const r=state.recipes.find(x=>Number(x.id)===Number(id));if(!r)return;state.mode="view";state.currentId=r.id;state.scrollY=scrollY;$("dialogCategory").textContent=state.categories.get(String(r.category_id))?.name||"Altro";$("dialogTitle").textContent=r.title;let h=`<div class="detail-img"><img src="${imagePath(r.id)}" onerror="this.parentElement.remove()"></div><p>${esc(r.description||"")}</p>`;const ing=grouped(r.ingredients,"group");if(ing.length)h+=`<section class="section"><h3>Ingredienti</h3>${ing.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ul>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ul>`).join("")}</section>`;const ins=grouped(r.instructions,"section");if(ins.length)h+=`<section class="section"><h3>Procedimento</h3>${ins.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ol>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ol>`).join("")}</section>`;h+='<div class="actions"><button id="editButton" class="button primary">Modifica ricetta</button></div>';dialogContent.innerHTML=h;dialogBody.scrollTop=0;if(!keep&&!dialog.open)dialog.showModal();$("editButton").onclick=()=>showEditor(r,false)}
+function openRecipe(id,keep=false){const r=state.recipes.find(x=>Number(x.id)===Number(id));if(!r)return;state.mode="view";state.currentId=r.id;state.scrollY=scrollY;$("dialogCategory").textContent=state.categories.get(String(r.category_id))?.name\vert{}\vert{}"Altro";$("dialogTitle").textContent=r.title;let h=`<div class="detail-img"><img src="${imagePath(r.id)}" onerror="this.parentElement.remove()"></div><p>${esc(r.description||"")}</p>`;const ing=grouped(r.ingredients,"group");if(ing.length)h+=`<section class="section"><h3>Ingredienti</h3>${ing.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ul>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ul>`).join("")}</section>`;const ins=grouped(r.instructions,"section");if(ins.length)h+=`<section class="section"><h3>Procedimento</h3>${ins.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ol>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ol>`).join("")}</section>`;h+='<div class="actions"><button id="editButton" class="button primary">Modifica ricetta</button></div>';dialogContent.innerHTML=h;dialogBody.scrollTop=0;if(!keep&&!dialog.open)dialog.showModal();$("editButton").onclick=()=>showEditor(r,false)}
 
 function nextLocalId(){const ids=new Set(state.recipes.map(r=>Number(r.id)).filter(Number.isSafeInteger));let id=ids.size?Math.max(...ids)+1:1;while(ids.has(id))id++;return id}
 function row(x,type){const g=type==="ingredient"?(x.group||""):(x.section||"");return `<div class="edit-row" data-row><input class="input group" value="${esc(g)}" placeholder="${type==="ingredient"?"Gruppo":"Sezione"} (facoltativo)"><textarea class="input text" rows="2" required>${esc(x.text||"")}</textarea><button type="button" class="remove" data-remove>×</button></div>`}
@@ -103,62 +103,6 @@ function showEditor(recipe,isNew){
   if(!dialog.open)dialog.showModal();
 }
 
-function showAiSourceChooser(){
-  state.mode="new";state.currentId=nextLocalId();state.pendingImage=null;
-  $("dialogCategory").textContent="Nuova ricetta con AI";
-  $("dialogTitle").textContent="Carica le foto della ricetta";
-  dialogContent.innerHTML=`
-    <div class="ai-box">
-      <b>✨ Scegli come acquisire la ricetta</b>
-      <p style="margin:0">Google Gemini trascriverà automaticamente titolo, descrizione, categoria, ingredienti e procedimento. La foto caricata verrà usata come copertina della ricetta.</p>
-      <input id="aiCameraInput" type="file" accept="image/*" capture="environment" multiple hidden>
-      <input id="aiGalleryInput" type="file" accept="image/*" multiple hidden>
-      <div class="ai-btns">
-        <button type="button" class="button primary" id="btnAiCamera">📷 Fotocamera</button>
-        <button type="button" class="button neutral" id="btnAiGallery">🖼️ Galleria</button>
-      </div>
-      <div id="aiStatus" class="ai-status">⏳ Elaborazione AI in corso…</div>
-      <button type="button" class="button neutral" id="cancelAi">Annulla</button>
-    </div>`;
-  $("btnAiCamera").onclick=()=>{const i=$("aiCameraInput");i.value="";i.click()};
-  $("btnAiGallery").onclick=()=>{const i=$("aiGalleryInput");i.value="";i.click()};
-  $("aiCameraInput").onchange=e=>handleAiFiles(e.target.files);
-  $("aiGalleryInput").onchange=e=>handleAiFiles(e.target.files);
-  $("cancelAi").onclick=()=>dialog.close();
-  dialogBody.scrollTop=0;if(!dialog.open)dialog.showModal();
-}
-function showAiPreview(aiRecipe,dishFile){
-  state.pendingImage=dishFile;
-  const catId=state.categories.has(String(aiRecipe.category_id))?String(aiRecipe.category_id):String(state.data.categories[0]?.id||"");
-  const catName=state.categories.get(catId)?.name||"Altro";
-  const imageUrl=URL.createObjectURL(dishFile);
-  $("dialogCategory").textContent="Anteprima ricetta";
-  $("dialogTitle").textContent=aiRecipe.title||"Ricetta senza titolo";
-  dialogContent.innerHTML=`
-    <div class="detail-img"><img id="aiPreviewImage" src="${imageUrl}" alt="Anteprima del piatto"></div>
-    <div class="cat">${esc(catName)}</div>
-    <p>${esc(aiRecipe.description||"")}</p>
-    <section class="section"><h3>Ingredienti</h3><ul>${(aiRecipe.ingredients||[]).map(x=>`<li>${esc(x.text||"")}</li>`).join("")}</ul></section>
-    <section class="section"><h3>Procedimento</h3><ol>${(aiRecipe.instructions||[]).map(x=>`<li>${esc(x.text||"")}</li>`).join("")}</ol></section>
-    <form id="aiPreviewForm">
-      <input id="editTitle" type="hidden" value="${esc(aiRecipe.title||"")}">
-      <textarea id="editDesc" hidden>${esc(aiRecipe.description||"")}</textarea>
-      <select id="editCat" hidden><option value="${esc(catId)}" selected>${esc(catName)}</option></select>
-      <div id="ingredients" hidden>${(aiRecipe.ingredients||[]).map(x=>row(x,"ingredient")).join("")}</div>
-      <div id="instructions" hidden>${(aiRecipe.instructions||[]).map(x=>row(x,"instruction")).join("")}</div>
-      <div class="editor-footer">
-        <button id="confirmAiRecipe" class="button primary" type="submit">Conferma e inserisci</button>
-        <button id="cancelAiPreview" class="button neutral" type="button">Annulla</button>
-      </div>
-    </form>`;
-  $("aiPreviewImage").onload=()=>URL.revokeObjectURL(imageUrl);
-  $("cancelAiPreview").onclick=()=>{state.pendingImage=null;dialog.close()};
-  $("aiPreviewForm").onsubmit=async e=>{
-    e.preventDefault();const b=$("confirmAiRecipe");b.disabled=true;b.textContent="Salvataggio…";
-    try{await saveNewRecipe()}catch(err){b.disabled=false;b.textContent="Conferma e inserisci";toast(`Errore: ${err.message}`)}
-  };
-  dialogBody.scrollTop=0;
-}
 function setPreviewFile(file){
   state.pendingImage=file;
   const u=URL.createObjectURL(file),p=$("imagePreview");
@@ -167,118 +111,126 @@ function setPreviewFile(file){
 }
 
 // --- LOGICA AI GEMINI + IMAGEN ---
-async function aiImageBase64(file){
-  const bitmap=await createImageBitmap(file),max=1200,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
-  const canvas=document.createElement("canvas");canvas.width=Math.round(bitmap.width*scale);canvas.height=Math.round(bitmap.height*scale);
-  canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();
-  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error("Compressione foto non riuscita")),"image/jpeg",.78));
-  return b64bytes(new Uint8Array(await blob.arrayBuffer()));
+async function transcribeWithGemini(files, apiKey){
+  const b64List = await Promise.all([...files].map(f => jpegBase64(f)));
+  const cats = state.data.categories.map(c => ({id: String(c.id), name: c.name}));
+  const promptText = `Sei uno chef ed esperto archivista. Trascrivi le foto di questa ricetta manoscritta in italiano, correggendo eventuali refusi ma mantenendo lo stile autentico di famiglia.
+Scegli il category_id più adatto esclusivamente tra questi: ${JSON.stringify(cats)}.
+Restituisci SOLO un oggetto JSON valido con questa struttura esatta:
+{
+  "title": "Titolo della ricetta",
+  "description": "Breve descrizione invitante del piatto (1-2 frasi)",
+  "category_id": "id_categoria_scelta",
+  "ingredients": [{"group": "", "text": "quantità e ingrediente"}],
+  "instructions": [{"section": "", "text": "descrizione passaggio"}],
+  "image_prompt": "Detailed professional food photography of [dish name in English], rustic Italian home style table, warm natural lighting, shallow depth of field, high resolution"
+}`;
+
+  const parts = [{text: promptText}, ...b64List.map(data => ({inline_data: {mime_type: "image/jpeg", data}}))];
+  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({
+      contents: [{parts}],
+      generationConfig: {responseMimeType: "application/json", temperature: 0.2}
+    })
+  });
+  const data = await res.json();
+  if(!res.ok) throw Error(data.error?.message || `Errore Gemini HTTP ${res.status}`);
+  const rawJson = data.candidates?.[0]?.content?.parts?.[0]?.text;
+  if(!rawJson) throw Error("Risposta AI vuota o non valida.");
+  return JSON.parse(rawJson);
 }
-async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
-  onProgress("Ottimizzazione delle foto…","Preparazione immagini");
-  const b64List=await Promise.all([...files].map(f=>aiImageBase64(f)));
-  const cats=state.data.categories.map(c=>({id:String(c.id),name:c.name}));
-  const prompt=`Trascrivi la ricetta in italiano. Scegli category_id solo tra ${JSON.stringify(cats)}. Restituisci SOLO JSON valido con title, description, category_id, ingredients (group,text), instructions (section,text).`;
-  const parts=[{text:prompt},...b64List.map(data=>({inline_data:{mime_type:"image/jpeg",data}}))];
-  const models=["gemini-3.8-flash","gemini-3.6-flash","gemini-3.5-flash-lite"];
-  let lastError=null;
-  for(let modelIndex=0;modelIndex<models.length;modelIndex++){
-    const model=models[modelIndex];
-    onProgress(modelIndex===0?"Lettura e trascrizione della ricetta…":`Tentativo automatico ${modelIndex+1} di ${models.length}…`,`Modello in uso: ${model}`);
-    const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`;
-    let res;
-    try{
-      const generationConfig={responseMimeType:"application/json",temperature:0.1,maxOutputTokens:3072};
-      if(model!=="gemini-3.5-flash-lite")generationConfig.thinkingConfig={thinkingLevel:"LOW"};
-      res=await fetch(url,{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify({contents:[{parts}],generationConfig})});
-    }catch(fetchError){
-      lastError=fetchError;
-      if(modelIndex<models.length-1)continue;
-      throw fetchError;
-    }
-    if(!res.ok){
-      const e=await res.json().catch(()=>({}));
-      const message=e.error?.message||`Errore Gemini HTTP ${res.status}`;
-      lastError=Error(message);
-      const busy=res.status===503||/high demand|overloaded|unavailable|capacity|try again later/i.test(message);
-      if(busy&&modelIndex<models.length-1)continue;
-      throw lastError;
-    }
-    if(!res.body)throw Error("Il browser non supporta la risposta streaming.");
-    const reader=res.body.getReader(),decoder=new TextDecoder();let buffer="",jsonText="",chunks=0,streamError=null;
-    const consumeEvent=event=>{
-      for(const rawLine of event.split(/\r?\n/)){
-        const line=rawLine.trim();if(!line.startsWith("data:"))continue;
-        const payload=line.slice(5).trim();if(!payload||payload==="[DONE]")continue;
-        let obj;try{obj=JSON.parse(payload)}catch(parseError){console.warn("Blocco SSE non JSON:",payload);continue}
-        if(obj.error){streamError=Error(obj.error.message||"Errore streaming Gemini");return}
-        const candidate=obj.candidates?.[0];
-        const text=(candidate?.content?.parts||[]).filter(part=>!part.thought).map(part=>part.text||"").join("");
-        if(text){jsonText+=text;chunks++;onProgress("Lettura e trascrizione della ricetta…",`${model}: ricevuti ${chunks} blocchi`)}
-        if(!text&&candidate?.finishReason&&candidate.finishReason!=="STOP")console.warn("Gemini finishReason:",candidate.finishReason,candidate.safetyRatings||"");
+
+async function generateDishImage(promptText, title, apiKey){
+  // 1. Tentativo con Google Imagen 3 via Gemini API
+  try {
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${encodeURIComponent(apiKey)}`;
+    const res = await fetch(url, {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        instances: [{prompt: promptText}],
+        parameters: {sampleCount: 1, aspectRatio: "4:3", outputOptions: {mimeType: "image/jpeg"}}
+      })
+    });
+    if(res.ok){
+      const d = await res.json();
+      const b64 = d.predictions?.[0]?.bytesBase64Encoded;
+      if(b64){
+        const bin = atob(b64), arr = new Uint8Array(bin.length);
+        for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+        return new File([arr], "ai-dish.jpg", {type: "image/jpeg"});
       }
-    };
-    while(true){
-      const {done,value}=await reader.read();
-      if(value)buffer+=decoder.decode(value,{stream:!done});
-      const events=buffer.split(/\r?\n\r?\n/);buffer=events.pop()||"";
-      for(const event of events)consumeEvent(event);
-      if(streamError||done)break;
     }
-    buffer+=decoder.decode();
-    if(buffer.trim())consumeEvent(buffer);
-    if(streamError){
-      const busy=/high demand|overloaded|unavailable|capacity|try again later/i.test(streamError.message);
-      if(busy&&modelIndex<models.length-1){lastError=streamError;continue}
-      throw streamError;
+  } catch(e){ console.warn("Imagen fallback:", e); }
+
+  // 2. Fallback con Gemini 2.0 Flash Image Generation o Generatore Fotografico AI
+  try {
+    const fallbackUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptText)}?width=1024&height=768&nologo=true&seed=${Date.now()}`;
+    const r = await fetch(fallbackUrl);
+    if(r.ok){
+      const blob = await r.blob();
+      return new File([blob], "ai-dish.jpg", {type: blob.type || "image/jpeg"});
     }
-    if(!jsonText.trim()){lastError=Error(`${model} ha risposto senza contenuto testuale. Controlla la console per finishReason o blocchi di sicurezza.`);if(modelIndex<models.length-1)continue;throw lastError}
-    try{return JSON.parse(jsonText)}catch(e){throw Error(`Risposta JSON non valida da ${model}: ${e.message}`)}
-  }
-  throw lastError||Error("Nessun modello Gemini disponibile.");
+  } catch(e){ console.warn("Pollinations fallback:", e); }
+
+  // 3. Fallback card grafica su Canvas se offline/bloccato
+  const c = document.createElement("canvas"); c.width = 1200; c.height = 900;
+  const ctx = c.getContext("2d");
+  ctx.fillStyle = "#f8f3eb"; ctx.fillRect(0,0,1200,900);
+  ctx.strokeStyle = "#a90818"; ctx.lineWidth = 18; ctx.strokeRect(40,40,1120,820);
+  ctx.fillStyle = "#a90818"; ctx.font = "bold 64px Georgia, serif"; ctx.textAlign = "center";
+  ctx.fillText(title.slice(0,32), 600, 440);
+  ctx.fillStyle = "#746a62"; ctx.font = "36px sans-serif";
+  ctx.fillText("Ricettario di Mamma Anna", 600, 520);
+  const blob = await new Promise(r => c.toBlob(r, "image/jpeg", 0.9));
+  return new File([blob], "ai-dish.jpg", {type: "image/jpeg"});
 }
 
 async function handleAiFiles(fileList){
-  const files=[...(fileList||[])];
-  if(!files.length)return;
-  // Mostra subito una schermata persistente: l'utente vede sempre cosa sta succedendo.
-  const selectedText=files.length===1?files[0].name:`${files.length} immagini selezionate`;
-  dialogContent.innerHTML=`<div class="ai-progress" id="aiProgressPanel">
-    <div class="ai-spinner" id="aiSpinner"></div>
-    <b id="aiProgressTitle" style="text-align:center">Preparazione immagine…</b>
-    <div id="aiProgressDetail" class="ai-file-note">${esc(selectedText)}</div>
-    <div id="aiErrorBox" class="ai-error" hidden></div>
-    <button type="button" class="button neutral" id="cancelAiWork">Annulla e torna alla home</button>
-  </div>`;
-  $("dialogCategory").textContent="Elaborazione AI";
-  $("dialogTitle").textContent="Trascrizione ricetta in corso";
-  $("cancelAiWork").onclick=()=>dialog.close();
-  dialogBody.scrollTop=0;
-  // Consente al browser di disegnare loader e testo prima di conversione/API.
-  await new Promise(resolve=>requestAnimationFrame(()=>setTimeout(resolve,30)));
-  const progress=(title,detail="")=>{const t=$("aiProgressTitle"),d=$("aiProgressDetail");if(t)t.textContent=title;if(d)d.textContent=detail};
-  try{
-    progress("Controllo configurazione Gemini…",selectedText);
-    await new Promise(resolve=>setTimeout(resolve,20));
-    const apiKey=requestGeminiKey();
-    progress("Lettura e trascrizione della ricetta…","Analisi di titolo, categoria, ingredienti e passaggi");
-    const aiRecipe=await transcribeWithGemini(files,apiKey,progress);
-    if(!aiRecipe?.title||!(aiRecipe.ingredients||[]).length||!(aiRecipe.instructions||[]).length)throw Error("Gemini non ha riconosciuto una ricetta completa. Usa una foto nitida che includa ingredienti e procedimento.");
-    progress("Preparazione anteprima…",aiRecipe.title);
-    const uploadedPhoto=files[0];
-    await new Promise(resolve=>setTimeout(resolve,100));
-    showAiPreview(aiRecipe,uploadedPhoto);
-  }catch(err){
-    console.error("Errore caricamento ricetta AI:",err);
-    const spinner=$("aiSpinner"),box=$("aiErrorBox"),title=$("aiProgressTitle"),detail=$("aiProgressDetail");
-    if(spinner)spinner.style.display="none";
-    if(title)title.textContent="Caricamento non riuscito";
-    if(detail)detail.textContent="Nessuna ricetta è stata salvata.";
-    if(box){box.hidden=false;box.textContent=`Errore: ${err?.message||String(err)}\n\nPuoi annullare e riprovare con un'altra foto.`}
-    const cancel=$("cancelAiWork");if(cancel)cancel.textContent="Chiudi e torna alla home";
-    toast("Errore durante il caricamento AI");
+  if(!fileList || !fileList.length) return;
+  const statusEl = $("aiStatus"), btnCam = $("btnAiCamera"), btnGal = $("btnAiGallery");
+  const setStatus = msg => { statusEl.textContent = msg; statusEl.classList.add("show"); };
+  try {
+    const apiKey = requestGeminiKey();
+    const autoSave = $("aiAutoCommit")?.checked;
+    if(autoSave) requestToken(); // Verifica subito anche il token GitHub
+
+    btnCam.disabled = btnGal.disabled = true;
+    setStatus(`⏳ Lettura e trascrizione di ${fileList.length} foto con Gemini…`);
+    const aiRecipe = await transcribeWithGemini(fileList, apiKey);
+
+    // Popola i campi dell'editor
+    $("editTitle").value = aiRecipe.title || "";
+    $("editDesc").value = aiRecipe.description || "";
+    if(aiRecipe.category_id && state.categories.has(String(aiRecipe.category_id))){
+      $("editCat").value = String(aiRecipe.category_id);
+    }
+    $("ingredients").innerHTML = (aiRecipe.ingredients||[]).map(x=>row(x,"ingredient")).join("");
+    $("instructions").innerHTML = (aiRecipe.instructions||[]).map(x=>row(x,"instruction")).join("");
+
+    setStatus("🎨 Generazione immagine del piatto con AI…");
+    const imgPrompt = aiRecipe.image_prompt || `Professional Italian food photography of ${aiRecipe.title}, warm lighting`;
+    const dishFile = await generateDishImage(imgPrompt, aiRecipe.title || "Ricetta", apiKey);
+    setPreviewFile(dishFile);
+
+    if(autoSave){
+      setStatus("🚀 Salvataggio automatico su GitHub in corso…");
+      await saveNewRecipe();
+    } else {
+      statusEl.classList.remove("show");
+      toast("Ricetta trascritta e foto generata! Controlla e clicca Aggiungi.");
+    }
+  } catch(err){
+    statusEl.classList.remove("show");
+    toast(`Errore AI: ${err.message}`);
+  } finally {
+    btnCam.disabled = btnGal.disabled = false;
   }
 }
+
 function formRecipe(id){const catId=$("editCat").value,cat=state.categories.get(String(catId)),read=(box,type)=>[...$(box).querySelectorAll("[data-row]")].map((el,i)=>{const text=el.querySelector(".text").value.trim(),g=el.querySelector(".group").value.trim();return type==="ingredient"?{order:i+1,group:g,text}:{order:i+1,section:g,text}}).filter(x=>x.text),title=$("editTitle").value.trim();return{id,title,slug:norm(title).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),description:$("editDesc").value.trim(),category_id:catId,category:cat?.name||"Altro",ingredients:read("ingredients","ingredient"),instructions:read("instructions","instruction"),notes:[],sections:[],warnings:[],source_text:""}}
 function headers(token){return{Accept:"application/vnd.github+json",Authorization:`Bearer ${token}`,"X-GitHub-Api-Version":"2022-11-28"}}
 function b64bytes(bytes){let b="";for(let i=0;i<bytes.length;i+=32768)b+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(b)}
@@ -340,7 +292,7 @@ async function submitEditor(e){e.preventDefault();const b=$("submitBtn");b.disab
 
 $("categories").onclick=e=>{const b=e.target.closest("[data-cat]");if(b){state.active=b.dataset.cat;renderCategories();render()}};
 grid.onclick=e=>{const b=e.target.closest("[data-open]");if(b)openRecipe(b.dataset.open)};
-$("addRecipeButton").onclick=()=>{if(!state.data)return toast("Ricettario non ancora caricato.");showAiSourceChooser()};
+$("addRecipeButton").onclick=()=>{if(!state.data)return toast("Ricettario non ancora caricato.");showEditor({title:"",description:"",category_id:state.data.categories[0]?.id,ingredients:[],instructions:[]},true)};
 $("searchInput").oninput=e=>{state.query=e.target.value;render()};
 $("clearButton").onclick=()=>{state.query="";state.active="all";$("searchInput").value="";renderCategories();render()};
 $("closeDialog").onclick=()=>dialog.close();
