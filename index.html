@@ -180,25 +180,46 @@ async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
   const cats=state.data.categories.map(c=>({id:String(c.id),name:c.name}));
   const prompt=`Trascrivi la ricetta in italiano. Scegli category_id solo tra ${JSON.stringify(cats)}. Restituisci SOLO JSON valido con title, description, category_id, ingredients (group,text), instructions (section,text).`;
   const parts=[{text:prompt},...b64List.map(data=>({inline_data:{mime_type:"image/jpeg",data}}))];
-  const url="https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:streamGenerateContent?alt=sse";
-  onProgress("Lettura e trascrizione della ricetta…","Ricezione progressiva della risposta da Gemini");
-  const res=await fetch(url,{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:3072,thinkingConfig:{thinkingLevel:"LOW"}}})});
-  if(!res.ok){const e=await res.json().catch(()=>({}));throw Error(e.error?.message||`Errore Gemini HTTP ${res.status}`)}
-  if(!res.body)throw Error("Il browser non supporta la risposta streaming.");
-  const reader=res.body.getReader(),decoder=new TextDecoder();let buffer="",jsonText="",chunks=0;
-  while(true){
-    const {done,value}=await reader.read();if(done)break;
-    buffer+=decoder.decode(value,{stream:true});
-    const events=buffer.split("\n\n");buffer=events.pop()||"";
-    for(const event of events){
-      const line=event.split("\n").find(x=>x.startsWith("data:"));if(!line)continue;
-      const payload=line.slice(5).trim();if(!payload||payload==="[DONE]")continue;
-      const obj=JSON.parse(payload);const text=(obj.candidates?.[0]?.content?.parts||[]).filter(p=>!p.thought).map(p=>p.text||"").join("");
-      if(text){jsonText+=text;chunks++;onProgress("Lettura e trascrizione della ricetta…",`Risposta ricevuta: ${chunks} blocchi`)}
+  const models=["gemini-3.8-flash","gemini-3.6-flash"];
+  let lastError=null;
+  for(let modelIndex=0;modelIndex<models.length;modelIndex++){
+    const model=models[modelIndex];
+    onProgress(modelIndex===0?"Lettura e trascrizione della ricetta…":"Gemini 3.8 occupato: passaggio automatico a 3.6 Flash…",`Modello in uso: ${model}`);
+    const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`;
+    const res=await fetch(url,{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:3072,thinkingConfig:{thinkingLevel:"LOW"}}})});
+    if(!res.ok){
+      const e=await res.json().catch(()=>({}));
+      const message=e.error?.message||`Errore Gemini HTTP ${res.status}`;
+      lastError=Error(message);
+      const busy=res.status===503||/high demand|overloaded|unavailable/i.test(message);
+      if(busy&&modelIndex<models.length-1)continue;
+      throw lastError;
     }
+    if(!res.body)throw Error("Il browser non supporta la risposta streaming.");
+    const reader=res.body.getReader(),decoder=new TextDecoder();let buffer="",jsonText="",chunks=0,streamError=null;
+    while(true){
+      const {done,value}=await reader.read();if(done)break;
+      buffer+=decoder.decode(value,{stream:true});
+      const events=buffer.split("\n\n");buffer=events.pop()||"";
+      for(const event of events){
+        const line=event.split("\n").find(x=>x.startsWith("data:"));if(!line)continue;
+        const payload=line.slice(5).trim();if(!payload||payload==="[DONE]")continue;
+        const obj=JSON.parse(payload);
+        if(obj.error){streamError=Error(obj.error.message||"Errore streaming Gemini");break}
+        const text=(obj.candidates?.[0]?.content?.parts||[]).filter(p=>!p.thought).map(p=>p.text||"").join("");
+        if(text){jsonText+=text;chunks++;onProgress("Lettura e trascrizione della ricetta…",`${model}: ricevuti ${chunks} blocchi`)}
+      }
+      if(streamError)break;
+    }
+    if(streamError){
+      const busy=/high demand|overloaded|unavailable/i.test(streamError.message);
+      if(busy&&modelIndex<models.length-1){lastError=streamError;continue}
+      throw streamError;
+    }
+    if(!jsonText.trim()){lastError=Error(`${model} ha completato la chiamata senza testo utilizzabile.`);if(modelIndex<models.length-1)continue;throw lastError}
+    try{return JSON.parse(jsonText)}catch(e){throw Error(`Risposta JSON non valida da ${model}: ${e.message}`)}
   }
-  if(!jsonText.trim())throw Error("Gemini ha completato la chiamata ma non ha restituito testo utilizzabile.");
-  return JSON.parse(jsonText);
+  throw lastError||Error("Nessun modello Gemini disponibile.");
 }
 
 async function handleAiFiles(fileList){
