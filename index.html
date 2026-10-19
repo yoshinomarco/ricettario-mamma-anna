@@ -182,13 +182,17 @@ async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
   const parts=[{text:promptText},...b64List.map(data=>({inline_data:{mime_type:"image/jpeg",data}}))];
   const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
   const body=JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:4096}});
-  const maxAttempts=2;
+  const maxAttempts=1;
   for(let attempt=1;attempt<=maxAttempts;attempt++){
     const controller=new AbortController();
-    const timer=setTimeout(()=>controller.abort(),30000);
+    const timer=setTimeout(()=>controller.abort(),90000);
     try{
-      onProgress(attempt===1?"Lettura e trascrizione della ricetta…":"Servizio occupato: secondo tentativo…",attempt===1?"Analisi con Gemini 3.8 Flash":"Nuovo tentativo automatico dopo errore temporaneo");
-      const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body,signal:controller.signal});
+      const startedAt=Date.now();
+      onProgress("Lettura e trascrizione della ricetta…","Analisi con Gemini 3.8 Flash: 0 secondi");
+      const elapsedTimer=setInterval(()=>onProgress("Lettura e trascrizione della ricetta…",`Analisi con Gemini 3.8 Flash: ${Math.floor((Date.now()-startedAt)/1000)} secondi`),1000);
+      let res;
+      try{res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body,signal:controller.signal})}
+      finally{clearInterval(elapsedTimer)}
       const data=await res.json().catch(()=>({}));
       if(!res.ok){
         const error=Error(data.error?.message||`Errore Gemini HTTP ${res.status}`);error.status=res.status;throw error;
@@ -199,8 +203,8 @@ async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
     }catch(err){
       const retryable=err.name==="AbortError"||err.status===429||err.status===408||err.status>=500;
       if(attempt<maxAttempts&&retryable){await new Promise(r=>setTimeout(r,1500));continue}
-      if(err.name==="AbortError")throw Error("Gemini non ha risposto entro 30 secondi. Il caricamento è stato interrotto: riprova.");
-      if(err.status===503)throw Error("Gemini 3.8 Flash è temporaneamente sovraccarico (503). Il caricamento è stato interrotto dopo 2 tentativi.");
+      if(err.name==="AbortError")throw Error("Gemini non ha restituito la risposta al browser entro 90 secondi. Il caricamento è stato interrotto: riprova.");
+      if(err.status===503)throw Error("Gemini 3.8 Flash è temporaneamente sovraccarico (503). Il caricamento è stato interrotto.");
       throw err;
     }finally{clearTimeout(timer)}
   }
