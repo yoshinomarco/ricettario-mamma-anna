@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#a90818">
-<meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Mamma Anna">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Mamma Anna">
 <link rel="manifest" href="./manifest.webmanifest"><link rel="preload" as="image" href="./copertina-mamma-anna.jpg?v=6">
 <link rel="icon" type="image/png" sizes="192x192" href="./logo.png?v=6"><link rel="shortcut icon" href="./logo.png?v=6"><link rel="apple-touch-icon" href="./logo.png?v=6">
 <title>RICETTARIO DI MAMMA ANNA</title>
@@ -47,7 +47,7 @@ function render(){const list=visible();grid.innerHTML=list.length?list.map(r=>`<
 function current(){return state.recipes.find(r=>Number(r.id)===Number(state.currentId))}
 function grouped(a,k){const g=[];(a||[]).forEach(x=>{let y=g.find(z=>z.label===(x[k]||""));if(!y){y={label:x[k]||"",items:[]};g.push(y)}y.items.push(x)});return g}
 
-function openRecipe(id,keep=false){const r=state.recipes.find(x=>Number(x.id)===Number(id));if(!r)return;state.mode="view";state.currentId=r.id;state.scrollY=scrollY;$("dialogCategory").textContent=state.categories.get(String(r.category_id))?.name\vert{}\vert{}"Altro";$("dialogTitle").textContent=r.title;let h=`<div class="detail-img"><img src="${imagePath(r.id)}" onerror="this.parentElement.remove()"></div><p>${esc(r.description||"")}</p>`;const ing=grouped(r.ingredients,"group");if(ing.length)h+=`<section class="section"><h3>Ingredienti</h3>${ing.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ul>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ul>`).join("")}</section>`;const ins=grouped(r.instructions,"section");if(ins.length)h+=`<section class="section"><h3>Procedimento</h3>${ins.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ol>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ol>`).join("")}</section>`;h+='<div class="actions"><button id="editButton" class="button primary">Modifica ricetta</button></div>';dialogContent.innerHTML=h;dialogBody.scrollTop=0;if(!keep&&!dialog.open)dialog.showModal();$("editButton").onclick=()=>showEditor(r,false)}
+function openRecipe(id,keep=false){const r=state.recipes.find(x=>Number(x.id)===Number(id));if(!r)return;state.mode="view";state.currentId=r.id;state.scrollY=scrollY;$("dialogCategory").textContent=state.categories.get(String(r.category_id))?.name||"Altro";$("dialogTitle").textContent=r.title;let h=`<div class="detail-img"><img src="${imagePath(r.id)}" onerror="this.parentElement.remove()"></div><p>${esc(r.description||"")}</p>`;const ing=grouped(r.ingredients,"group");if(ing.length)h+=`<section class="section"><h3>Ingredienti</h3>${ing.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ul>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ul>`).join("")}</section>`;const ins=grouped(r.instructions,"section");if(ins.length)h+=`<section class="section"><h3>Procedimento</h3>${ins.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ol>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ol>`).join("")}</section>`;h+='<div class="actions"><button id="editButton" class="button primary">Modifica ricetta</button></div>';dialogContent.innerHTML=h;dialogBody.scrollTop=0;if(!keep&&!dialog.open)dialog.showModal();$("editButton").onclick=()=>showEditor(r,false)}
 
 function nextLocalId(){const ids=new Set(state.recipes.map(r=>Number(r.id)).filter(Number.isSafeInteger));let id=ids.size?Math.max(...ids)+1:1;while(ids.has(id))id++;return id}
 function row(x,type){const g=type==="ingredient"?(x.group||""):(x.section||"");return `<div class="edit-row" data-row><input class="input group" value="${esc(g)}" placeholder="${type==="ingredient"?"Gruppo":"Sezione"} (facoltativo)"><textarea class="input text" rows="2" required>${esc(x.text||"")}</textarea><button type="button" class="remove" data-remove>×</button></div>`}
@@ -144,51 +144,42 @@ Restituisci SOLO un oggetto JSON valido con questa struttura esatta:
 }
 
 async function generateDishImage(promptText, title, apiKey){
-  // 1. Tentativo con Google Imagen 3 via Gemini API
+  // Generazione immagine con Gemini 3.1 Flash Image (Nano Banana 2).
+  const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent";
   try {
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-002:predict?key=${encodeURIComponent(apiKey)}`;
     const res = await fetch(url, {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: {"Content-Type":"application/json", "x-goog-api-key":apiKey},
       body: JSON.stringify({
-        instances: [{prompt: promptText}],
-        parameters: {sampleCount: 1, aspectRatio: "4:3", outputOptions: {mimeType: "image/jpeg"}}
+        contents: [{parts: [{text: promptText}]}],
+        generationConfig: {
+          responseModalities: ["IMAGE"],
+          imageConfig: {aspectRatio: "4:3", imageSize: "1K"}
+        }
       })
     });
-    if(res.ok){
-      const d = await res.json();
-      const b64 = d.predictions?.[0]?.bytesBase64Encoded;
-      if(b64){
-        const bin = atob(b64), arr = new Uint8Array(bin.length);
-        for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
-        return new File([arr], "ai-dish.jpg", {type: "image/jpeg"});
-      }
-    }
-  } catch(e){ console.warn("Imagen fallback:", e); }
-
-  // 2. Fallback con Gemini 2.0 Flash Image Generation o Generatore Fotografico AI
-  try {
-    const fallbackUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(promptText)}?width=1024&height=768&nologo=true&seed=${Date.now()}`;
-    const r = await fetch(fallbackUrl);
-    if(r.ok){
-      const blob = await r.blob();
-      return new File([blob], "ai-dish.jpg", {type: blob.type || "image/jpeg"});
-    }
-  } catch(e){ console.warn("Pollinations fallback:", e); }
-
-  // 3. Fallback card grafica su Canvas se offline/bloccato
-  const c = document.createElement("canvas"); c.width = 1200; c.height = 900;
-  const ctx = c.getContext("2d");
-  ctx.fillStyle = "#f8f3eb"; ctx.fillRect(0,0,1200,900);
-  ctx.strokeStyle = "#a90818"; ctx.lineWidth = 18; ctx.strokeRect(40,40,1120,820);
-  ctx.fillStyle = "#a90818"; ctx.font = "bold 64px Georgia, serif"; ctx.textAlign = "center";
-  ctx.fillText(title.slice(0,32), 600, 440);
-  ctx.fillStyle = "#746a62"; ctx.font = "36px sans-serif";
-  ctx.fillText("Ricettario di Mamma Anna", 600, 520);
-  const blob = await new Promise(r => c.toBlob(r, "image/jpeg", 0.9));
-  return new File([blob], "ai-dish.jpg", {type: "image/jpeg"});
+    const data = await res.json();
+    if(!res.ok) throw Error(data.error?.message || `Errore immagine Gemini HTTP ${res.status}`);
+    const parts = data.candidates?.[0]?.content?.parts || [];
+    const imagePart = parts.find(p => p.inlineData?.data || p.inline_data?.data);
+    const inline = imagePart?.inlineData || imagePart?.inline_data;
+    if(!inline?.data) throw Error("Gemini non ha restituito alcuna immagine.");
+    const bin = atob(inline.data), arr = new Uint8Array(bin.length);
+    for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
+    return new File([arr], "ai-dish.jpg", {type:inline.mimeType || inline.mime_type || "image/jpeg"});
+  } catch(e){
+    console.warn("Generazione immagine Gemini non riuscita:", e);
+  }
+  // Fallback locale, così la ricetta resta comunque salvabile.
+  const c=document.createElement("canvas");c.width=1200;c.height=900;
+  const ctx=c.getContext("2d");ctx.fillStyle="#f8f3eb";ctx.fillRect(0,0,1200,900);
+  ctx.strokeStyle="#a90818";ctx.lineWidth=18;ctx.strokeRect(40,40,1120,820);
+  ctx.fillStyle="#a90818";ctx.font="bold 64px Georgia, serif";ctx.textAlign="center";
+  ctx.fillText(String(title||"Ricetta").slice(0,32),600,440);
+  ctx.fillStyle="#746a62";ctx.font="36px sans-serif";ctx.fillText("Ricettario di Mamma Anna",600,520);
+  const blob=await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(Error("Creazione immagine fallback non riuscita")),"image/jpeg",.9));
+  return new File([blob],"ai-dish.jpg",{type:"image/jpeg"});
 }
-
 async function handleAiFiles(fileList){
   if(!fileList || !fileList.length) return;
   const statusEl = $("aiStatus"), btnCam = $("btnAiCamera"), btnGal = $("btnAiGallery");
