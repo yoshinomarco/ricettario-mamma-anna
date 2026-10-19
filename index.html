@@ -110,7 +110,7 @@ function showAiSourceChooser(){
   dialogContent.innerHTML=`
     <div class="ai-box">
       <b>✨ Scegli come acquisire la ricetta</b>
-      <p style="margin:0">Google Gemini trascriverà automaticamente titolo, descrizione, categoria, ingredienti e procedimento, quindi genererà la foto del piatto.</p>
+      <p style="margin:0">Google Gemini trascriverà automaticamente titolo, descrizione, categoria, ingredienti e procedimento. La foto caricata verrà usata come copertina della ricetta.</p>
       <input id="aiCameraInput" type="file" accept="image/*" capture="environment" multiple hidden>
       <input id="aiGalleryInput" type="file" accept="image/*" multiple hidden>
       <div class="ai-btns">
@@ -199,16 +199,6 @@ Restituisci SOLO un oggetto JSON valido con questa struttura esatta:
   return JSON.parse(rawJson);
 }
 
-async function generateDishImage(promptText,title,apiKey){
-  const url="https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent";
-  const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify({contents:[{parts:[{text:promptText}]}],generationConfig:{responseModalities:["IMAGE"],imageConfig:{aspectRatio:"4:3",imageSize:"1K"}}})});
-  const data=await res.json();
-  if(!res.ok)throw Error(data.error?.message||`Errore immagine Gemini HTTP ${res.status}`);
-  const parts=data.candidates?.[0]?.content?.parts||[],imagePart=parts.find(p=>p.inlineData?.data||p.inline_data?.data),inline=imagePart?.inlineData||imagePart?.inline_data;
-  if(!inline?.data)throw Error("Gemini non ha restituito alcuna immagine.");
-  const bin=atob(inline.data),arr=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
-  return new File([arr],"ai-dish.jpg",{type:inline.mimeType||inline.mime_type||"image/jpeg"});
-}
 async function handleAiFiles(fileList){
   const files=[...(fileList||[])];
   if(!files.length)return;
@@ -222,7 +212,7 @@ async function handleAiFiles(fileList){
     <button type="button" class="button neutral" id="cancelAiWork">Annulla e torna alla home</button>
   </div>`;
   $("dialogCategory").textContent="Elaborazione AI";
-  $("dialogTitle").textContent="Creazione ricetta in corso";
+  $("dialogTitle").textContent="Trascrizione ricetta in corso";
   $("cancelAiWork").onclick=()=>dialog.close();
   dialogBody.scrollTop=0;
   // Consente al browser di disegnare loader e testo prima di conversione/API.
@@ -235,12 +225,10 @@ async function handleAiFiles(fileList){
     progress("Lettura e trascrizione della ricetta…","Analisi di titolo, categoria, ingredienti e passaggi");
     const aiRecipe=await transcribeWithGemini(files,apiKey);
     if(!aiRecipe?.title||!(aiRecipe.ingredients||[]).length||!(aiRecipe.instructions||[]).length)throw Error("Gemini non ha riconosciuto una ricetta completa. Usa una foto nitida che includa ingredienti e procedimento.");
-    progress("Generazione della foto del piatto…",aiRecipe.title);
-    const imgPrompt=aiRecipe.image_prompt||`Professional Italian food photography of ${aiRecipe.title}, warm natural lighting, rustic home style`;
-    const dishFile=await generateDishImage(imgPrompt,aiRecipe.title,apiKey);
-    progress("Anteprima pronta…","Apertura della ricetta");
+    progress("Preparazione anteprima…",aiRecipe.title);
+    const uploadedPhoto=files[0];
     await new Promise(resolve=>setTimeout(resolve,100));
-    showAiPreview(aiRecipe,dishFile);
+    showAiPreview(aiRecipe,uploadedPhoto);
   }catch(err){
     console.error("Errore caricamento ricetta AI:",err);
     const spinner=$("aiSpinner"),box=$("aiErrorBox"),title=$("aiProgressTitle"),detail=$("aiProgressDetail");
