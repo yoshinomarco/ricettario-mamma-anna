@@ -103,6 +103,62 @@ function showEditor(recipe,isNew){
   if(!dialog.open)dialog.showModal();
 }
 
+function showAiSourceChooser(){
+  state.mode="new";state.currentId=nextLocalId();state.pendingImage=null;
+  $("dialogCategory").textContent="Nuova ricetta con AI";
+  $("dialogTitle").textContent="Carica le foto della ricetta";
+  dialogContent.innerHTML=`
+    <div class="ai-box">
+      <b>✨ Scegli come acquisire la ricetta</b>
+      <p style="margin:0">Google Gemini trascriverà automaticamente titolo, descrizione, categoria, ingredienti e procedimento, quindi genererà la foto del piatto.</p>
+      <input id="aiCameraInput" type="file" accept="image/*" capture="environment" multiple hidden>
+      <input id="aiGalleryInput" type="file" accept="image/*" multiple hidden>
+      <div class="ai-btns">
+        <button type="button" class="button primary" id="btnAiCamera">📷 Fotocamera</button>
+        <button type="button" class="button neutral" id="btnAiGallery">🖼️ Galleria</button>
+      </div>
+      <div id="aiStatus" class="ai-status">⏳ Elaborazione AI in corso…</div>
+      <button type="button" class="button neutral" id="cancelAi">Annulla</button>
+    </div>`;
+  $("btnAiCamera").onclick=()=>$("aiCameraInput").click();
+  $("btnAiGallery").onclick=()=>$("aiGalleryInput").click();
+  $("aiCameraInput").onchange=e=>handleAiFiles(e.target.files);
+  $("aiGalleryInput").onchange=e=>handleAiFiles(e.target.files);
+  $("cancelAi").onclick=()=>dialog.close();
+  dialogBody.scrollTop=0;if(!dialog.open)dialog.showModal();
+}
+function showAiPreview(aiRecipe,dishFile){
+  state.pendingImage=dishFile;
+  const catId=state.categories.has(String(aiRecipe.category_id))?String(aiRecipe.category_id):String(state.data.categories[0]?.id||"");
+  const catName=state.categories.get(catId)?.name||"Altro";
+  const imageUrl=URL.createObjectURL(dishFile);
+  $("dialogCategory").textContent="Anteprima ricetta";
+  $("dialogTitle").textContent=aiRecipe.title||"Ricetta senza titolo";
+  dialogContent.innerHTML=`
+    <div class="detail-img"><img id="aiPreviewImage" src="${imageUrl}" alt="Anteprima del piatto"></div>
+    <div class="cat">${esc(catName)}</div>
+    <p>${esc(aiRecipe.description||"")}</p>
+    <section class="section"><h3>Ingredienti</h3><ul>${(aiRecipe.ingredients||[]).map(x=>`<li>${esc(x.text||"")}</li>`).join("")}</ul></section>
+    <section class="section"><h3>Procedimento</h3><ol>${(aiRecipe.instructions||[]).map(x=>`<li>${esc(x.text||"")}</li>`).join("")}</ol></section>
+    <form id="aiPreviewForm">
+      <input id="editTitle" type="hidden" value="${esc(aiRecipe.title||"")}">
+      <textarea id="editDesc" hidden>${esc(aiRecipe.description||"")}</textarea>
+      <select id="editCat" hidden><option value="${esc(catId)}" selected>${esc(catName)}</option></select>
+      <div id="ingredients" hidden>${(aiRecipe.ingredients||[]).map(x=>row(x,"ingredient")).join("")}</div>
+      <div id="instructions" hidden>${(aiRecipe.instructions||[]).map(x=>row(x,"instruction")).join("")}</div>
+      <div class="editor-footer">
+        <button id="confirmAiRecipe" class="button primary" type="submit">Conferma e inserisci</button>
+        <button id="cancelAiPreview" class="button neutral" type="button">Annulla</button>
+      </div>
+    </form>`;
+  $("aiPreviewImage").onload=()=>URL.revokeObjectURL(imageUrl);
+  $("cancelAiPreview").onclick=()=>{state.pendingImage=null;dialog.close()};
+  $("aiPreviewForm").onsubmit=async e=>{
+    e.preventDefault();const b=$("confirmAiRecipe");b.disabled=true;b.textContent="Salvataggio…";
+    try{await saveNewRecipe()}catch(err){b.disabled=false;b.textContent="Conferma e inserisci";toast(`Errore: ${err.message}`)}
+  };
+  dialogBody.scrollTop=0;
+}
 function setPreviewFile(file){
   state.pendingImage=file;
   const u=URL.createObjectURL(file),p=$("imagePreview");
@@ -143,85 +199,36 @@ Restituisci SOLO un oggetto JSON valido con questa struttura esatta:
   return JSON.parse(rawJson);
 }
 
-async function generateDishImage(promptText, title, apiKey){
-  // Generazione immagine con Gemini 3.1 Flash Image (Nano Banana 2).
-  const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent";
-  try {
-    const res = await fetch(url, {
-      method: "POST",
-      headers: {"Content-Type":"application/json", "x-goog-api-key":apiKey},
-      body: JSON.stringify({
-        contents: [{parts: [{text: promptText}]}],
-        generationConfig: {
-          responseModalities: ["IMAGE"],
-          imageConfig: {aspectRatio: "4:3", imageSize: "1K"}
-        }
-      })
-    });
-    const data = await res.json();
-    if(!res.ok) throw Error(data.error?.message || `Errore immagine Gemini HTTP ${res.status}`);
-    const parts = data.candidates?.[0]?.content?.parts || [];
-    const imagePart = parts.find(p => p.inlineData?.data || p.inline_data?.data);
-    const inline = imagePart?.inlineData || imagePart?.inline_data;
-    if(!inline?.data) throw Error("Gemini non ha restituito alcuna immagine.");
-    const bin = atob(inline.data), arr = new Uint8Array(bin.length);
-    for(let i=0;i<bin.length;i++) arr[i]=bin.charCodeAt(i);
-    return new File([arr], "ai-dish.jpg", {type:inline.mimeType || inline.mime_type || "image/jpeg"});
-  } catch(e){
-    console.warn("Generazione immagine Gemini non riuscita:", e);
-  }
-  // Fallback locale, così la ricetta resta comunque salvabile.
-  const c=document.createElement("canvas");c.width=1200;c.height=900;
-  const ctx=c.getContext("2d");ctx.fillStyle="#f8f3eb";ctx.fillRect(0,0,1200,900);
-  ctx.strokeStyle="#a90818";ctx.lineWidth=18;ctx.strokeRect(40,40,1120,820);
-  ctx.fillStyle="#a90818";ctx.font="bold 64px Georgia, serif";ctx.textAlign="center";
-  ctx.fillText(String(title||"Ricetta").slice(0,32),600,440);
-  ctx.fillStyle="#746a62";ctx.font="36px sans-serif";ctx.fillText("Ricettario di Mamma Anna",600,520);
-  const blob=await new Promise((resolve,reject)=>c.toBlob(b=>b?resolve(b):reject(Error("Creazione immagine fallback non riuscita")),"image/jpeg",.9));
-  return new File([blob],"ai-dish.jpg",{type:"image/jpeg"});
+async function generateDishImage(promptText,title,apiKey){
+  const url="https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent";
+  const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify({contents:[{parts:[{text:promptText}]}],generationConfig:{responseModalities:["IMAGE"],imageConfig:{aspectRatio:"4:3",imageSize:"1K"}}})});
+  const data=await res.json();
+  if(!res.ok)throw Error(data.error?.message||`Errore immagine Gemini HTTP ${res.status}`);
+  const parts=data.candidates?.[0]?.content?.parts||[],imagePart=parts.find(p=>p.inlineData?.data||p.inline_data?.data),inline=imagePart?.inlineData||imagePart?.inline_data;
+  if(!inline?.data)throw Error("Gemini non ha restituito alcuna immagine.");
+  const bin=atob(inline.data),arr=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)arr[i]=bin.charCodeAt(i);
+  return new File([arr],"ai-dish.jpg",{type:inline.mimeType||inline.mime_type||"image/jpeg"});
 }
 async function handleAiFiles(fileList){
-  if(!fileList || !fileList.length) return;
-  const statusEl = $("aiStatus"), btnCam = $("btnAiCamera"), btnGal = $("btnAiGallery");
-  const setStatus = msg => { statusEl.textContent = msg; statusEl.classList.add("show"); };
-  try {
-    const apiKey = requestGeminiKey();
-    const autoSave = $("aiAutoCommit")?.checked;
-    if(autoSave) requestToken(); // Verifica subito anche il token GitHub
-
-    btnCam.disabled = btnGal.disabled = true;
-    setStatus(`⏳ Lettura e trascrizione di ${fileList.length} foto con Gemini…`);
-    const aiRecipe = await transcribeWithGemini(fileList, apiKey);
-
-    // Popola i campi dell'editor
-    $("editTitle").value = aiRecipe.title || "";
-    $("editDesc").value = aiRecipe.description || "";
-    if(aiRecipe.category_id && state.categories.has(String(aiRecipe.category_id))){
-      $("editCat").value = String(aiRecipe.category_id);
-    }
-    $("ingredients").innerHTML = (aiRecipe.ingredients||[]).map(x=>row(x,"ingredient")).join("");
-    $("instructions").innerHTML = (aiRecipe.instructions||[]).map(x=>row(x,"instruction")).join("");
-
-    setStatus("🎨 Generazione immagine del piatto con AI…");
-    const imgPrompt = aiRecipe.image_prompt || `Professional Italian food photography of ${aiRecipe.title}, warm lighting`;
-    const dishFile = await generateDishImage(imgPrompt, aiRecipe.title || "Ricetta", apiKey);
-    setPreviewFile(dishFile);
-
-    if(autoSave){
-      setStatus("🚀 Salvataggio automatico su GitHub in corso…");
-      await saveNewRecipe();
-    } else {
-      statusEl.classList.remove("show");
-      toast("Ricetta trascritta e foto generata! Controlla e clicca Aggiungi.");
-    }
-  } catch(err){
-    statusEl.classList.remove("show");
+  if(!fileList||!fileList.length)return;
+  const statusEl=$("aiStatus"),btnCam=$("btnAiCamera"),btnGal=$("btnAiGallery");
+  const setStatus=msg=>{statusEl.textContent=msg;statusEl.classList.add("show")};
+  try{
+    const apiKey=requestGeminiKey();
+    btnCam.disabled=btnGal.disabled=true;
+    setStatus(`⏳ Trascrizione automatica di ${fileList.length} foto…`);
+    const aiRecipe=await transcribeWithGemini(fileList,apiKey);
+    if(!aiRecipe?.title||!(aiRecipe.ingredients||[]).length||!(aiRecipe.instructions||[]).length)throw Error("La ricetta non è stata riconosciuta completamente. Prova con foto più nitide.");
+    setStatus("🎨 Generazione automatica della foto del piatto…");
+    const imgPrompt=aiRecipe.image_prompt||`Professional Italian food photography of ${aiRecipe.title}, warm natural lighting, rustic home style`;
+    const dishFile=await generateDishImage(imgPrompt,aiRecipe.title,apiKey);
+    showAiPreview(aiRecipe,dishFile);
+  }catch(err){
+    statusEl?.classList.remove("show");
     toast(`Errore AI: ${err.message}`);
-  } finally {
-    btnCam.disabled = btnGal.disabled = false;
+    if(btnCam)btnCam.disabled=false;if(btnGal)btnGal.disabled=false;
   }
 }
-
 function formRecipe(id){const catId=$("editCat").value,cat=state.categories.get(String(catId)),read=(box,type)=>[...$(box).querySelectorAll("[data-row]")].map((el,i)=>{const text=el.querySelector(".text").value.trim(),g=el.querySelector(".group").value.trim();return type==="ingredient"?{order:i+1,group:g,text}:{order:i+1,section:g,text}}).filter(x=>x.text),title=$("editTitle").value.trim();return{id,title,slug:norm(title).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,""),description:$("editDesc").value.trim(),category_id:catId,category:cat?.name||"Altro",ingredients:read("ingredients","ingredient"),instructions:read("instructions","instruction"),notes:[],sections:[],warnings:[],source_text:""}}
 function headers(token){return{Accept:"application/vnd.github+json",Authorization:`Bearer ${token}`,"X-GitHub-Api-Version":"2022-11-28"}}
 function b64bytes(bytes){let b="";for(let i=0;i<bytes.length;i+=32768)b+=String.fromCharCode(...bytes.subarray(i,i+32768));return btoa(b)}
@@ -283,7 +290,7 @@ async function submitEditor(e){e.preventDefault();const b=$("submitBtn");b.disab
 
 $("categories").onclick=e=>{const b=e.target.closest("[data-cat]");if(b){state.active=b.dataset.cat;renderCategories();render()}};
 grid.onclick=e=>{const b=e.target.closest("[data-open]");if(b)openRecipe(b.dataset.open)};
-$("addRecipeButton").onclick=()=>{if(!state.data)return toast("Ricettario non ancora caricato.");showEditor({title:"",description:"",category_id:state.data.categories[0]?.id,ingredients:[],instructions:[]},true)};
+$("addRecipeButton").onclick=()=>{if(!state.data)return toast("Ricettario non ancora caricato.");showAiSourceChooser()};
 $("searchInput").oninput=e=>{state.query=e.target.value;render()};
 $("clearButton").onclick=()=>{state.query="";state.active="all";$("searchInput").value="";renderCategories();render()};
 $("closeDialog").onclick=()=>dialog.close();
