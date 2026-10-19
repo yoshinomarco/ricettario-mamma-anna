@@ -177,15 +177,19 @@ async function aiImageBase64(file){
 async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
   onProgress("Ottimizzazione delle foto…","Riduzione del peso per velocizzare l’analisi");
   const b64List=await Promise.all([...files].map(f=>aiImageBase64(f)));
+  const hashBuffer=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(b64List.join("|")));
+  const photoHash=[...new Uint8Array(hashBuffer)].map(b=>b.toString(16).padStart(2,"0")).join("");
+  const cacheKey=`mammaAnnaAiRecipe:${photoHash}`;
+  try{const cached=sessionStorage.getItem(cacheKey);if(cached){onProgress("Trascrizione già disponibile","Riutilizzo immediato del risultato della stessa foto");return JSON.parse(cached)}}catch(e){console.warn("Cache non disponibile",e)}
   const cats=state.data.categories.map(c=>({id:String(c.id),name:c.name}));
   const promptText=`Trascrivi questa ricetta in italiano. Correggi solo refusi evidenti. Scegli category_id esclusivamente tra: ${JSON.stringify(cats)}. Restituisci SOLO JSON valido: {"title":"titolo","description":"descrizione breve","category_id":"id","ingredients":[{"group":"","text":"quantità e ingrediente"}],"instructions":[{"section":"","text":"passaggio"}]}`;
   const parts=[{text:promptText},...b64List.map(data=>({inline_data:{mime_type:"image/jpeg",data}}))];
   const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-  const body=JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:4096}});
+  const body=JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:3072,thinkingConfig:{thinkingLevel:"LOW"}}});
   const maxAttempts=1;
   for(let attempt=1;attempt<=maxAttempts;attempt++){
     const controller=new AbortController();
-    const timer=setTimeout(()=>controller.abort(),90000);
+    const timer=setTimeout(()=>controller.abort(),180000);
     try{
       const startedAt=Date.now();
       onProgress("Lettura e trascrizione della ricetta…","Analisi con Gemini 3.8 Flash: 0 secondi");
@@ -199,11 +203,13 @@ async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
       }
       const rawJson=data.candidates?.[0]?.content?.parts?.[0]?.text;
       if(!rawJson)throw Error("Risposta AI vuota o non valida.");
-      return JSON.parse(rawJson);
+      const parsed=JSON.parse(rawJson);
+      try{sessionStorage.setItem(cacheKey,JSON.stringify(parsed))}catch(e){console.warn("Cache non salvata",e)}
+      return parsed;
     }catch(err){
       const retryable=err.name==="AbortError"||err.status===429||err.status===408||err.status>=500;
       if(attempt<maxAttempts&&retryable){await new Promise(r=>setTimeout(r,1500));continue}
-      if(err.name==="AbortError")throw Error("Gemini non ha restituito la risposta al browser entro 90 secondi. Il caricamento è stato interrotto: riprova.");
+      if(err.name==="AbortError")throw Error("Gemini non ha restituito la risposta al browser entro 180 secondi. Il caricamento è stato interrotto: riprova.");
       if(err.status===503)throw Error("Gemini 3.8 Flash è temporaneamente sovraccarico (503). Il caricamento è stato interrotto.");
       throw err;
     }finally{clearTimeout(timer)}
