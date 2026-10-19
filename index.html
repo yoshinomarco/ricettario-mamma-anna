@@ -167,36 +167,43 @@ function setPreviewFile(file){
 }
 
 // --- LOGICA AI GEMINI + IMAGEN ---
-async function transcribeWithGemini(files, apiKey){
-  const b64List = await Promise.all([...files].map(f => jpegBase64(f)));
-  const cats = state.data.categories.map(c => ({id: String(c.id), name: c.name}));
-  const promptText = `Sei uno chef ed esperto archivista. Trascrivi le foto di questa ricetta manoscritta in italiano, correggendo eventuali refusi ma mantenendo lo stile autentico di famiglia.
-Scegli il category_id più adatto esclusivamente tra questi: ${JSON.stringify(cats)}.
-Restituisci SOLO un oggetto JSON valido con questa struttura esatta:
-{
-  "title": "Titolo della ricetta",
-  "description": "Breve descrizione invitante del piatto (1-2 frasi)",
-  "category_id": "id_categoria_scelta",
-  "ingredients": [{"group": "", "text": "quantità e ingrediente"}],
-  "instructions": [{"section": "", "text": "descrizione passaggio"}],
-  "image_prompt": "Detailed professional food photography of [dish name in English], rustic Italian home style table, warm natural lighting, shallow depth of field, high resolution"
-}`;
-
-  const parts = [{text: promptText}, ...b64List.map(data => ({inline_data: {mime_type: "image/jpeg", data}}))];
-  const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
-  const res = await fetch(url, {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify({
-      contents: [{parts}],
-      generationConfig: {responseMimeType: "application/json", temperature: 0.2}
-    })
-  });
-  const data = await res.json();
-  if(!res.ok) throw Error(data.error?.message || `Errore Gemini HTTP ${res.status}`);
-  const rawJson = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if(!rawJson) throw Error("Risposta AI vuota o non valida.");
-  return JSON.parse(rawJson);
+async function aiImageBase64(file){
+  const bitmap=await createImageBitmap(file),max=1200,scale=Math.min(1,max/Math.max(bitmap.width,bitmap.height));
+  const canvas=document.createElement("canvas");canvas.width=Math.round(bitmap.width*scale);canvas.height=Math.round(bitmap.height*scale);
+  canvas.getContext("2d").drawImage(bitmap,0,0,canvas.width,canvas.height);bitmap.close();
+  const blob=await new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(Error("Compressione foto non riuscita")),"image/jpeg",.78));
+  return b64bytes(new Uint8Array(await blob.arrayBuffer()));
+}
+async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
+  onProgress("Ottimizzazione delle foto…","Riduzione del peso per velocizzare l’analisi");
+  const b64List=await Promise.all([...files].map(f=>aiImageBase64(f)));
+  const cats=state.data.categories.map(c=>({id:String(c.id),name:c.name}));
+  const promptText=`Trascrivi questa ricetta in italiano. Correggi solo refusi evidenti. Scegli category_id esclusivamente tra: ${JSON.stringify(cats)}. Restituisci SOLO JSON valido: {"title":"titolo","description":"descrizione breve","category_id":"id","ingredients":[{"group":"","text":"quantità e ingrediente"}],"instructions":[{"section":"","text":"passaggio"}]}`;
+  const parts=[{text:promptText},...b64List.map(data=>({inline_data:{mime_type:"image/jpeg",data}}))];
+  const url=`https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${encodeURIComponent(apiKey)}`;
+  const body=JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:4096}});
+  const maxAttempts=2;
+  for(let attempt=1;attempt<=maxAttempts;attempt++){
+    const controller=new AbortController();
+    const timer=setTimeout(()=>controller.abort(),30000);
+    try{
+      onProgress(attempt===1?"Lettura e trascrizione della ricetta…":"Servizio occupato: secondo tentativo…",attempt===1?"Analisi con Gemini 3.8 Flash":"Nuovo tentativo automatico dopo errore temporaneo");
+      const res=await fetch(url,{method:"POST",headers:{"Content-Type":"application/json"},body,signal:controller.signal});
+      const data=await res.json().catch(()=>({}));
+      if(!res.ok){
+        const error=Error(data.error?.message||`Errore Gemini HTTP ${res.status}`);error.status=res.status;throw error;
+      }
+      const rawJson=data.candidates?.[0]?.content?.parts?.[0]?.text;
+      if(!rawJson)throw Error("Risposta AI vuota o non valida.");
+      return JSON.parse(rawJson);
+    }catch(err){
+      const retryable=err.name==="AbortError"||err.status===429||err.status===408||err.status>=500;
+      if(attempt<maxAttempts&&retryable){await new Promise(r=>setTimeout(r,1500));continue}
+      if(err.name==="AbortError")throw Error("Gemini non ha risposto entro 30 secondi. Il caricamento è stato interrotto: riprova.");
+      if(err.status===503)throw Error("Gemini 3.8 Flash è temporaneamente sovraccarico (503). Il caricamento è stato interrotto dopo 2 tentativi.");
+      throw err;
+    }finally{clearTimeout(timer)}
+  }
 }
 
 async function handleAiFiles(fileList){
@@ -223,7 +230,7 @@ async function handleAiFiles(fileList){
     await new Promise(resolve=>setTimeout(resolve,20));
     const apiKey=requestGeminiKey();
     progress("Lettura e trascrizione della ricetta…","Analisi di titolo, categoria, ingredienti e passaggi");
-    const aiRecipe=await transcribeWithGemini(files,apiKey);
+    const aiRecipe=await transcribeWithGemini(files,apiKey,progress);
     if(!aiRecipe?.title||!(aiRecipe.ingredients||[]).length||!(aiRecipe.instructions||[]).length)throw Error("Gemini non ha riconosciuto una ricetta completa. Usa una foto nitida che includa ingredienti e procedimento.");
     progress("Preparazione anteprima…",aiRecipe.title);
     const uploadedPhoto=files[0];
