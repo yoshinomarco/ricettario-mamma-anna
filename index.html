@@ -180,18 +180,25 @@ async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
   const cats=state.data.categories.map(c=>({id:String(c.id),name:c.name}));
   const prompt=`Trascrivi la ricetta in italiano. Scegli category_id solo tra ${JSON.stringify(cats)}. Restituisci SOLO JSON valido con title, description, category_id, ingredients (group,text), instructions (section,text).`;
   const parts=[{text:prompt},...b64List.map(data=>({inline_data:{mime_type:"image/jpeg",data}}))];
-  const models=["gemini-3.8-flash","gemini-3.6-flash"];
+  const models=["gemini-3.8-flash","gemini-3.6-flash","gemini-3.5-flash-lite"];
   let lastError=null;
   for(let modelIndex=0;modelIndex<models.length;modelIndex++){
     const model=models[modelIndex];
-    onProgress(modelIndex===0?"Lettura e trascrizione della ricetta…":"Gemini 3.8 occupato: passaggio automatico a 3.6 Flash…",`Modello in uso: ${model}`);
+    onProgress(modelIndex===0?"Lettura e trascrizione della ricetta…":`Tentativo automatico ${modelIndex+1} di ${models.length}…`,`Modello in uso: ${model}`);
     const url=`https://generativelanguage.googleapis.com/v1beta/models/${model}:streamGenerateContent?alt=sse`;
-    const res=await fetch(url,{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:3072,thinkingConfig:{thinkingLevel:"LOW"}}})});
+    let res;
+    try{
+      res=await fetch(url,{method:"POST",cache:"no-store",headers:{"Content-Type":"application/json","x-goog-api-key":apiKey},body:JSON.stringify({contents:[{parts}],generationConfig:{responseMimeType:"application/json",temperature:0.1,maxOutputTokens:3072,thinkingConfig:{thinkingLevel:"LOW"}}})});
+    }catch(fetchError){
+      lastError=fetchError;
+      if(modelIndex<models.length-1)continue;
+      throw fetchError;
+    }
     if(!res.ok){
       const e=await res.json().catch(()=>({}));
       const message=e.error?.message||`Errore Gemini HTTP ${res.status}`;
       lastError=Error(message);
-      const busy=res.status===503||/high demand|overloaded|unavailable/i.test(message);
+      const busy=res.status===503||/high demand|overloaded|unavailable|capacity|try again later/i.test(message);
       if(busy&&modelIndex<models.length-1)continue;
       throw lastError;
     }
@@ -212,7 +219,7 @@ async function transcribeWithGemini(files,apiKey,onProgress=()=>{}){
       if(streamError)break;
     }
     if(streamError){
-      const busy=/high demand|overloaded|unavailable/i.test(streamError.message);
+      const busy=/high demand|overloaded|unavailable|capacity|try again later/i.test(streamError.message);
       if(busy&&modelIndex<models.length-1){lastError=streamError;continue}
       throw streamError;
     }
