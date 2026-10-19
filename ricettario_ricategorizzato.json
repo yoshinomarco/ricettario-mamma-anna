@@ -34687,6 +34687,97 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 251,
+      "title": "Biscotti Arrotolati",
+      "slug": "biscotti-arrotolati",
+      "description": "Deliziosi biscotti di pasta frolla arrotolati con un ricco ripieno di cioccolato e mandorle.",
+      "category_id": "4",
+      "category": "Dolci",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Frolla",
+          "text": "250 g farina 00"
+        },
+        {
+          "order": 2,
+          "group": "Frolla",
+          "text": "100 g zucchero"
+        },
+        {
+          "order": 3,
+          "group": "Frolla",
+          "text": "60 g burro"
+        },
+        {
+          "order": 4,
+          "group": "Frolla",
+          "text": "1 uovo + 1 tuorlo"
+        },
+        {
+          "order": 5,
+          "group": "Frolla",
+          "text": "1 cucchiaio di latte"
+        },
+        {
+          "order": 6,
+          "group": "Frolla",
+          "text": "2 cucchiaini lievito"
+        },
+        {
+          "order": 7,
+          "group": "Ripieno",
+          "text": "100 g cioccolato fondente"
+        },
+        {
+          "order": 8,
+          "group": "Ripieno",
+          "text": "100 g mandorle (o nocciole, noci) spellate"
+        },
+        {
+          "order": 9,
+          "group": "Ripieno",
+          "text": "80 g zucchero"
+        },
+        {
+          "order": 10,
+          "group": "Ripieno",
+          "text": "30 g burro"
+        },
+        {
+          "order": 11,
+          "group": "Ripieno",
+          "text": "1 uovo"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Impastare tutti gli ingredienti della frolla, coprire e far riposare in frigo per 30 minuti."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "Per il ripieno: mettere nel mixer le mandorle tosate + zucchero e cominciare a tritare. Unire il cioccolato a pezzi e tritare ancora finemente, aggiungere il burro e l'uovo intero."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "Stendere la frolla ad uno spessore di 3/4 millimetri, ricavando un rettangolo che dividerete a metà. Su ogni rettangolo spalmare il ripieno e arrotolare partendo dal lato lungo. Avvolgere il salsicciotto ottenuto nella pellicola e in freezer fino a quando non si sarà ben indurito."
+        },
+        {
+          "order": 4,
+          "section": "Cottura",
+          "text": "Tagliare a fette di 1 cm e poggiare sulla teglia. Cuocere a 170° per 15 min."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -34768,5 +34859,5 @@
       }
     ]
   },
-  "recipe_count": 250
+  "recipe_count": 251
 }
