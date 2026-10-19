@@ -34611,6 +34611,82 @@
         "method": "title_ingredients_procedure_plus_web_verified_taxonomy",
         "confidence": "high"
       }
+    },
+    {
+      "id": 250,
+      "title": "Ossi Buchi",
+      "slug": "ossi-buchi",
+      "description": "Ricetta classica per preparare gli ossi buchi con verdure, vino bianco e pomodoro.",
+      "category_id": "3",
+      "category": "Secondi",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Per 4 persone",
+          "text": "4 ossi buchi (600/700 gr. circa)"
+        },
+        {
+          "order": 2,
+          "group": "Per 4 persone",
+          "text": "80 gr. di burro o margarina vegetale"
+        },
+        {
+          "order": 3,
+          "group": "Per 4 persone",
+          "text": "1/2 bicchiere di vino bianco secco"
+        },
+        {
+          "order": 4,
+          "group": "Per 4 persone",
+          "text": "1 scatola di carota, cipolla tritati - sedano (250 gr.)"
+        },
+        {
+          "order": 5,
+          "group": "Per 4 persone",
+          "text": "brodo oppure mezzo bicchiere di acqua e mezzo cubetto di dado"
+        },
+        {
+          "order": 6,
+          "group": "Per 4 persone",
+          "text": "sale"
+        },
+        {
+          "order": 7,
+          "group": "Per 4 persone",
+          "text": "pepe"
+        },
+        {
+          "order": 8,
+          "group": "Per 4 persone",
+          "text": "farina"
+        },
+        {
+          "order": 9,
+          "group": "Per 4 persone",
+          "text": "scorza di limone e prezzemolo tritati"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Nella pentola scoperta fate dorare gli ossi buchi leggermente infarinati nel burro imbiondito, spruzzateli con il vino bianco che lascerete evaporare, salate, pepate ed unite il trito di sedano, carota e cipolla."
+        },
+        {
+          "order": 2,
+          "section": "Cottura",
+          "text": "Lasciate insaporire poi aggiungete i pomodori pelati ed il brodo. Chiudete la pentola, all'inizio del sibilo abbassate la fiamma e calcolate 45 minuti di cottura."
+        },
+        {
+          "order": 3,
+          "section": "Finitura",
+          "text": "Cospargete gli ossi buchi con il trito di scorza di limone e di prezzemolo e serviteli con risotto o con passato di patate."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -34692,5 +34768,5 @@
       }
     ]
   },
-  "recipe_count": 249
+  "recipe_count": 250
 }
