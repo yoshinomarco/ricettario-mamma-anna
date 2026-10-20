@@ -11,22 +11,6 @@
 
 /* Navigazione inferiore e Sous Chef */
 body{padding-bottom:88px}.controls{position:relative;top:auto}.categories{display:none}.bottom-nav{position:fixed;left:0;right:0;bottom:0;z-index:90;padding:8px max(10px,env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));background:rgba(255,253,249,.96);border-top:1px solid var(--border);box-shadow:0 -10px 30px rgba(64,32,16,.12);backdrop-filter:blur(16px)}.bottom-nav-inner{width:min(760px,100%);margin:auto;display:flex;gap:5px;overflow-x:auto;scrollbar-width:none}.bottom-nav-inner::-webkit-scrollbar{display:none}.bottom-nav .category{flex:1 0 auto;min-width:68px;min-height:54px;padding:6px 10px;display:grid;place-items:center;gap:1px;border:0;background:transparent;color:var(--muted);font-size:.73rem;line-height:1.05}.bottom-nav .category:before{content:"●";font-size:.72rem;color:#c9bdb2}.bottom-nav .category.active{color:var(--dark);background:#fff0f1}.bottom-nav .category.active:before{color:var(--red)}.sous-chef-fab{position:fixed;right:18px;bottom:calc(82px + env(safe-area-inset-bottom));z-index:95;min-height:54px;padding:0 19px;border:0;border-radius:999px;color:#fff;background:linear-gradient(135deg,var(--dark),var(--red));box-shadow:0 13px 32px rgba(169,8,24,.35);font-weight:900}.chef-panel{position:fixed;right:18px;bottom:calc(148px + env(safe-area-inset-bottom));z-index:100;width:min(420px,calc(100% - 24px));height:min(610px,calc(100dvh - 180px));display:none;grid-template-rows:auto 1fr auto;background:var(--card);border:1px solid var(--border);border-radius:24px;box-shadow:0 25px 70px rgba(35,22,16,.32);overflow:hidden}.chef-panel.open{display:grid}.chef-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;color:#fff;background:linear-gradient(135deg,var(--dark),var(--red))}.chef-head strong{font-size:1.15rem}.chef-head small{display:block;opacity:.88}.chef-close{width:40px;min-width:40px;min-height:40px;border:0;border-radius:50%;color:#fff;background:rgba(255,255,255,.18);font-size:1.3rem}.chef-messages{padding:16px;overflow:auto;display:grid;align-content:start;gap:12px}.chef-bubble{max-width:91%;padding:11px 13px;border-radius:16px;white-space:pre-wrap;word-break:break-word}.chef-bubble.user{justify-self:end;color:#fff;background:var(--dark);border-bottom-right-radius:5px}.chef-bubble.ai{justify-self:start;background:#f2e8dc;border-bottom-left-radius:5px}.chef-bubble.loading{color:var(--muted)}.chef-recipes{display:grid;gap:7px;margin-top:10px}.chef-recipe{width:100%;min-height:0;padding:10px 12px;text-align:left;border:1px solid #dfc8b6;border-radius:12px;background:#fff;font-weight:850;color:var(--dark)}.chef-form{display:grid;grid-template-columns:1fr auto;gap:8px;padding:12px;border-top:1px solid var(--border);background:#fff}.chef-input{min-width:0;border-radius:18px;resize:none;max-height:110px}.chef-send{width:48px;min-width:48px;padding:0;border-radius:50%}.chef-hint{grid-column:1/-1;margin:0 4px;color:var(--muted);font-size:.76rem}@media(max-width:700px){body{padding-bottom:80px}.controls{padding-top:12px}.search-row{grid-template-columns:1fr auto}.search-row #addRecipeButton{grid-column:1/-1}.chef-panel{right:8px;bottom:calc(78px + env(safe-area-inset-bottom));width:calc(100% - 16px);height:min(72dvh,650px);border-radius:22px}.sous-chef-fab{right:14px;bottom:calc(80px + env(safe-area-inset-bottom));padding:0 16px}.bottom-nav .category{min-width:66px}.bottom-nav .category span{max-width:88px;overflow:hidden;text-overflow:ellipsis}}
-
-/* Menu categorie: 6 voci sempre sulla stessa riga */
-body{padding-bottom:96px}
-.bottom-nav{padding:7px max(4px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(4px,env(safe-area-inset-left))}
-.bottom-nav-inner{width:100%;max-width:920px;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:3px;overflow:visible}
-.bottom-nav .category{min-width:0;min-height:70px;width:100%;padding:5px 2px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;border:0;border-radius:14px;background:transparent;color:var(--muted);font-size:clamp(.68rem,2.7vw,.9rem);font-weight:900;line-height:1;text-align:center;overflow:hidden}
-.bottom-nav .category:before{display:none;content:none}
-.bottom-nav .category-icon{display:block;width:30px;height:30px;object-fit:contain;flex:0 0 30px}
-.bottom-nav .category span{display:block;width:100%;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bottom-nav .category small{display:none}
-.bottom-nav .category.active{color:var(--dark);background:#fff0f1;box-shadow:inset 0 0 0 1px rgba(169,8,24,.12)}
-.bottom-nav .category.active .category-icon{transform:scale(1.08)}
-.sous-chef-fab{bottom:calc(94px + env(safe-area-inset-bottom))}
-.chef-panel{bottom:calc(158px + env(safe-area-inset-bottom))}
-@media(max-width:700px){body{padding-bottom:92px}.bottom-nav-inner{grid-template-columns:repeat(6,minmax(0,1fr));gap:1px}.bottom-nav .category{min-width:0;min-height:68px;padding:4px 1px;font-size:clamp(.61rem,2.55vw,.76rem);letter-spacing:-.02em}.bottom-nav .category-icon{width:27px;height:27px;flex-basis:27px}.bottom-nav .category span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sous-chef-fab{bottom:calc(91px + env(safe-area-inset-bottom))}.chef-panel{bottom:calc(88px + env(safe-area-inset-bottom))}}
-@media(max-width:380px){.bottom-nav .category{font-size:.58rem}.bottom-nav .category-icon{width:24px;height:24px;flex-basis:24px}}
 </style></head>
 <body><header class="hero"><div class="container"><p>Ricette di famiglia</p><h1>RICETTARIO DI MAMMA ANNA</h1><p>Cerca tra ingredienti, procedimenti, titoli e descrizioni.</p></div></header>
 <section class="controls"><div class="container"><div class="search-row"><input id="searchInput" class="input" type="search" placeholder="Cerca ricette…"><button id="clearButton" class="button neutral">Azzera filtri</button><button id="addRecipeButton" class="button primary">+ Nuova ricetta</button></div><div id="categories" class="categories"></div></div></section>
@@ -49,7 +33,14 @@ const $=id=>document.getElementById(id),grid=$("grid"),dialog=$("dialog"),dialog
 function esc(v=""){return String(v).replace(/[&<>'"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#039;",'"':"&quot;"})[c])}
 function norm(v=""){return String(v).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
 const imageVersions=new Map();
-function imagePath(id){const v=imageVersions.get(String(id));return `${IMAGE_FOLDER}/${encodeURIComponent(id)}.jpg${v?`?v=${v}`:""}`}
+function imagePath(id){return `${IMAGE_FOLDER}/${encodeURIComponent(id)}.jpg`}
+const freshImageUrls=new Map();
+async function freshImageUrl(path){
+  const response=await fetch(path,{cache:"no-store",headers:{"Cache-Control":"no-cache","Pragma":"no-cache"}});
+  if(!response.ok)throw Error(`Immagine non trovata: HTTP ${response.status}`);
+  const previous=freshImageUrls.get(path);if(previous)URL.revokeObjectURL(previous);
+  const url=URL.createObjectURL(await response.blob());freshImageUrls.set(path,url);return url;
+}
 function toast(m){const e=$("toast");e.textContent=m;e.classList.add("show");clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove("show"),4500)}
 
 function readToken(){try{return(localStorage.getItem(TOKEN_KEY)||"").trim()}catch{return""}}
@@ -65,30 +56,11 @@ function loadData(d){if(!Array.isArray(d.categories)||!Array.isArray(d.recipes))
 
 async function autoLoad(){const v=Date.now(),urls=[`./${JSON_FILE}?v=${v}`,`https://raw.githubusercontent.com/${GITHUB.owner}/${GITHUB.repository}/${GITHUB.branch}/${GITHUB.jsonPath}?v=${v}`];for(const u of urls){try{const r=await fetch(u,{cache:"no-store"});if(!r.ok)throw Error(`HTTP ${r.status}`);const text=await r.text();if(!text.trim())throw Error("Risposta JSON vuota");let data;try{data=JSON.parse(text)}catch(e){throw Error(`JSON non valido: ${e.message}`)}loadData(data);return}catch(e){console.warn(u,e)}}grid.innerHTML='<div class="empty">Impossibile caricare automaticamente il JSON.</div>'}
 
-function categoryMenuData(item){
-  const name=norm(item.name);
-  if(item.id==="all")return{label:"Tutte",icon:"fork.png"};
-  if(name.includes("primi")||name.includes("pasta")||name.includes("riso"))return{label:"Primi",icon:"spaghetti.png"};
-  if(name.includes("secondi")||name.includes("carne")||name.includes("pesce"))return{label:"Secondi",icon:"meat.png"};
-  if(name.includes("dolci")||name.includes("dessert"))return{label:"Dolci",icon:"cupcake.png"};
-  if(name.includes("antipasti")||name.includes("contorni"))return{label:"Contorni",icon:"french-fries.png"};
-  return{label:"Altro",icon:"maple-syrup.png"};
-}
-function renderCategories(){
-  const n=new Map();state.recipes.forEach(r=>n.set(String(r.category_id),(n.get(String(r.category_id))||0)+1));
-  const items=[{id:"all",name:"Tutte",count:state.recipes.length},...state.data.categories.map(c=>({id:String(c.id),name:c.name,count:n.get(String(c.id))||0}))];
-  const desktop=items.map(c=>`<button class="category ${state.active===c.id?"active":""}" data-cat="${esc(c.id)}">${esc(c.name)} · ${c.count}</button>`).join("");
-  const bottom=items.map(c=>{const m=categoryMenuData(c);return`<button class="category ${state.active===c.id?"active":""}" data-cat="${esc(c.id)}" title="${esc(c.name)}: ${c.count} ricette" aria-label="${esc(c.name)}, ${c.count} ricette"><img class="category-icon" src="img/${m.icon}" alt="" aria-hidden="true"><span>${m.label}</span><small>${c.count}</small></button>`}).join("");
-  $("categories").innerHTML=desktop;$("bottomCategories").innerHTML=bottom;
-}
+function renderCategories(){const n=new Map();state.recipes.forEach(r=>n.set(String(r.category_id),(n.get(String(r.category_id))||0)+1));const items=[{id:"all",name:"Tutte",count:state.recipes.length},...state.data.categories.map(c=>({id:String(c.id),name:c.name,count:n.get(String(c.id))||0}))];const html=items.map(c=>`<button class="category ${state.active===c.id?"active":""}" data-cat="${esc(c.id)}" title="${esc(c.name)}: ${c.count} ricette"><span>${esc(c.name)}</span><small>${c.count}</small></button>`).join("");$("categories").innerHTML=html;$("bottomCategories").innerHTML=html}
 function visible(){const q=norm(state.query);return state.recipes.filter(r=>(state.active==="all"||String(r.category_id)===state.active)&&(!q||r._search.includes(q)))}
 
-function render(){const list=visible();grid.innerHTML=list.length?list.map(r=>`<article class="card" data-id="${r.id}"><div class="cat">${esc(state.categories.get(String(r.category_id))?.name||"Altro")}</div><h2>${esc(r.title)}</h2><p class="desc">${esc(r.description||"Descrizione non disponibile.")}</p><div class="footer"><small>#${r.id} · ${(r.ingredients||[]).length} ingredienti</small><button class="button primary" data-open="${r.id}">Apri</button></div></article>`).join(""):'<div class="empty">Nessuna ricetta trovata.</div>';const cards=[...grid.querySelectorAll(".card")];const loadCardImage=c=>{if(c.dataset.imageLoaded)return;c.dataset.imageLoaded="1";const i=new Image;i.decoding="async";i.onload=()=>c.style.setProperty("--image",`url("${imagePath(c.dataset.id)}")`);i.onerror=()=>c.removeAttribute("data-image-loaded");i.src=imagePath(c.dataset.id)};if("IntersectionObserver" in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){loadCardImage(entry.target);observer.unobserve(entry.target)}})},{rootMargin:"500px 0px"});cards.forEach(c=>observer.observe(c))}else{cards.forEach(loadCardImage)}}
-
-function current(){return state.recipes.find(r=>Number(r.id)===Number(state.currentId))}
-function grouped(a,k){const g=[];(a||[]).forEach(x=>{let y=g.find(z=>z.label===(x[k]||""));if(!y){y={label:x[k]||"",items:[]};g.push(y)}y.items.push(x)});return g}
-
-function openRecipe(id,keep=false){const r=state.recipes.find(x=>Number(x.id)===Number(id));if(!r)return;state.mode="view";state.currentId=r.id;state.scrollY=scrollY;$("dialogCategory").textContent=state.categories.get(String(r.category_id))?.name||"Altro";$("dialogTitle").textContent=r.title;let h=`<div class="detail-img"><img src="${imagePath(r.id)}" onerror="this.parentElement.remove()"></div><p>${esc(r.description||"")}</p>`;const ing=grouped(r.ingredients,"group");if(ing.length)h+=`<section class="section"><h3>Ingredienti</h3>${ing.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ul>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ul>`).join("")}</section>`;const ins=grouped(r.instructions,"section");if(ins.length)h+=`<section class="section"><h3>Procedimento</h3>${ins.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ol>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ol>`).join("")}</section>`;h+='<div class="actions"><button id="editButton" class="button primary">Modifica ricetta</button></div>';dialogContent.innerHTML=h;dialogBody.scrollTop=0;if(!keep&&!dialog.open)dialog.showModal();$("editButton").onclick=()=>showEditor(r,false)}
+function render(){const list=visible();grid.innerHTML=list.length?list.map(r=>`<article class="card" data-id="${r.id}"><div class="cat">${esc(state.categories.get(String(r.category_id))?.name||"Altro")}</div><h2>${esc(r.title)}</h2><p class="desc">${esc(r.description||"Descrizione non disponibile.")}</p><div class="footer"><small>#${r.id} · ${(r.ingredients||[]).length} ingredienti</small><button class="button primary" data-open="${r.id}">Apri</button></div></article>`).join(""):'<div class="empty">Nessuna ricetta trovata.</div>';const cards=[...grid.querySelectorAll(".card")];const loadCardImage=async c=>{if(c.dataset.imageLoaded)return;c.dataset.imageLoaded="1";try{const url=await freshImageUrl(imagePath(c.dataset.id));c.style.setProperty("--image",`url("${url}")`)}catch(e){c.removeAttribute("data-image-loaded")}};if("IntersectionObserver" in window){const observer=new IntersectionObserver(entries=>{entries.forEach(entry=>{if(entry.isIntersecting){loadCardImage(entry.target);observer.unobserve(entry.target)}})},{rootMargin:"500px 0px"});cards.forEach(c=>observer.observe(c))}else{cards.forEach(loadCardImage)}}
+function openRecipe(id,keep=false){const r=state.recipes.find(x=>Number(x.id)===Number(id));if(!r)return;state.mode="view";state.currentId=r.id;state.scrollY=scrollY;$("dialogCategory").textContent=state.categories.get(String(r.category_id))?.name||"Altro";$("dialogTitle").textContent=r.title;let h=`<div class="detail-img"><img id="freshDetailImage" alt="Immagine ${esc(r.title)}"></div><p>${esc(r.description||"")}</p>`;const ing=grouped(r.ingredients,"group");if(ing.length)h+=`<section class="section"><h3>Ingredienti</h3>${ing.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ul>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ul>`).join("")}</section>`;const ins=grouped(r.instructions,"section");if(ins.length)h+=`<section class="section"><h3>Procedimento</h3>${ins.map(g=>`${g.label?`<b>${esc(g.label)}</b>`:""}<ol>${g.items.map(x=>`<li>${esc(x.text)}</li>`).join("")}</ol>`).join("")}</section>`;h+='<div class="actions"><button id="editButton" class="button primary">Modifica ricetta</button></div>';dialogContent.innerHTML=h;const detailImg=$("freshDetailImage");if(detailImg)freshImageUrl(imagePath(r.id)).then(url=>detailImg.src=url).catch(()=>detailImg.parentElement?.remove());dialogBody.scrollTop=0;if(!keep&&!dialog.open)dialog.showModal();$("editButton").onclick=()=>showEditor(r,false)}
 
 function nextLocalId(){const ids=new Set(state.recipes.map(r=>Number(r.id)).filter(Number.isSafeInteger));let id=ids.size?Math.max(...ids)+1:1;while(ids.has(id))id++;return id}
 function row(x,type){const g=type==="ingredient"?(x.group||""):(x.section||"");return `<div class="edit-row" data-row><input class="input group" value="${esc(g)}" placeholder="${type==="ingredient"?"Gruppo":"Sezione"} (facoltativo)"><textarea class="input text" rows="2" required>${esc(x.text||"")}</textarea><button type="button" class="remove" data-remove>×</button></div>`}
@@ -382,22 +354,23 @@ function parseGithubJson(file,path){
 async function deleteFile(path,sha,token){const u=`https://api.github.com/repos/${GITHUB.owner}/${GITHUB.repository}/contents/${path}`,r=await fetch(u,{method:"DELETE",headers:{...headers(token),"Content-Type":"application/json"},body:JSON.stringify({message:`Rollback ${path}`,sha,branch:GITHUB.branch})});if(!r.ok)console.warn("Rollback immagine non riuscito")}
 
 async function saveNewRecipe(){
-  if(!state.pendingImage)throw Error("La foto da salvare non è più disponibile.");
+  // La foto scattata/caricata serve esclusivamente a Gemini per la trascrizione.
+  // Non viene mai salvata come copertina della nuova ricetta.
   if(!$("editTitle")||!$("editCat")||!$("ingredients")||!$("instructions"))throw Error("I dati della preview non sono più disponibili. Annulla e ripeti la scansione.");
   if(!$("editTitle").value.trim())throw Error("Il titolo della ricetta è vuoto.");
   const token=requestToken(),jsonFile=await githubFile(GITHUB.jsonPath,token),remote=parseGithubJson(jsonFile,GITHUB.jsonPath);
   if(!Array.isArray(remote.recipes))throw Error("JSON remoto non valido.");
   const ids=new Set(remote.recipes.map(r=>Number(r.id)).filter(Number.isSafeInteger));
   let id=ids.size?Math.max(...ids)+1:1;while(ids.has(id))id++;
-  const imgRepoPath=`img/${id}.jpg`;
-  let imageCommit=null;
-  try{await githubFile(imgRepoPath,token);throw Error(`Esiste già un'immagine per l'ID ${id}.`)}catch(e){if(!/Not Found|404/i.test(e.message)&&!/Esiste già/.test(e.message))throw e;if(/Esiste già/.test(e.message))throw e}
-  const recipe=formRecipe(id),imageContent=await jpegBase64(state.pendingImage);
-  imageCommit=await putFile(imgRepoPath,imageContent,`Aggiungi immagine ricetta ${id}`,token);
-  remote.recipes.push(recipe);remote.recipe_count=remote.recipes.length;
-  try{await putFile(GITHUB.jsonPath,b64text(JSON.stringify(remote,null,2)+"\n"),`Aggiungi ricetta ${id}: ${recipe.title}`,token,jsonFile.sha)}catch(e){const sha=imageCommit?.content?.sha;if(sha)await deleteFile(imgRepoPath,sha,token);throw e}
-  imageVersions.set(String(id),Date.now());loadData(remote);state.currentId=null;state.mode="view";dialog.close();
-  requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:"auto"}));toast(`Ricetta #${id} (${recipe.title}) salvata su GitHub!`);
+  const recipe=formRecipe(id);
+  remote.recipes.push(recipe);
+  remote.recipe_count=remote.recipes.length;
+  await putFile(GITHUB.jsonPath,b64text(JSON.stringify(remote,null,2)+"\n"),`Aggiungi ricetta ${id}: ${recipe.title}`,token,jsonFile.sha);
+  // Scarta definitivamente la foto di scansione: nessun file img/ID.jpg viene creato.
+  state.pendingImage=null;
+  loadData(remote);state.currentId=null;state.mode="view";dialog.close();
+  requestAnimationFrame(()=>window.scrollTo({top:0,left:0,behavior:"auto"}));
+  toast(`Ricetta #${id} (${recipe.title}) salvata senza immagine.`);
 }
 
 async function saveExisting(){
@@ -496,5 +469,5 @@ dialogContent.onclick=e=>{
 dialogContent.onsubmit=e=>{if(e.target.id==="editor")submitEditor(e)};
 autoLoad();
 if(!readToken())setTimeout(()=>{try{requestToken()}catch{}},350);
-if("serviceWorker"in navigator)addEventListener("load",()=>navigator.serviceWorker.register("./service-worker.js",{updateViaCache:"none"}).catch(console.warn));
+addEventListener("load",async()=>{try{if("serviceWorker"in navigator){const registrations=await navigator.serviceWorker.getRegistrations();await Promise.all(registrations.map(r=>r.unregister()))}if("caches"in window){const keys=await caches.keys();await Promise.all(keys.map(k=>caches.delete(k)))}}catch(e){console.warn("Pulizia cache immagini non riuscita",e)}});
 </script></body></html>
