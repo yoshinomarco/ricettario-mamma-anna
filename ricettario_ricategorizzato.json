@@ -34859,6 +34859,72 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 253,
+      "title": "Risoni al pomodoro (x 1P)",
+      "slug": "risoni-al-pomodoro-x-1p",
+      "description": "Una ricetta semplice e veloce per preparare i risoni al pomodoro in porzione singola.",
+      "category_id": "2",
+      "category": "Primi",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "100 g risoni (pastina)"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "100 g passata di pomodoro"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "300 ml acqua"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "1/4 cipolla"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "Olio"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Soffriggere nell'olio la cipolla e l'aglio."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "Unire la passata e far cuocere qualche minuto."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "Aggiungere l'acqua, il sale e quando arriva ad ebollizione unire la pastina."
+        },
+        {
+          "order": 4,
+          "section": "Preparazione",
+          "text": "Cuocere fino a quando non si sarà assorbita tutta l'acqua."
+        },
+        {
+          "order": 5,
+          "section": "Preparazione",
+          "text": "Unire a questo punto un po' di basilico e il formaggio grattugiato."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -34940,5 +35006,5 @@
       }
     ]
   },
-  "recipe_count": 252
+  "recipe_count": 253
 }
