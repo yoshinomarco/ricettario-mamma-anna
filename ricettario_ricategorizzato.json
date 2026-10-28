@@ -34925,6 +34925,77 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 254,
+      "title": "Crumble Cookies",
+      "slug": "crumble-cookies",
+      "description": "Ricetta per preparare deliziosi crumble cookies con gocce di cioccolato.",
+      "category_id": "4",
+      "category": "Dolci",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "260 g farina 00"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "200 g zucchero di canna grezzo"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "200 g burro"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "2 uova grandi"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "2 g bicarbonato (o 4 g lievito)"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "2 g sale"
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "300 g gocce di cioccolato"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Sciogliere il burro finché non diventa ambrato, unire lo zucchero e far intiepidire."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "Aggiungere le uova + il sale, poi la farina e il lievito. Unire poi le gocce di cioccolato."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "Coprire con pellicola e mettere in frigo x 1 ora."
+        },
+        {
+          "order": 4,
+          "section": "Cottura",
+          "text": "Formare delle palline da 100 g, schiacciarle un pò e cuocere a 175° x 8/9 minuti."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -35006,5 +35077,5 @@
       }
     ]
   },
-  "recipe_count": 253
+  "recipe_count": 254
 }
