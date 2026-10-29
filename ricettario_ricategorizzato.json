@@ -35067,6 +35067,62 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 256,
+      "title": "Pasta Frolla allo Yogurt",
+      "slug": "pasta-frolla-allo-yogurt",
+      "description": "Pasta frolla allo yogurt per biscotti ripieni con scorza di limone grattugiata.",
+      "category_id": "4",
+      "category": "Dolci",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "300 g farina"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "100 g zucchero a velo"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "100 g burro freddo"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "1 pizzico sale"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "50 g yogurt greco"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "Scorza limone grattugiata"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Impastare tutti gli ingredienti insieme."
+        },
+        {
+          "order": 2,
+          "section": "Cottura",
+          "text": "Cuocere a 180° per 25 minuti."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -35148,5 +35204,5 @@
       }
     ]
   },
-  "recipe_count": 255
+  "recipe_count": 256
 }
