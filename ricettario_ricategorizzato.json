@@ -35123,6 +35123,137 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 257,
+      "title": "Panini ripieni lievitati",
+      "slug": "panini-ripieni-lievitati",
+      "description": "Panini morbidi ripieni di prosciutto e scamorz, lievitati e cotti al forno.",
+      "category_id": "3",
+      "category": "Secondi",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Impasto",
+          "text": "Latte"
+        },
+        {
+          "order": 2,
+          "group": "Impasto",
+          "text": "Lievito"
+        },
+        {
+          "order": 3,
+          "group": "Impasto",
+          "text": "Zucchero"
+        },
+        {
+          "order": 4,
+          "group": "Impasto",
+          "text": "Uova"
+        },
+        {
+          "order": 5,
+          "group": "Impasto",
+          "text": "Farina"
+        },
+        {
+          "order": 6,
+          "group": "Impasto",
+          "text": "Burro"
+        },
+        {
+          "order": 7,
+          "group": "Impasto",
+          "text": "Sale"
+        },
+        {
+          "order": 8,
+          "group": "Ripieno e finitura",
+          "text": "Prosciutto"
+        },
+        {
+          "order": 9,
+          "group": "Ripieno e finitura",
+          "text": "Scamorza"
+        },
+        {
+          "order": 10,
+          "group": "Ripieno e finitura",
+          "text": "Latte per spennellare"
+        },
+        {
+          "order": 11,
+          "group": "Ripieno e finitura",
+          "text": "Semi di sesamo"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione dell'impasto",
+          "text": "Mettere nel boccale il latte, il lievito e lo zucchero: 2 min. 37° vel. 2."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione dell'impasto",
+          "text": "Aggiungere le uova, la farina e il burro a tocchetti: 2 min. vel. Spiga."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione dell'impasto",
+          "text": "Aggiungere il sale: 5 min. vel. Spiga."
+        },
+        {
+          "order": 4,
+          "section": "Lievitazione e formatura",
+          "text": "Versare l'impasto in una ciotola imburrata, coprire con pellicola e lasciare lievitare in forno spento con luce accesa fino al raddoppio di volume."
+        },
+        {
+          "order": 5,
+          "section": "Lievitazione e formatura",
+          "text": "Pesare l'impasto finito e dividerlo in 20 palline uguali."
+        },
+        {
+          "order": 6,
+          "section": "Lievitazione e formatura",
+          "text": "Schiacciare ciascuna pallina e posizionare al centro di ognuna del prosciutto e della scamorza a pezzetti."
+        },
+        {
+          "order": 7,
+          "section": "Lievitazione e formatura",
+          "text": "Chiudere di nuovo a pallina sigillando bene i bordi."
+        },
+        {
+          "order": 8,
+          "section": "Lievitazione e formatura",
+          "text": "Posizionare le palline con chiusura verso il basso nello stampo imburrato (tutte alla stessa distanza l'una dall'altra)."
+        },
+        {
+          "order": 9,
+          "section": "Cottura",
+          "text": "Spennellare la superficie con del latte e cospargere con i semi di sesamo."
+        },
+        {
+          "order": 10,
+          "section": "Cottura",
+          "text": "Trasferire lo stampo in forno spento con luce accesa e lasciare lievitare fino al raddoppio di volume."
+        },
+        {
+          "order": 11,
+          "section": "Cottura",
+          "text": "Infornare in forno preriscaldato statico a 180° per 30 - 35 minuti."
+        },
+        {
+          "order": 12,
+          "section": "Cottura",
+          "text": "Sfornare e servire."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -35204,5 +35335,5 @@
       }
     ]
   },
-  "recipe_count": 256
+  "recipe_count": 257
 }
