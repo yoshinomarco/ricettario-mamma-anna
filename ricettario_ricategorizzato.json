@@ -34996,6 +34996,77 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 255,
+      "title": "Mug Cake",
+      "slug": "mug-cake",
+      "description": "Una torta in tazza veloce e golosa, perfetta per una porzione singola cotta al microonde.",
+      "category_id": "4",
+      "category": "Dolci",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Per 1 tazza",
+          "text": "1 uovo"
+        },
+        {
+          "order": 2,
+          "group": "Per 1 tazza",
+          "text": "2 cucchiai zucchero"
+        },
+        {
+          "order": 3,
+          "group": "Per 1 tazza",
+          "text": "1 cucchiaio cacao"
+        },
+        {
+          "order": 4,
+          "group": "Per 1 tazza",
+          "text": "1 cucchiaio olio di semi"
+        },
+        {
+          "order": 5,
+          "group": "Per 1 tazza",
+          "text": "2 cucchiai latte"
+        },
+        {
+          "order": 6,
+          "group": "Per 1 tazza",
+          "text": "2 cucchiai farina"
+        },
+        {
+          "order": 7,
+          "group": "Per 1 tazza",
+          "text": "1 punta di cucchiaino di lievito"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Nella tazza imburrata mescolare l'uovo + zucchero + cacao + olio + latte con una forchetta."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "Unire la farina + lievito."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "Sopra mettere un cubetto di cioccolato e granella di mandorle."
+        },
+        {
+          "order": 4,
+          "section": "Cottura",
+          "text": "Cuocere nel microonde 750W x 1 minuto e mezzo."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -35077,5 +35148,5 @@
       }
     ]
   },
-  "recipe_count": 254
+  "recipe_count": 255
 }
