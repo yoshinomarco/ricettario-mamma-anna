@@ -35254,6 +35254,102 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 258,
+      "title": "Apple Crumble",
+      "slug": "apple-crumble",
+      "description": "Un delizioso crumble di mele facile da preparare, perfetto da gustare tiepido magari accompagnato da una pallina di gelato.",
+      "category_id": "4",
+      "category": "Dolci",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Per il ripieno",
+          "text": "4 mele sbucciate"
+        },
+        {
+          "order": 2,
+          "group": "Per il ripieno",
+          "text": "70 g di zucchero di canna"
+        },
+        {
+          "order": 3,
+          "group": "Per il ripieno",
+          "text": "1 cucchiaino di cannella"
+        },
+        {
+          "order": 4,
+          "group": "Per la copertura crumble",
+          "text": "100 g di burro freddo"
+        },
+        {
+          "order": 5,
+          "group": "Per la copertura crumble",
+          "text": "100 g di farina"
+        },
+        {
+          "order": 6,
+          "group": "Per la copertura crumble",
+          "text": "60 g di fiocchi d'avena"
+        },
+        {
+          "order": 7,
+          "group": "Per la copertura crumble",
+          "text": "35 g di zucchero di canna"
+        },
+        {
+          "order": 8,
+          "group": "Per la copertura crumble",
+          "text": "40 g di zucchero bianco"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Preriscalda il forno a 180°C (350°F)."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "In una padella unisci le mele tagliate, lo zucchero di canna e la cannella. Cuoci, mescolando di tanto in tanto, finché la frutta si ammorbidisce e lo zucchero si è leggermente caramellato, per circa 5-7 minuti."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "Trasferisci il composto di frutta cotto in una pirofila."
+        },
+        {
+          "order": 4,
+          "section": "Preparazione",
+          "text": "In un'altra ciotola unisci farina, fiocchi d'avena, zucchero di canna e zucchero bianco."
+        },
+        {
+          "order": 5,
+          "section": "Preparazione",
+          "text": "Aggiungi il burro freddo a cubetti agli ingredienti secchi. Con la punta delle dita, strofina il burro nel mix secco finché non avrà una consistenza simile a briciole grossolane."
+        },
+        {
+          "order": 6,
+          "section": "Preparazione",
+          "text": "Distribuisci in modo uniforme la copertura crumble sulla frutta nella pirofila."
+        },
+        {
+          "order": 7,
+          "section": "Cottura",
+          "text": "Metti in forno preriscaldato per 25-30 minuti, finché la superficie è dorata e i bordi sono pieni di bolle e caramello."
+        },
+        {
+          "order": 8,
+          "section": "Servizio",
+          "text": "Togli il crumble dal forno e lascialo intiepidire qualche minuto prima di servirlo oppure gustalo con una pallina di gelato."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -35335,5 +35431,5 @@
       }
     ]
   },
-  "recipe_count": 257
+  "recipe_count": 258
 }
