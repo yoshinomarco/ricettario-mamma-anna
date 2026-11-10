@@ -35350,6 +35350,97 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 259,
+      "title": "Capricci al Limone",
+      "slug": "capricci-al-limone",
+      "description": "Dolcetti alle mandorle e limone con cuore morbido e crosticina di zucchero a velo.",
+      "category_id": "4",
+      "category": "Dolci",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "250 g mandorle pelate"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "100 g zucchero"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "1 limone"
+        },
+        {
+          "order": 4,
+          "group": "Ingredienti",
+          "text": "1 albume (circa 30 g)"
+        },
+        {
+          "order": 5,
+          "group": "Ingredienti",
+          "text": "15 ml limoncello"
+        },
+        {
+          "order": 6,
+          "group": "Ingredienti",
+          "text": "1 cucchiaino liquore mandorlato (o aroma mandorle amare)"
+        },
+        {
+          "order": 7,
+          "group": "Ingredienti",
+          "text": "4 g lievito per dolci"
+        },
+        {
+          "order": 8,
+          "group": "Ingredienti",
+          "text": "1 pizzico sale"
+        },
+        {
+          "order": 9,
+          "group": "Ingredienti",
+          "text": "zucchero a velo q.b."
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Fare lo zucchero a velo e tenere da parte per la copertura."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "Tritare finemente le mandorle con 2 cucchiai dello zucchero totale (20 sec vel 50), poi trasferiamo in una ciotola."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "Grattugiare la buccia del limone nello zucchero rimanente e con le mani streghiamo."
+        },
+        {
+          "order": 4,
+          "section": "Preparazione",
+          "text": "Mescolare le mandorle + lo zucchero aromatizzato + il lievito poi un cucchiaio di succo di limone + il limoncello + qualche goccia di aroma mandorla + un pizzico di sale + l'albume leggermente sbattuto (tenendo da parte un poco). Mescolare con una forchetta poi con le mani (non deve essere appiccicoso)."
+        },
+        {
+          "order": 5,
+          "section": "Formatura e Cottura",
+          "text": "Formare delle palline da 30 g, formiamo un cilindro e lo ripassiamo nello zucchero a velo che abbiamo preparato, poi con pollice e indice lo pizzichiamo in 2 punti."
+        },
+        {
+          "order": 6,
+          "section": "Formatura e Cottura",
+          "text": "Cuocere a 170° per 12/15 minuti."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -35431,5 +35522,5 @@
       }
     ]
   },
-  "recipe_count": 258
+  "recipe_count": 259
 }
