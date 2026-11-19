@@ -29739,6 +29739,9 @@
       "id": 215,
       "title": "Chocolate Crinkles",
       "slug": "chocolate-crinkles",
+      "description": "Preparazione dolce della raccolta di famiglia: Chocolate Crinkles, ideale per dessert, colazione o occasioni speciali.",
+      "category_id": "4",
+      "category": "Dolci",
       "ingredients": [
         {
           "order": 1,
@@ -29844,7 +29847,7 @@
         },
         {
           "order": 10,
-          "section": "Formare palline da circa 38 g.",
+          "section": "Formare palline da circa 15 g",
           "text": "Passarle prima nello zucchero semolato e poi nello zucchero a velo."
         },
         {
@@ -29858,61 +29861,10 @@
           "text": "Disporre le palline sulla teglia e schiacciarle leggermente al centro."
         }
       ],
-      "notes": [
-        {
-          "order": 1,
-          "section": "Risultato",
-          "text": "I biscotti devono presentare la tipica superficie screpolata e un interno morbido e leggermente umido."
-        }
-      ],
-      "sections": [
-        {
-          "title": "Ingredienti",
-          "type": "ingredients",
-          "order": 1
-        },
-        {
-          "title": "Preparazione",
-          "type": "instructions",
-          "order": 2
-        },
-        {
-          "title": "Formatura",
-          "type": "instructions",
-          "order": 3
-        },
-        {
-          "title": "Formare palline da circa 38 g.",
-          "type": "instructions",
-          "order": 4
-        },
-        {
-          "title": "Cottura",
-          "type": "instructions",
-          "order": 5
-        },
-        {
-          "title": "Cuocere in forno preriscaldato a 180 °C per 12-15 minuti.",
-          "type": "instructions",
-          "order": 6
-        },
-        {
-          "title": "Risultato",
-          "type": "notes",
-          "order": 7
-        }
-      ],
+      "notes": [],
+      "sections": [],
       "warnings": [],
-      "source_text": "Ingredienti\n180 g di farina 00\n20 g di cacao amaro\n100 g di zucchero\n1 uovo\n25 ml di acqua\n50 ml di olio di semi\n1 cucchiaino di lievito per dolci\n170 g di cioccolato fondente\n1 pizzico di sale\nZucchero semolato q.b.\nZucchero a velo q.b.\nPreparazione\nTritare grossolanamente il cioccolato fondente e tenerlo da parte.\nIn una ciotola mescolare:\nzucchero;\nuovo;\nacqua;\nolio di semi.\nAggiungere farina, cacao e lievito setacciati.\nIncorporare il cioccolato tritato.\nMescolare fino a ottenere un impasto uniforme.\nFormatura\nFormare palline da circa 38 g.\nPassarle prima nello zucchero semolato e poi nello zucchero a velo.\nConservare in frigorifero fino al momento della cottura.\nDisporre le palline sulla teglia e schiacciarle leggermente al centro.\nCottura\nCuocere in forno preriscaldato a 180 °C per 12-15 minuti.\nRisultato\nI biscotti devono presentare la tipica superficie screpolata e un interno morbido e leggermente umido.",
-      "category_id": 4,
-      "category": "Dolci",
-      "description": "Preparazione dolce della raccolta di famiglia: Chocolate Crinkles, ideale per dessert, colazione o occasioni speciali.",
-      "classification": {
-        "previous_category": "Dolci",
-        "new_category": "Dolci",
-        "method": "title_ingredients_procedure_plus_web_verified_taxonomy",
-        "confidence": "high"
-      }
+      "source_text": ""
     },
     {
       "id": 216,
