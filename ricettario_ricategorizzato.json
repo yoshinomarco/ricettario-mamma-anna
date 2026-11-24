@@ -27082,6 +27082,9 @@
       "id": 195,
       "title": "Ciambellone Americano",
       "slug": "ciambellone-americano",
+      "description": "Preparazione dolce della raccolta di famiglia: Ciambellone Americano, ideale per dessert, colazione o occasioni speciali.",
+      "category_id": "4",
+      "category": "Dolci",
       "ingredients": [
         {
           "order": 1,
@@ -27101,7 +27104,7 @@
         {
           "order": 4,
           "group": "Ingredienti",
-          "text": "6 albumi"
+          "text": "6 albumi+100ml"
         },
         {
           "order": 5,
@@ -27177,54 +27180,9 @@
         }
       ],
       "notes": [],
-      "sections": [
-        {
-          "title": "Ingredienti",
-          "type": "ingredients",
-          "order": 1
-        },
-        {
-          "title": "Preparazione",
-          "type": "instructions",
-          "order": 2
-        },
-        {
-          "title": "Cottura",
-          "type": "instructions",
-          "order": 3
-        },
-        {
-          "title": "Cuocere a 150 °C ventilato per 55 minuti.",
-          "type": "instructions",
-          "order": 4
-        },
-        {
-          "title": "Proseguire a 180 °C per altri 10 minuti.",
-          "type": "instructions",
-          "order": 5
-        },
-        {
-          "title": "Raffreddamento",
-          "type": "instructions",
-          "order": 6
-        },
-        {
-          "title": "Capovolgere lo stampo e lasciare raffreddare per 5-6 ore, oppure per tutta la notte.",
-          "type": "instructions",
-          "order": 7
-        }
-      ],
+      "sections": [],
       "warnings": [],
-      "source_text": "Ingredienti\n300 g di farina\n250 g di zucchero a velo\n6 tuorli\n6 albumi\n100 ml di acqua tiepida\n200 ml di acqua\n120 ml di olio di semi\n1 bustina di cremor tartaro\n1 bustina di lievito\n1 pizzico di sale\nScorza grattugiata di 1 limone\nVanillina q.b.\nPreparazione\nPolverizzare lo zucchero.\nMescolare farina, lievito, sale, olio, tuorli, acqua, vanillina e scorza di limone.\nMontare gli albumi a neve; appena iniziano a schiumare aggiungere il cremor tartaro.\nContinuare a montare fino a ottenere una massa stabile.\nIncorporare delicatamente gli albumi al composto principale.\nVersare nello stampo da chiffon cake.\nCottura\nCuocere a 150 °C ventilato per 55 minuti.\nProseguire a 180 °C per altri 10 minuti.\nRaffreddamento\nCapovolgere lo stampo e lasciare raffreddare per 5-6 ore, oppure per tutta la notte.",
-      "category_id": 4,
-      "category": "Dolci",
-      "description": "Preparazione dolce della raccolta di famiglia: Ciambellone Americano, ideale per dessert, colazione o occasioni speciali.",
-      "classification": {
-        "previous_category": "Dolci",
-        "new_category": "Dolci",
-        "method": "title_ingredients_procedure_plus_web_verified_taxonomy",
-        "confidence": "high"
-      }
+      "source_text": ""
     },
     {
       "id": 196,
