@@ -35393,6 +35393,57 @@
       "sections": [],
       "warnings": [],
       "source_text": ""
+    },
+    {
+      "id": 260,
+      "title": "Rotoli sfiziosi di piadina",
+      "slug": "rotoli-sfiziosi-di-piadina",
+      "description": "Deliziosi rotolini di piadina farciti con speck e provola affumicata, cotti in friggitrice ad aria.",
+      "category_id": "1",
+      "category": "Antipasti e contorni",
+      "ingredients": [
+        {
+          "order": 1,
+          "group": "Ingredienti",
+          "text": "2/3 piadine"
+        },
+        {
+          "order": 2,
+          "group": "Ingredienti",
+          "text": "Speck"
+        },
+        {
+          "order": 3,
+          "group": "Ingredienti",
+          "text": "Provola affumicata"
+        }
+      ],
+      "instructions": [
+        {
+          "order": 1,
+          "section": "Preparazione",
+          "text": "Tagliare la piadina a strisce larghe."
+        },
+        {
+          "order": 2,
+          "section": "Preparazione",
+          "text": "Stendere una fetta di speck, la piadina, sopra la provola e arrotolare."
+        },
+        {
+          "order": 3,
+          "section": "Preparazione",
+          "text": "Chiudere con uno stecchino, mettere sopra ancora un po' di provola e una spruzzata di olio."
+        },
+        {
+          "order": 4,
+          "section": "Cottura",
+          "text": "Cuocere in friggitrice ad aria a 200° x 5/6 min."
+        }
+      ],
+      "notes": [],
+      "sections": [],
+      "warnings": [],
+      "source_text": ""
     }
   ],
   "validation": {
@@ -35474,5 +35525,5 @@
       }
     ]
   },
-  "recipe_count": 259
+  "recipe_count": 260
 }
